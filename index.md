@@ -8,7 +8,6 @@ See my [GitHub profile](https://github.com/JeffIrwin).
 </body>
 
 <script>
-	console.log("JavaScript goes brrrr");
-	document.getElementById("indexBody").innerHTML = "Here's some text";
+	src="main.js"
 </script>
 
