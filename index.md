@@ -5,7 +5,6 @@ See my [GitHub profile](https://github.com/JeffIrwin).
 
 <body>
 	<pre><p id="indexBody"></p></pre>
+	<script> type="text/javascript" src="./assets/js/main.js"></script>
 </body>
-
-<script> type="text/javascript" src="./assets/js/main.js"></script>
 
