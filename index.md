@@ -8,6 +8,6 @@ See my [GitHub profile](https://github.com/JeffIrwin).
 </body>
 
 <script>
-	src="{{ base.url | prepend: site.url }}/main.js"
+	src="/assets/js/main.js"
 </script>
 
