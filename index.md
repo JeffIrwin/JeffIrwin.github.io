@@ -8,6 +8,6 @@ See my [GitHub profile](https://github.com/JeffIrwin).
 </body>
 
 <script>
-	src="main.js"
+	src="./main.js"
 </script>
 
