@@ -1,6 +1,10 @@
+---
+firstname: {{firstname}}
+lastname: {{lastname}}
+---
 
-# JeffIrwin.github.io
-Jeff Irwin's GitHub page
+# {{firstname}}{{lastname}}.github.io
+{{firstname}} {{lastname}}'s GitHub page
 
-See the site here:  https://jeffirwin.github.io/
+See the site here:  https://{{firstname}}{{lastname}}.github.io/
 

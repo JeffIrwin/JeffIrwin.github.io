@@ -1,5 +1,11 @@
+---
+firstname: Jeff
+lastname: Irwin
+---
 
-# Jeff Irwin's GitHub page
+# {{firstname}} {{lastname}}'s GitHub page
 
-See my [GitHub profile](https://github.com/JeffIrwin).
+See my [GitHub profile](https://github.com/{{firstname}}{{lastname}}).
+
+{{page.date}}
 
