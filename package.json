@@ -1,0 +1,26 @@
+{
+  "scripts": {
+    "build": "webpack --progress --mode development",
+    "build:release": "webpack --progress --mode production"
+  },
+  "name": "jeffirwin.github.io",
+  "description": "Jeff Irwin's GitHub page",
+  "version": "0.0.1",
+  "main": "main.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JeffIrwin/JeffIrwin.github.io.git"
+  },
+  "author": "Jeff Irwin",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/JeffIrwin/JeffIrwin.github.io/issues"
+  },
+  "homepage": "https://github.com/JeffIrwin/JeffIrwin.github.io#readme",
+  "dependencies": {
+    "webpack": "^5.10.1"
+  },
+  "devDependencies": {
+    "webpack-cli": "^4.2.0"
+  }
+}
