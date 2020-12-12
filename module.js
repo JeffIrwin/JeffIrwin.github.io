@@ -1,8 +1,13 @@
 
-import vtkFullScreenRenderWindow from 'vtk.js/Sources/Rendering/Misc/FullScreenRenderWindow';
+//import vtkFullScreenRenderWindow from 'vtk.js/Sources/Rendering/Misc/FullScreenRenderWindow';
 import vtkActor from 'vtk.js/Sources/Rendering/Core/Actor';
 import vtkConeSource from 'vtk.js/Sources/Filters/Sources/ConeSource';
 import vtkMapper from 'vtk.js/Sources/Rendering/Core/Mapper';
+import vtkOpenGLRenderWindow from 'vtk.js/Sources/Rendering/OpenGL/RenderWindow';
+import vtkRenderWindow from 'vtk.js/Sources/Rendering/Core/RenderWindow';
+import vtkRenderWindowInteractor from 'vtk.js/Sources/Rendering/Core/RenderWindowInteractor';
+import vtkRenderer from 'vtk.js/Sources/Rendering/Core/Renderer';
+import vtkInteractorStyleTrackballCamera from 'vtk.js/Sources/Interaction/Style/InteractorStyleTrackballCamera';
 import vtkOrientationMarkerWidget from 'vtk.js/Sources/Interaction/Widgets/OrientationMarkerWidget';
 import vtkAnnotatedCubeActor from 'vtk.js/Sources/Rendering/Core/AnnotatedCubeActor';
 
@@ -17,11 +22,9 @@ function moduleFunc()
 	//
 	// ----------------------------------------------------------------------------
 	
-	const fullScreenRenderer = vtkFullScreenRenderWindow.newInstance({
-	  background: [0.2, 0.2, 0.2],
-	});
-	const renderer = fullScreenRenderer.getRenderer();
-	const renderWindow = fullScreenRenderer.getRenderWindow();
+	const renderer = vtkRenderer.newInstance({ background: [0.2, 0.3, 0.4] });
+	const renderWindow = vtkRenderWindow.newInstance();
+	renderWindow.addRenderer(renderer);
 	
 	// ----------------------------------------------------------------------------
 	// Example code
@@ -74,6 +77,30 @@ function moduleFunc()
 	});
 	axes.setZMinusFaceProperty({ text: '-Z', faceRotation: 45, edgeThickness: 0 });
 	
+	renderer.resetCamera();
+
+	// Use OpenGL as the backend to view the all this
+	const openglRenderWindow = vtkOpenGLRenderWindow.newInstance();
+	renderWindow.addView(openglRenderWindow);
+
+	// Put the render window inside of a div from the HTML
+	const container = document.getElementById("vtkDiv");
+	openglRenderWindow.setContainer(container);
+
+	// Capture size of the container and set the resolution
+	const { width, height } = container.getBoundingClientRect();
+	const f = 2;  // larger f == finer resolution
+	openglRenderWindow.setSize(f * width, f * height);
+
+	// Setup an interactor to handle mouse events
+	const interactor = vtkRenderWindowInteractor.newInstance();
+	interactor.setView(openglRenderWindow);
+	interactor.initialize();
+	interactor.bindEvents(container);
+
+	// Setup interactor style to use
+	interactor.setInteractorStyle(vtkInteractorStyleTrackballCamera.newInstance());
+	
 	// create orientation widget
 	const orientationWidget = vtkOrientationMarkerWidget.newInstance({
 	  actor: axes,
@@ -86,11 +113,8 @@ function moduleFunc()
 	orientationWidget.setViewportSize(0.15);
 	orientationWidget.setMinPixelSize(100);
 	orientationWidget.setMaxPixelSize(300);
-	
-	renderer.resetCamera();
+
 	renderWindow.render();
-	
-	global.renderWindow = renderWindow;
 
 }
 
