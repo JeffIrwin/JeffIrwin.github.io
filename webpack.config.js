@@ -1,5 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
+var vtkRules = require('vtk.js/Utilities/config/dependency.js').webpack.core.rules;
 
 var entry = path.join(__dirname, './main.js');
 const sourcePath = path.join(__dirname, './');
@@ -14,7 +15,7 @@ module.exports = {
   module: {
     rules: [
         { test: /\.html$/, loader: 'html-loader' },
-    ],
+    ].concat(vtkRules),
   },
   resolve: {
     modules: [

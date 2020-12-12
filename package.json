@@ -18,9 +18,11 @@
   },
   "homepage": "https://github.com/JeffIrwin/JeffIrwin.github.io#readme",
   "dependencies": {
+    "vtk.js": "^15.3.5",
     "webpack": "^5.10.1"
   },
   "devDependencies": {
+    "kw-web-suite": "^11.0.0",
     "webpack-cli": "^4.2.0"
   }
 }
