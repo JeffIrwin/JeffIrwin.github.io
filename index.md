@@ -4,6 +4,6 @@
 See my [GitHub profile](https://github.com/JeffIrwin).
 
 <pre><p id="indexBody"></p></pre>
-<div id="vtkDiv" style="height: 15%; width: 30%;"></div>
+<div id="vtkDiv"></div>
 <script src="./dist/main.js"></script>
 
