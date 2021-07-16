@@ -4,3 +4,5 @@
 See my [GitHub profile](https://github.com/JeffIrwin)
 
 - [Rubik's cube game written in JavaScript](rubik-js/)
+
+Build revision `{{ site.github.build_revision }}`
