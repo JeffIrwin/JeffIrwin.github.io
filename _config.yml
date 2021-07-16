@@ -1,12 +1,8 @@
 
- theme: jekyll-theme-cayman
+theme: jekyll-theme-cayman
 
- minima:
-   #date_format: "%b %-d, %Y"
-
-   # generate social links in footer
-   social_links:
-     #twitter: jekyllrb
-     github:  JeffIrwin
-     linkedin: jeff-irwin-54967332
+minima:
+  social_links:
+    github:  JeffIrwin
+    linkedin: jeff-irwin-54967332
 
