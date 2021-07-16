@@ -6,3 +6,9 @@ minima:
     github:  JeffIrwin
     linkedin: jeff-irwin-54967332
 
+theme: minima
+
+plugins:
+ - jekyll-feed
+ - jekyll-seo-tag
+
