@@ -9,5 +9,7 @@ Highlights of some of my toys include:
 
 For more, see my [GitHub profile](https://github.com/JeffIrwin)
 
+<script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
+
 Build revision `{{ site.github.build_revision }}`
 
