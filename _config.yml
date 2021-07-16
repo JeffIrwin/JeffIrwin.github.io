@@ -1,10 +1,9 @@
 
 theme: jekyll-theme-cayman
 
-minima:
-  social_links:
-    github:  JeffIrwin
-    linkedin: jeff-irwin-54967332
+social_links:
+  github:  JeffIrwin
+  linkedin: jeff-irwin-54967332
 
 plugins:
  - jekyll-feed
