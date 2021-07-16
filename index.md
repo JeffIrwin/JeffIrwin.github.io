@@ -9,7 +9,7 @@ Highlights of some of my toys include:
 
 For more, see my [GitHub profile](https://github.com/JeffIrwin)
 
-[LinkedIn](https://www.linkedin.com/in/jeff-irwin-54967332) | [GitHub](https://github.com/JeffIrwin)
+#### [LinkedIn](https://www.linkedin.com/in/jeff-irwin-54967332) | [GitHub](https://github.com/JeffIrwin)
 
 Build revision `{{ site.github.build_revision }}`
 
