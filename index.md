@@ -1,9 +1,6 @@
 
-# Jeff Irwin's GitHub page
+# Jeff Irwin's home page
 
 See my [GitHub profile](https://github.com/JeffIrwin).
 
-<pre><p id="indexBody"></p></pre>
-<div id="vtkDiv"></div>
-<script src="./dist/main.js"></script>
-
+- [Rubik's cube game written in JavaScript](jeffirwin.github.io/rubik-js/)
