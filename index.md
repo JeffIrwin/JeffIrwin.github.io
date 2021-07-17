@@ -1,4 +1,6 @@
 
+<link rel="shortcut icon" type="image/png" href="favicon.png">
+
 # Jeff Irwin's home page
 
 Highlights of some of my toys include:
