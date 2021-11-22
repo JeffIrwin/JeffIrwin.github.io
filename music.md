@@ -15,6 +15,11 @@ syntax -->
 
 - [Aria](https://www.youtube.com/watch?v=38GcBKf3Umk){:target="_blank"}
 - [Variation 2](https://www.youtube.com/watch?v=4bk4HKYhkG8){:target="_blank"}
+- Variation 3 [part 1](https://www.tiktok.com/@jeff.irwin/video/6847988594527800582){:target="_blank"} and [part 2](https://www.tiktok.com/@jeff.irwin/video/6850935952605596934){:target="_blank"}:  Canone all' Unisuono
+- Variation 5 [part 1](https://www.tiktok.com/@jeff.irwin/video/6928220737719241990){:target="_blank"} and [part 2](https://www.tiktok.com/@jeff.irwin/video/6937492746789801222){:target="_blank"}
+- [Variation 6](https://www.youtube.com/watch?v=oay3ZwzJHw8){:target="_blank"}:
+- [Variation 7](https://www.facebook.com/100000215612496/videos/283375250193379/){:target="_blank"}
+  Canone alla Seconda
 - More TBA ...
 
 ## The French Suites
