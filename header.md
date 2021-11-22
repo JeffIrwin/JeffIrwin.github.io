@@ -1,3 +1,3 @@
 
-| [Home](jeffirwin.xyz) | [About](about/) |
+| [Home]() | [About](about) |
 
