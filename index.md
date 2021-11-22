@@ -1,6 +1,8 @@
 
 <link rel="shortcut icon" type="image/png" href="favicon.png">
 
+</div><!-- ends .full-width that started in _includes/header.html -->
+
 # Jeff Irwin's home page
 
 Highlights of some of my toys include:
