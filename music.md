@@ -10,7 +10,17 @@ higher-level organization.
 
 ## The Goldberg Variations
 
+<!-- target=blank makes the links open in a new tab, just like the similar html
+syntax -->
+
 - [Aria](https://www.youtube.com/watch?v=38GcBKf3Umk){:target="_blank"}
 - [Variation 2](https://www.youtube.com/watch?v=4bk4HKYhkG8){:target="_blank"}
+- More TBA ...
+
+## The French Suites
+
+### Suite No. 1 in D minor, BWV 812
+
+- Courante [part 1](https://www.tiktok.com/@jeff.irwin/video/6958856517751803142?is_copy_url=1&is_from_webapp=v1&lang=en) and [part 2](https://www.tiktok.com/@jeff.irwin/video/6966349034906766597?is_copy_url=1&is_from_webapp=v1&lang=en)
 - More TBA ...
 
