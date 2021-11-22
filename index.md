@@ -1,7 +1,9 @@
 
 <link rel="shortcut icon" type="image/png" href="favicon.png">
 
-</div><!-- ends .full-width that started in _includes/header.html -->
+<!--</div> ends .full-width that started in _includes/header.html -->
+
+{% include_relative header.md %}
 
 # Jeff Irwin's home page
 
