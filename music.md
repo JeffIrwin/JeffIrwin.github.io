@@ -8,7 +8,7 @@
 My music, original or not, is scattered across various socials.  Here's some
 higher-level organization.
 
-## The Goldberg Variations
+## The Goldberg Variations, BWV 988
 
 <!-- target=blank makes the links open in a new tab, just like the similar html
 syntax -->
