@@ -10,7 +10,7 @@ higher-level organization.
 
 ## The Goldberg Variations
 
-- [Aria](https://www.youtube.com/watch?v=38GcBKf3Umk)
-- [Variation 2](https://www.youtube.com/watch?v=4bk4HKYhkG8)
+- [Aria](https://www.youtube.com/watch?v=38GcBKf3Umk){:target="_blank"}
+- [Variation 2](https://www.youtube.com/watch?v=4bk4HKYhkG8){:target="_blank"}
 - More TBA ...
 
