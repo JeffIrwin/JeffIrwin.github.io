@@ -21,6 +21,7 @@ syntax -->
 
 ### Suite No. 1 in D minor, BWV 812
 
-- Courante [part 1](https://www.tiktok.com/@jeff.irwin/video/6958856517751803142?is_copy_url=1&is_from_webapp=v1&lang=en) and [part 2](https://www.tiktok.com/@jeff.irwin/video/6966349034906766597?is_copy_url=1&is_from_webapp=v1&lang=en)
+- [Allemande](https://soundcloud.com/jirwin505/french-suite-no1-in-d-minor-bwv-812-i-allemande?si=aa910a6c1b4442ada535791af9f0f7ff){:target="_blank"}
+- Courante [part 1](https://www.tiktok.com/@jeff.irwin/video/6958856517751803142){:target="_blank"} and [part 2](https://www.tiktok.com/@jeff.irwin/video/6966349034906766597){:target="_blank"}
 - More TBA ...
 
