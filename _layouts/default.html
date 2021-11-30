@@ -38,7 +38,20 @@
       <h2 class="project-tagline" id="tagline">Computers are useless, they can only give you answers</h2>
 
       <script>
-        document.getElementById("tagline").innerHTML = "Here's some text";
+
+        let r = Math.random();
+        let s = "";
+        if (r < 0.5)
+        {
+          s = "Computers are useless, they can only give you answers";
+        }
+        else
+        {
+          s = "You should never ask an engineer to explain anything because he will";
+        }
+
+        document.getElementById("tagline").innerHTML = s;
+
       </script>
 
       {% if site.github.is_project_page %}
