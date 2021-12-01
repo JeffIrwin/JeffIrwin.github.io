@@ -39,18 +39,15 @@
 
       <script>
 
-        let r = Math.random();
-        let s = "";
-        if (r < 0.5)
-        {
-          s = "Computers are useless, they can only give you answers";
-        }
-        else
-        {
-          s = "You should never ask an engineer to explain anything because he will";
-        }
+        s =
+          [
+              "Computers are useless, they can only give you answers",
+              "You should never ask an engineer to explain anything because he will",
+              "The programmer's wife tells him: \"Run to the store and pick up a loaf of bread. If they have eggs, get a dozen.\"  The programmer comes home with 12 loaves of bread.",
+              "Everyone knows that debugging is twice as hard as writing a program in the first place.  So if you're as clever as you can be when you write it, how will you ever debug it?"
+          ];
 
-        document.getElementById("tagline").innerHTML = s;
+        document.getElementById("tagline").innerHTML = s[Math.floor(Math.random() * s.length)];
 
       </script>
 
