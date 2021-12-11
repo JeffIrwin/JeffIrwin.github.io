@@ -3,7 +3,7 @@
 
 <!--</div> ends .full-width that started in _includes/header.html -->
 
-{% include_relative .header.md %}
+{% include header.md %}
 
 # Jeff Irwin's home page
 
