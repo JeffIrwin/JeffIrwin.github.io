@@ -22,14 +22,14 @@ jobs:
         date > _includes/footer.md
 
     - uses: actions/jekyll-build-pages@v1-beta
-    - name: Archive build output (custom)
-      run: |
-        tar --dereference --hard-dereference --directory _site/ -cvf artifact.tar .
-    - uses: actions/upload-artifact@main
-      with:
-        name: github-pages
-        path: ./artifact.tar
-        if-no-files-found: warn
+    #- name: Archive build output (custom)
+    #  run: |
+    #    tar --dereference --hard-dereference --directory _site/ -cvf artifact.tar .
+    #- uses: actions/upload-artifact@main
+    #  with:
+    #    name: github-pages
+    #    path: ./artifact.tar
+    #    if-no-files-found: warn
 
     - name: Deploy to github pages
       uses: JamesIves/github-pages-deploy-action@4.1.8
