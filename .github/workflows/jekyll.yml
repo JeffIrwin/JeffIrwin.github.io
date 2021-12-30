@@ -13,10 +13,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - uses: actions/checkout@v2
     - run: |
+        pwd
         mkdir -p _includes
         date > _includes/footer.md
-    - uses: actions/checkout@v2
+        ls _includes/footer.md
+        cat _includes/footer.md
     - uses: actions/jekyll-build-pages@v1-beta
     - uses: actions/upload-artifact@main
     - name: Build the site in the jekyll/builder container
