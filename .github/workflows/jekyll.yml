@@ -30,9 +30,10 @@ jobs:
         name: github-pages
         path: ./artifact.tar
         if-no-files-found: warn
-    - name: Build the site in the jekyll/builder container
-      run: |
-        docker run \
-        -v ${{ github.workspace }}:/srv/jekyll -v ${{ github.workspace }}/_site:/srv/jekyll/_site \
-        jekyll/builder:latest /bin/bash -c "chmod -R 777 /srv/jekyll && jekyll build --future"
+    - uses: actions/deploy-pages@v1-beta
+      #- name: Build the site in the jekyll/builder container
+      #  run: |
+      #    docker run \
+      #    -v ${{ github.workspace }}:/srv/jekyll -v ${{ github.workspace }}/_site:/srv/jekyll/_site \
+      #    jekyll/builder:latest /bin/bash -c "chmod -R 777 /srv/jekyll && jekyll build --future"
 
