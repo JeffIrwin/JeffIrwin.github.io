@@ -31,6 +31,8 @@ jobs:
         path: ./artifact.tar
         if-no-files-found: warn
     - uses: actions/deploy-pages@v1-beta
+      with:
+        access-token: ${{ secrets.ACCESS_TOKEN }}
       #- name: Build the site in the jekyll/builder container
       #  run: |
       #    docker run \
