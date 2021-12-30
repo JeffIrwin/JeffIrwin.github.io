@@ -14,14 +14,22 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - run: |
+    - name: Custom site generation
+      run: |
         pwd
         mkdir -p _includes
         date > _includes/footer.md
         ls _includes/footer.md
         cat _includes/footer.md
     - uses: actions/jekyll-build-pages@v1-beta
+    - name: Archive build output (custom)
+      run: |
+        tar --dereference --hard-dereference --directory _site/ -cvf artifact.tar .
     - uses: actions/upload-artifact@main
+      with:
+        name: github-pages
+        path: ./artifact.tar
+        if-no-files-found: warn
     - name: Build the site in the jekyll/builder container
       run: |
         docker run \
