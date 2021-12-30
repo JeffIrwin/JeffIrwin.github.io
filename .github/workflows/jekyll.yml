@@ -13,12 +13,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - run: |
+        date > _includes/footer.md
     - uses: actions/checkout@v2
     - uses: actions/jekyll-build-pages@v1-beta
     - uses: actions/upload-artifact@main
     - name: Build the site in the jekyll/builder container
       run: |
-        date > _includes/footer.md
         docker run \
         -v ${{ github.workspace }}:/srv/jekyll -v ${{ github.workspace }}/_site:/srv/jekyll/_site \
         jekyll/builder:latest /bin/bash -c "chmod -R 777 /srv/jekyll && jekyll build --future"
+
