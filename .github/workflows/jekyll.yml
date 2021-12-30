@@ -18,8 +18,12 @@ jobs:
 
     - name: Custom site generation
       run: |
-        mkdir -p _includes
-        date > _includes/footer.md
+        #mkdir -p _includes
+        #date > _includes/footer.md
+        cp _layouts/default-template.html _layouts/default.html
+        date=$(date)
+        sed -i "s/BUILD\\\_DATE/$date/g" _layouts/default.html
+        tail -n15 _layouts/default-template.html
 
     - uses: actions/jekyll-build-pages@v1-beta
     #- name: Archive build output (custom)
