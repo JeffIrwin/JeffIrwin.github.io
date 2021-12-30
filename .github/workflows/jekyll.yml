@@ -14,6 +14,7 @@ jobs:
 
     steps:
     - run: |
+        mkdir -p _includes
         date > _includes/footer.md
     - uses: actions/checkout@v2
     - uses: actions/jekyll-build-pages@v1-beta
