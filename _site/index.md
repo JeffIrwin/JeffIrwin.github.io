@@ -15,5 +15,3 @@ Highlights of some of my toys include:
 
 For more, see my [GitHub profile](https://github.com/JeffIrwin){:target="_blank"}
 
-<!-- {% include footer.md %} -->
-
