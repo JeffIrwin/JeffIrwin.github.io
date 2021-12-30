@@ -35,6 +35,7 @@ jobs:
       uses: JamesIves/github-pages-deploy-action@4.1.8
       with:
         branch: main
+        folder: .
 
     #    - uses: actions/deploy-pages@v1-beta
     #      with:
