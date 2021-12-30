@@ -11,7 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - uses: JeffIrwin/gh-pages-deploy-action@v1.1
       - name: custom run
         run: |
           date > _includes/footer.md
