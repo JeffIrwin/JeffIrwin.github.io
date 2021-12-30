@@ -18,22 +18,16 @@ jobs:
 
     - name: Custom site generation
       run: |
-        #mkdir -p _includes
-        #date > _includes/footer.md
+
         cp _layouts/default-template.html _layouts/default.html
+
         date=$(date)
+        revi=$(git rev-parse --short HEAD)
+
         sed -i "s/BUILD\_DATE/$date/g" _layouts/default.html
-        tail -n15 _layouts/default.html
+        sed -i "s/BUILD\_REVI/$revi/g" _layouts/default.html
 
     - uses: actions/jekyll-build-pages@v1-beta
-    #- name: Archive build output (custom)
-    #  run: |
-    #    tar --dereference --hard-dereference --directory _site/ -cvf artifact.tar .
-    #- uses: actions/upload-artifact@main
-    #  with:
-    #    name: github-pages
-    #    path: ./artifact.tar
-    #    if-no-files-found: warn
 
     - name: Deploy to github pages
       uses: JamesIves/github-pages-deploy-action@4.1.8
