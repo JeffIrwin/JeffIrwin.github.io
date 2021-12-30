@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="44.703ex"
+   height="3.176ex"
+   style="vertical-align: -0.838ex;"
+   viewBox="0 -1006.6 19247.1 1367.4"
+   role="img"
+   focusable="false"
+   aria-labelledby="MathJax-SVG-1-Title"
+   id="svg5009"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="burning-ship-itr-func.svg">
+  <metadata
+     id="metadata5119">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     id="namedview5117"
+     showgrid="false"
+     inkscape:zoom="0.060476644"
+     inkscape:cx="10720.117"
+     inkscape:cy="548.60172"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg5009" />
+  <title
+     id="MathJax-SVG-1-Title">{\displaystyle z_{n+1}=(|\operatorname {Re} \left(z_{n}\right)|+i|\operatorname {Im} \left(z_{n}\right)|)^{2}+c,\quad z_{0}=0}</title>
+  <defs
+     aria-hidden="true"
+     id="defs5012">
+    <path
+       stroke-width="1"
+       id="E1-MJMATHI-7A"
+       d="M347 338Q337 338 294 349T231 360Q211 360 197 356T174 346T162 335T155 324L153 320Q150 317 138 317Q117 317 117 325Q117 330 120 339Q133 378 163 406T229 440Q241 442 246 442Q271 442 291 425T329 392T367 375Q389 375 411 408T434 441Q435 442 449 442H462Q468 436 468 434Q468 430 463 420T449 399T432 377T418 358L411 349Q368 298 275 214T160 106L148 94L163 93Q185 93 227 82T290 71Q328 71 360 90T402 140Q406 149 409 151T424 153Q443 153 443 143Q443 138 442 134Q425 72 376 31T278 -11Q252 -11 232 6T193 40T155 57Q111 57 76 -3Q70 -11 59 -11H54H41Q35 -5 35 -2Q35 13 93 84Q132 129 225 214T340 322Q352 338 347 338Z" />
+    <path
+       stroke-width="1"
+       id="E1-MJMATHI-6E"
+       d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z" />
+    <path
+       stroke-width="1"
+       id="E1-MJMAIN-2B"
+       d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z" />
+    <path
+       stroke-width="1"
+       id="E1-MJMAIN-31"
+       d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z" />
+    <path
+       stroke-width="1"
+       id="E1-MJMAIN-3D"
+       d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z" />
+    <path
+       stroke-width="1"
+       id="E1-MJMAIN-28"
+       d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z" />
+    <path
+       stroke-width="1"
+       id="E1-MJMAIN-7C"
+       d="M139 -249H137Q125 -249 119 -235V251L120 737Q130 750 139 750Q152 750 159 735V-235Q151 -249 141 -249H139Z" />
+    <path
+       stroke-width="1"
+       id="E1-MJMAIN-52"
+       d="M130 622Q123 629 119 631T103 634T60 637H27V683H202H236H300Q376 683 417 677T500 648Q595 600 609 517Q610 512 610 501Q610 468 594 439T556 392T511 361T472 343L456 338Q459 335 467 332Q497 316 516 298T545 254T559 211T568 155T578 94Q588 46 602 31T640 16H645Q660 16 674 32T692 87Q692 98 696 101T712 105T728 103T732 90Q732 59 716 27T672 -16Q656 -22 630 -22Q481 -16 458 90Q456 101 456 163T449 246Q430 304 373 320L363 322L297 323H231V192L232 61Q238 51 249 49T301 46H334V0H323Q302 3 181 3Q59 3 38 0H27V46H60Q102 47 111 49T130 61V622ZM491 499V509Q491 527 490 539T481 570T462 601T424 623T362 636Q360 636 340 636T304 637H283Q238 637 234 628Q231 624 231 492V360H289Q390 360 434 378T489 456Q491 467 491 499Z" />
+    <path
+       stroke-width="1"
+       id="E1-MJMAIN-65"
+       d="M28 218Q28 273 48 318T98 391T163 433T229 448Q282 448 320 430T378 380T406 316T415 245Q415 238 408 231H126V216Q126 68 226 36Q246 30 270 30Q312 30 342 62Q359 79 369 104L379 128Q382 131 395 131H398Q415 131 415 121Q415 117 412 108Q393 53 349 21T250 -11Q155 -11 92 58T28 218ZM333 275Q322 403 238 411H236Q228 411 220 410T195 402T166 381T143 340T127 274V267H333V275Z" />
+    <path
+       stroke-width="1"
+       id="E1-MJMAIN-29"
+       d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z" />
+    <path
+       stroke-width="1"
+       id="E1-MJMATHI-69"
+       d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z" />
+    <path
+       stroke-width="1"
+       id="E1-MJMAIN-49"
+       d="M328 0Q307 3 180 3T32 0H21V46H43Q92 46 106 49T126 60Q128 63 128 342Q128 620 126 623Q122 628 118 630T96 635T43 637H21V683H32Q53 680 180 680T328 683H339V637H317Q268 637 254 634T234 623Q232 620 232 342Q232 63 234 60Q238 55 242 53T264 48T317 46H339V0H328Z" />
+    <path
+       stroke-width="1"
+       id="E1-MJMAIN-6D"
+       d="M41 46H55Q94 46 102 60V68Q102 77 102 91T102 122T103 161T103 203Q103 234 103 269T102 328V351Q99 370 88 376T43 385H25V408Q25 431 27 431L37 432Q47 433 65 434T102 436Q119 437 138 438T167 441T178 442H181V402Q181 364 182 364T187 369T199 384T218 402T247 421T285 437Q305 442 336 442Q351 442 364 440T387 434T406 426T421 417T432 406T441 395T448 384T452 374T455 366L457 361L460 365Q463 369 466 373T475 384T488 397T503 410T523 422T546 432T572 439T603 442Q729 442 740 329Q741 322 741 190V104Q741 66 743 59T754 49Q775 46 803 46H819V0H811L788 1Q764 2 737 2T699 3Q596 3 587 0H579V46H595Q656 46 656 62Q657 64 657 200Q656 335 655 343Q649 371 635 385T611 402T585 404Q540 404 506 370Q479 343 472 315T464 232V168V108Q464 78 465 68T468 55T477 49Q498 46 526 46H542V0H534L510 1Q487 2 460 2T422 3Q319 3 310 0H302V46H318Q379 46 379 62Q380 64 380 200Q379 335 378 343Q372 371 358 385T334 402T308 404Q263 404 229 370Q202 343 195 315T187 232V168V108Q187 78 188 68T191 55T200 49Q221 46 249 46H265V0H257L234 1Q210 2 183 2T145 3Q42 3 33 0H25V46H41Z" />
+    <path
+       stroke-width="1"
+       id="E1-MJMAIN-32"
+       d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z" />
+    <path
+       stroke-width="1"
+       id="E1-MJMATHI-63"
+       d="M34 159Q34 268 120 355T306 442Q362 442 394 418T427 355Q427 326 408 306T360 285Q341 285 330 295T319 325T330 359T352 380T366 386H367Q367 388 361 392T340 400T306 404Q276 404 249 390Q228 381 206 359Q162 315 142 235T121 119Q121 73 147 50Q169 26 205 26H209Q321 26 394 111Q403 121 406 121Q410 121 419 112T429 98T420 83T391 55T346 25T282 0T202 -11Q127 -11 81 37T34 159Z" />
+    <path
+       stroke-width="1"
+       id="E1-MJMAIN-2C"
+       d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z" />
+    <path
+       stroke-width="1"
+       id="E1-MJMAIN-30"
+       d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z" />
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath5125">
+      <rect
+         style="fill:#ffffff;fill-opacity:1;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none"
+         id="rect5127"
+         width="15377.837"
+         height="2612.5789"
+         x="-297.63556"
+         y="-1391.9427"
+         transform="scale(1,-1)" />
+    </clipPath>
+  </defs>
+  <g
+     stroke="currentColor"
+     fill="currentColor"
+     stroke-width="0"
+     transform="matrix(1 0 0 -1 0 0)"
+     aria-hidden="true"
+     id="g5031"
+     clip-path="url(#clipPath5125)">
+    <use
+       xlink:href="#E1-MJMATHI-7A"
+       x="0"
+       y="0"
+       id="use5033" />
+    <g
+       transform="translate(465,-150)"
+       id="g5035">
+      <use
+         transform="scale(0.707)"
+         xlink:href="#E1-MJMATHI-6E"
+         x="0"
+         y="0"
+         id="use5037" />
+      <use
+         transform="scale(0.707)"
+         xlink:href="#E1-MJMAIN-2B"
+         x="600"
+         y="0"
+         id="use5039" />
+      <use
+         transform="scale(0.707)"
+         xlink:href="#E1-MJMAIN-31"
+         x="1379"
+         y="0"
+         id="use5041" />
+    </g>
+    <use
+       xlink:href="#E1-MJMAIN-3D"
+       x="2172"
+       y="0"
+       id="use5043" />
+    <use
+       xlink:href="#E1-MJMAIN-28"
+       x="3228"
+       y="0"
+       id="use5045" />
+    <use
+       xlink:href="#E1-MJMAIN-7C"
+       x="3618"
+       y="0"
+       id="use5047" />
+    <g
+       transform="translate(4063,0)"
+       id="g5049">
+      <use
+         xlink:href="#E1-MJMAIN-52"
+         id="use5051" />
+      <use
+         xlink:href="#E1-MJMAIN-65"
+         x="736"
+         y="0"
+         id="use5053" />
+    </g>
+    <g
+       transform="translate(5244,0)"
+       id="g5055">
+      <use
+         xlink:href="#E1-MJMAIN-28"
+         x="0"
+         y="0"
+         id="use5057" />
+      <g
+         transform="translate(389,0)"
+         id="g5059">
+        <use
+           xlink:href="#E1-MJMATHI-7A"
+           x="0"
+           y="0"
+           id="use5061" />
+        <use
+           transform="scale(0.707)"
+           xlink:href="#E1-MJMATHI-6E"
+           x="658"
+           y="-213"
+           id="use5063" />
+      </g>
+      <use
+         xlink:href="#E1-MJMAIN-29"
+         x="1379"
+         y="0"
+         id="use5065" />
+    </g>
+    <use
+       xlink:href="#E1-MJMAIN-7C"
+       x="7013"
+       y="0"
+       id="use5067" />
+    <use
+       xlink:href="#E1-MJMAIN-2B"
+       x="7514"
+       y="0"
+       id="use5069" />
+    <use
+       xlink:href="#E1-MJMATHI-69"
+       x="8514"
+       y="0"
+       id="use5071" />
+    <use
+       xlink:href="#E1-MJMAIN-7C"
+       x="8860"
+       y="0"
+       id="use5073" />
+    <g
+       transform="translate(9305,0)"
+       id="g5075">
+      <use
+         xlink:href="#E1-MJMAIN-49"
+         id="use5077" />
+      <use
+         xlink:href="#E1-MJMAIN-6D"
+         x="361"
+         y="0"
+         id="use5079" />
+    </g>
+    <g
+       transform="translate(10500,0)"
+       id="g5081">
+      <use
+         xlink:href="#E1-MJMAIN-28"
+         x="0"
+         y="0"
+         id="use5083" />
+      <g
+         transform="translate(389,0)"
+         id="g5085">
+        <use
+           xlink:href="#E1-MJMATHI-7A"
+           x="0"
+           y="0"
+           id="use5087" />
+        <use
+           transform="scale(0.707)"
+           xlink:href="#E1-MJMATHI-6E"
+           x="658"
+           y="-213"
+           id="use5089" />
+      </g>
+      <use
+         xlink:href="#E1-MJMAIN-29"
+         x="1379"
+         y="0"
+         id="use5091" />
+    </g>
+    <use
+       xlink:href="#E1-MJMAIN-7C"
+       x="12269"
+       y="0"
+       id="use5093" />
+    <g
+       transform="translate(12548,0)"
+       id="g5095">
+      <use
+         xlink:href="#E1-MJMAIN-29"
+         x="0"
+         y="0"
+         id="use5097" />
+      <use
+         transform="scale(0.707)"
+         xlink:href="#E1-MJMAIN-32"
+         x="550"
+         y="583"
+         id="use5099" />
+    </g>
+    <use
+       xlink:href="#E1-MJMAIN-2B"
+       x="13613"
+       y="0"
+       id="use5101" />
+    <use
+       xlink:href="#E1-MJMATHI-63"
+       x="14614"
+       y="0"
+       id="use5103" />
+    <use
+       xlink:href="#E1-MJMAIN-2C"
+       x="15047"
+       y="0"
+       id="use5105" />
+    <g
+       transform="translate(16493,0)"
+       id="g5107">
+      <use
+         xlink:href="#E1-MJMATHI-7A"
+         x="0"
+         y="0"
+         id="use5109" />
+      <use
+         transform="scale(0.707)"
+         xlink:href="#E1-MJMAIN-30"
+         x="658"
+         y="-213"
+         id="use5111" />
+    </g>
+    <use
+       xlink:href="#E1-MJMAIN-3D"
+       x="17690"
+       y="0"
+       id="use5113" />
+    <use
+       xlink:href="#E1-MJMAIN-30"
+       x="18746"
+       y="0"
+       id="use5115" />
+  </g>
+</svg>
