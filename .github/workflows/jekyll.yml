@@ -13,14 +13,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
     - uses: actions/checkout@v2
+
     - name: Custom site generation
       run: |
-        pwd
         mkdir -p _includes
         date > _includes/footer.md
-        ls _includes/footer.md
-        cat _includes/footer.md
+
     - uses: actions/jekyll-build-pages@v1-beta
     - name: Archive build output (custom)
       run: |
@@ -31,19 +31,9 @@ jobs:
         path: ./artifact.tar
         if-no-files-found: warn
 
-    - name: Deploy to GitHub Pages
+    - name: Deploy to github pages
       uses: JamesIves/github-pages-deploy-action@4.1.8
       with:
         branch: main
         folder: .
-
-    #    - uses: actions/deploy-pages@v1-beta
-    #      with:
-    #        #access-token: ${{ secrets.ACCESS_TOKEN }}
-    #        token: ${{ secrets.ACCESS_TOKEN }}
-    #      #- name: Build the site in the jekyll/builder container
-    #      #  run: |
-    #      #    docker run \
-    #      #    -v ${{ github.workspace }}:/srv/jekyll -v ${{ github.workspace }}/_site:/srv/jekyll/_site \
-    #      #    jekyll/builder:latest /bin/bash -c "chmod -R 777 /srv/jekyll && jekyll build --future"
 
