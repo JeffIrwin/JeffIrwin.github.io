@@ -93,7 +93,7 @@
 
 <p>It’s a problem we’ve all faced.  You make an earth-shattering edit to your blog on <a href="https://pages.github.com/" target="blank">GitHub pages</a>, commit, push, and refresh your browser to see the changes.  But wait: are you looking at the edited page, or the old version?  You watch the page build <a href="https://github.com/features/actions" target="blank">GitHub action</a> to confirm that it completed, but has the deployment trickled all the way down yet?</p>
 
-<p>The only way to really know which version you’re looking at is to add the build time or git revision somewhere on your page.  Jekyll even offers the <code class="language-plaintext highlighter-rouge">site.github.build_revision</code> <a href="https://github.com/jekyll/github-metadata/blob/master/docs/configuration.md" target="blank">for the latter</a>.</p>
+<p>The only way to really know which version you’re looking at is to add the build time or git revision somewhere on your page.  Jekyll even offers the variable <code class="language-plaintext highlighter-rouge">site.github.build_revision</code> <a href="https://github.com/jekyll/github-metadata/blob/master/docs/configuration.md" target="blank">for the latter</a>.</p>
 
 <p>We’re going to look at a more flexible solution that can be extended to other automated page modifications, which will eventually look like this:</p>
 
@@ -101,7 +101,7 @@
 
 <h2 id="setup-your-template-page-source-with-variables-to-be-replaced">Setup your template page source with variables to be replaced</h2>
 
-<p>In my example, I’m working on the <code class="language-plaintext highlighter-rouge">_layouts/default.html</code> page.  You can run the injection on <code class="language-plaintext highlighter-rouge">index.md</code> or any other html or markdown translation unit.</p>
+<p>In my example, I’m working on the <code class="language-plaintext highlighter-rouge">_layouts/default.html</code> page, where my footer is.  You can run the injection on <code class="language-plaintext highlighter-rouge">index.md</code> or any other html or markdown translation unit.</p>
 
 <p>We don’t want the injection to modify our source code and we don’t care about version control on the output of the injection process.  So, move your source to a template that will be the source of truth:</p>
 
@@ -117,7 +117,7 @@
 
 <p>The variable identifiers are <code class="language-plaintext highlighter-rouge">BUILD_DATE</code> and <code class="language-plaintext highlighter-rouge">BUILD_REVI</code>.</p>
 
-<p>Be careful that these identifiers don’t appear elsewhere in your source where you want them to be literal and unmodified.  Perhaps add some <a href="https://en.wikipedia.org/wiki/Sigil_(computer_programming)" target="blank">sigil</a> like <code class="language-plaintext highlighter-rouge">$VARIABLE</code> as an extra guard against the dumb parsing that we’re about to do.</p>
+<p>Be careful that these identifiers don’t appear elsewhere in your source where you want them to be literal and unmodified.  Perhaps add some <a href="https://en.wikipedia.org/wiki/Sigil_(computer_programming)" target="blank">sigil</a> – e.g. <code class="language-plaintext highlighter-rouge">$VARIABLE</code> – as an extra guard against the dumb parsing that we’re about to do.</p>
 
 <h2 id="use-sed-to-search-and-replace-the-template-variables-and-generate-your-page-source">Use <code class="language-plaintext highlighter-rouge">sed</code> to search and replace the template variables and generate your page source</h2>
 
@@ -164,7 +164,7 @@
           <a href="https://www.linkedin.com/in/jeff-irwin-54967332" target="_blank">LinkedIn</a>
         </p>
 
-        <p>Build: Fri Dec 31 01:28:54 UTC 2021, revision: <code>3d1a26c</code></p>
+        <p>Build: Fri Dec 31 01:36:34 UTC 2021, revision: <code>f15628a</code></p>
 
       </footer>
     </main>
