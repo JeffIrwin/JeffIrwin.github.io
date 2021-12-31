@@ -123,7 +123,7 @@
 
 <p>In this example, there are some handy bash and git commands to get the data that we want to inject.</p>
 
-<p>First, copy the template file to the injected output file.  Then inject the data:</p>
+<p>First, copy the template file to the injected output file.  Then inject the data with <code class="language-plaintext highlighter-rouge">sed</code>:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    cp _layouts/default-template.html _layouts/default.html
 
@@ -138,11 +138,13 @@
 
 <h2 id="build-and-deploy-the-page">Build and deploy the page</h2>
 
-<p>Because we’re modifying the page source, we can’t use the default Jekyll GitHub pages workflow.  We need to make a custom <code class="language-plaintext highlighter-rouge">jekyll.yml</code> workflow.</p>
+<p>Because we’re modifying the page source after every commit, we can’t use the default Jekyll GitHub pages workflow.  We need to make a custom <code class="language-plaintext highlighter-rouge">jekyll.yml</code> workflow.</p>
 
 <p>TBD</p>
 
 <p>I’m using JamesIves/github-pages-deploy-action.  To guard against a left-pad (LINK) fiasco, I forked it and use <code class="language-plaintext highlighter-rouge">pgh</code> (LINK) git helper to keep it up to date.</p>
+
+<p>Auto commits.  Push/pull, or forget and merge.</p>
 
 
 
@@ -164,7 +166,7 @@
           <a href="https://www.linkedin.com/in/jeff-irwin-54967332" target="_blank">LinkedIn</a>
         </p>
 
-        <p>Build: Fri Dec 31 01:36:34 UTC 2021, revision: <code>f15628a</code></p>
+        <p>Build: Fri Dec 31 15:14:40 UTC 2021, test revision: <code>2bbc7ae</code></p>
 
       </footer>
     </main>
