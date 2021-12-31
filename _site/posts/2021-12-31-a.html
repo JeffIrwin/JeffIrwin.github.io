@@ -127,16 +127,18 @@
 
 <p>In this example, there are some handy <code class="language-plaintext highlighter-rouge">bash</code> and <code class="language-plaintext highlighter-rouge">git</code> commands to get the data that we want to inject.</p>
 
-<p>First, copy the template file to the output file to be injected.  Then inject the data with <code class="language-plaintext highlighter-rouge">sed</code>:</p>
+<p>First, copy the template source file to the output destination file to be injected.  Then inject the data with <code class="language-plaintext highlighter-rouge">sed</code>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cp _layouts/default-template.html _layouts/default.html
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>source=_layouts/default-template.html
+destin=_layouts/default.html
+cp $source $destin
 
 export TZ='US/Eastern'
 date=$(date)
 revi=$(git rev-parse --short HEAD)
 
-sed -i "s/BUILD\_DATE/$date/g" _layouts/default.html
-sed -i "s/BUILD\_REVI/$revi/g" _layouts/default.html
+sed -i "s/BUILD\_DATE/$date/g" $destin
+sed -i "s/BUILD\_REVI/$revi/g" $destin
 </code></pre></div></div>
 
 <p>Recall that the <code class="language-plaintext highlighter-rouge">var=$(command)</code> syntax saves the output of a bash command in a variable.  The syntax for replacing <code class="language-plaintext highlighter-rouge">search</code> with <code class="language-plaintext highlighter-rouge">replace</code> globally in a <code class="language-plaintext highlighter-rouge">file</code> is <code class="language-plaintext highlighter-rouge">sed -i "s/search/replace/g" file</code>.</p>
@@ -147,7 +149,7 @@ sed -i "s/BUILD\_REVI/$revi/g" _layouts/default.html
 
 <p>Short of sigils, we can get little a extra protection by only replacing whole words that match the search pattern, by marking the beginning and ending word boundaries with <code class="language-plaintext highlighter-rouge">\&lt;</code> and <code class="language-plaintext highlighter-rouge">\&gt;</code> respectively:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sed -i "s/\&lt;BUILD\_DATE\&gt;/$date/g" _layouts/default.html
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sed -i "s/\&lt;BUILD\_DATE\&gt;/$date/g" $destin
 </code></pre></div></div>
 
 <p>Alternatively, if you don’t want to use <code class="language-plaintext highlighter-rouge">sed</code>, you could generate an entire footer file with <code class="language-plaintext highlighter-rouge">echo</code>, <code class="language-plaintext highlighter-rouge">cat</code>, etc.  For the <a href="https://github.com/pages-themes/cayman" target="blank">Jekyll cayman theme</a>, the footer is part of <code class="language-plaintext highlighter-rouge">default.html</code>, so it seems easier to use <code class="language-plaintext highlighter-rouge">sed</code> instead of generating all of <code class="language-plaintext highlighter-rouge">default.html</code> from scratch.</p>
@@ -197,7 +199,7 @@ sed -i "s/BUILD\_REVI/$revi/g" _layouts/default.html
           <a href="https://www.linkedin.com/in/jeff-irwin-54967332" target="_blank">LinkedIn</a>
         </p>
 
-        <p>Build: Fri Dec 31 16:53:40 EST 2021, revision: <code>6fe06aa</code></p>
+        <p>Build: Fri Dec 31 16:56:53 EST 2021, revision: <code>e451a69</code></p>
 
       </footer>
     </main>
