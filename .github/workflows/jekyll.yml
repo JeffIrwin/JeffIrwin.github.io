@@ -26,7 +26,7 @@ jobs:
 
         cp _layouts/default-template.html _layouts/default.html
 
-        TZ='US/Eastern'
+        export TZ='US/Eastern'
         date=$(date)
         revi=$(git rev-parse --short HEAD)
 
