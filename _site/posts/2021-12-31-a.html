@@ -99,42 +99,55 @@
 
 <p><em>Build: Fri Dec 31 01:03:45 UTC 2021, revision: <code class="language-plaintext highlighter-rouge">f7c5b70</code></em></p>
 
+<p>Assuming I haven’t broken anything, you can probably see it live at the bottom of this page.</p>
+
 <h2 id="setup-your-template-page-source-with-variables-to-be-replaced">Setup your template page source with variables to be replaced</h2>
 
-<p>In my example, I’m working on the <code class="language-plaintext highlighter-rouge">_layouts/default.html</code> page, where my footer is.  You can run the injection on <code class="language-plaintext highlighter-rouge">index.md</code> or any other html or markdown translation unit.</p>
+<p>In my example, I’m working on the <code class="language-plaintext highlighter-rouge">_layouts/default.html</code> page, where my footer is.  You can run the injection on <code class="language-plaintext highlighter-rouge">index.md</code> or any other <code class="language-plaintext highlighter-rouge">html</code> or <code class="language-plaintext highlighter-rouge">md</code> (markdown) translation unit.</p>
 
-<p>We don’t want the injection to modify our source code and we don’t care about version control on the output of the injection process.  So, move your source to a template that will be the source of truth:</p>
+<p>We don’t want the injection to modify our source code and we don’t care about version control on the output of the injection process.  So, move your source file to a template that will be the source of truth:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mv _layouts/default.html _layouts/default-template.html
 </code></pre></div></div>
 
-<p>Make sure the template filename starts with <code class="language-plaintext highlighter-rouge">_</code> or <code class="language-plaintext highlighter-rouge">.</code> to be ignored by Jekyll.  In the future, do all of your editing on the template file rather than the one that gets automatically modified.</p>
+<p>Make sure the template filename starts with <code class="language-plaintext highlighter-rouge">_</code> or <code class="language-plaintext highlighter-rouge">.</code> so that it is ignored by Jekyll.  We’re good since <code class="language-plaintext highlighter-rouge">default.html</code> is already in the <code class="language-plaintext highlighter-rouge">_layouts</code> folder.  In the future, do all of your editing on the template file rather than the one that gets automatically modified.</p>
+
+<p>TODO:  edit the github link to the correct “final” revision</p>
 
 <p>Next, <a href="https://github.com/JeffIrwin/JeffIrwin.github.io/blob/4b9b3923903862b58c009129dee710111e2a21e7/_layouts/default-template.html#L94" target="blank">add the content</a> where you’re going to inject variables:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;p&gt;Build: BUILD_DATE, revision: &lt;code&gt;BUILD_REVI&lt;/code&gt;&lt;/p&gt;
 </code></pre></div></div>
 
-<p>The variable identifiers are <code class="language-plaintext highlighter-rouge">BUILD_DATE</code> and <code class="language-plaintext highlighter-rouge">BUILD_REVI</code>.</p>
+<p>The variable identifiers I have chosen are <code class="language-plaintext highlighter-rouge">BUILD_DATE</code> and <code class="language-plaintext highlighter-rouge">BUILD_REVI</code>.</p>
 
 <p>Be careful that these identifiers don’t appear elsewhere in your source where you want them to be literal and unmodified.  Perhaps add some <a href="https://en.wikipedia.org/wiki/Sigil_(computer_programming)" target="blank">sigil</a> – e.g. <code class="language-plaintext highlighter-rouge">$VARIABLE</code> – as an extra guard against the dumb parsing that we’re about to do.</p>
 
 <h2 id="use-sed-to-search-and-replace-the-template-variables-and-generate-your-page-source">Use <code class="language-plaintext highlighter-rouge">sed</code> to search and replace the template variables and generate your page source</h2>
 
-<p>In this example, there are some handy bash and git commands to get the data that we want to inject.</p>
+<p>In this example, there are some handy <code class="language-plaintext highlighter-rouge">bash</code> and <code class="language-plaintext highlighter-rouge">git</code> commands to get the data that we want to inject.</p>
 
-<p>First, copy the template file to the injected output file.  Then inject the data with <code class="language-plaintext highlighter-rouge">sed</code>:</p>
+<p>First, copy the template file to the output file to be injected.  Then inject the data with <code class="language-plaintext highlighter-rouge">sed</code>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    cp _layouts/default-template.html _layouts/default.html
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cp _layouts/default-template.html _layouts/default.html
 
-    date=$(date)
-    revi=$(git rev-parse --short HEAD)
+date=$(date)
+revi=$(git rev-parse --short HEAD)
 
-    sed -i "s/BUILD\_DATE/$date/g" _layouts/default.html
-    sed -i "s/BUILD\_REVI/$revi/g" _layouts/default.html
+sed -i "s/BUILD\_DATE/$date/g" _layouts/default.html
+sed -i "s/BUILD\_REVI/$revi/g" _layouts/default.html
 </code></pre></div></div>
 
-<p>Recall that the <code class="language-plaintext highlighter-rouge">var=$(command)</code> syntax saves the output of a bash command in a variable.</p>
+<p>Recall that the <code class="language-plaintext highlighter-rouge">var=$(command)</code> syntax saves the output of a bash command in a variable.  The syntax for replacing <code class="language-plaintext highlighter-rouge">search</code> with <code class="language-plaintext highlighter-rouge">replace</code> globally in <code class="language-plaintext highlighter-rouge">file</code> is <code class="language-plaintext highlighter-rouge">sed -i "s/search/replace/g" file</code>.</p>
+
+<p>The underscore <code class="language-plaintext highlighter-rouge">_</code> needs to be escaped in the search pattern like <code class="language-plaintext highlighter-rouge">\_</code>.</p>
+
+<p>Short of sigils, we can get little a extra protection by only replacing whole words that match the search pattern, by marking the beginning and ending word boundaries with <code class="language-plaintext highlighter-rouge">\&lt;</code> and <code class="language-plaintext highlighter-rouge">\&gt;</code> respectively:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sed -i "s/\&lt;BUILD\_DATE\&gt;/$date/g" _layouts/default.html
+</code></pre></div></div>
+
+<p>Alternatively, if you don’t want to use <code class="language-plaintext highlighter-rouge">sed</code>, you could generate an entire footer file with <code class="language-plaintext highlighter-rouge">echo</code>, <code class="language-plaintext highlighter-rouge">cat</code>, etc.  For the <a href="https://github.com/pages-themes/cayman" target="blank">Jekyll cayman theme</a>, the footer is part of <code class="language-plaintext highlighter-rouge">default.html</code>, so it seems easier to use <code class="language-plaintext highlighter-rouge">sed</code> instead of generating all of <code class="language-plaintext highlighter-rouge">default.html</code> from scratch.</p>
 
 <h2 id="build-and-deploy-the-page">Build and deploy the page</h2>
 
@@ -166,7 +179,7 @@
           <a href="https://www.linkedin.com/in/jeff-irwin-54967332" target="_blank">LinkedIn</a>
         </p>
 
-        <p>Build: Fri Dec 31 15:16:37 UTC 2021, revision: <code>d2d435b</code></p>
+        <p>Build: Fri Dec 31 15:44:58 UTC 2021, revision: <code>1d1eb22</code></p>
 
       </footer>
     </main>
