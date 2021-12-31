@@ -114,9 +114,7 @@
 
 <p>Make sure the template filename starts with <code class="language-plaintext highlighter-rouge">_</code> or <code class="language-plaintext highlighter-rouge">.</code> so that it is ignored by Jekyll.  We’re good since <code class="language-plaintext highlighter-rouge">default.html</code> is already in the <code class="language-plaintext highlighter-rouge">_layouts</code> folder.  In the future, do all of your editing on the template file rather than the one that gets automatically modified.</p>
 
-<p>TODO:  edit the github link to the correct “final” revision, check line numbers too</p>
-
-<p>Next, <a href="https://github.com/JeffIrwin/JeffIrwin.github.io/blob/4b9b3923903862b58c009129dee710111e2a21e7/_layouts/default-template.html#L94" target="blank">add the content</a> where you’re going to inject variables into <code class="language-plaintext highlighter-rouge">default-template.html</code>:</p>
+<p>Next, <a href="https://github.com/JeffIrwin/JeffIrwin.github.io/blob/89f0290/_layouts/default-template.html#L94" target="blank">add the content</a> where you’re going to inject variables into <code class="language-plaintext highlighter-rouge">default-template.html</code>:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;p&gt;Build: BUILD_DATE, revision: &lt;code&gt;BUILD_REVI&lt;/code&gt;&lt;/p&gt;
 </code></pre></div></div>
@@ -156,7 +154,7 @@ sed -i "s/BUILD\_REVI/$revi/g" _layouts/default.html
 
 <h2 id="build-and-deploy-the-page">Build and deploy the page</h2>
 
-<p>Because we’re modifying the page source after every commit, we can’t use the default Jekyll GitHub pages workflow.  We need to use a <a href="https://github.com/JeffIrwin/JeffIrwin.github.io/blob/4b9b3923903862b58c009129dee710111e2a21e7/.github/workflows/jekyll.yml" target="blank">custom <code class="language-plaintext highlighter-rouge">jekyll.yml</code> workflow</a>.</p>
+<p>Because we’re modifying the page source after every commit, we can’t use the default Jekyll GitHub pages workflow.  We need to use a <a href="https://github.com/JeffIrwin/JeffIrwin.github.io/blob/89f0290/.github/workflows/jekyll.yml" target="blank">custom <code class="language-plaintext highlighter-rouge">jekyll.yml</code> workflow</a>.</p>
 
 <p>After checking out the git repo and running <code class="language-plaintext highlighter-rouge">sed</code> as above, place these steps in the workflow <code class="language-plaintext highlighter-rouge">yml</code> to build and deploy the page:</p>
 
@@ -177,7 +175,7 @@ sed -i "s/BUILD\_REVI/$revi/g" _layouts/default.html
 
 <p>Make sure to <code class="language-plaintext highlighter-rouge">pull</code> the changes locally after each junk commit.  If you’re like me, you’ll frequently forget to <code class="language-plaintext highlighter-rouge">pull</code> and end up with even more junk commits to <code class="language-plaintext highlighter-rouge">merge</code> the remote changes.</p>
 
-<p><a href="https://github.com/JeffIrwin/JeffIrwin.github.io/tree/4b9b3923903862b58c009129dee710111e2a21e7" target="blank">The full source for this site is here.</a></p>
+<p><a href="https://github.com/JeffIrwin/JeffIrwin.github.io/tree/89f0290" target="blank">The full source for this site is here.</a></p>
 
 
 
@@ -199,7 +197,7 @@ sed -i "s/BUILD\_REVI/$revi/g" _layouts/default.html
           <a href="https://www.linkedin.com/in/jeff-irwin-54967332" target="_blank">LinkedIn</a>
         </p>
 
-        <p>Build: Fri Dec 31 15:02:51 EST 2021, revision: <code>89f0290</code></p>
+        <p>Build: Fri Dec 31 15:07:33 EST 2021, revision: <code>66c8f03</code></p>
 
       </footer>
     </main>
