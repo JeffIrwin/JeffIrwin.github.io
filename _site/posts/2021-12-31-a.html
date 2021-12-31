@@ -91,15 +91,17 @@
 
 <h3 id="2021-dec-31">2021 Dec 31</h3>
 
-<p>It’s a problem we’ve all faced.  You make an earth-shattering edit to your blog on <a href="https://pages.github.com/" target="blank">GitHub pages</a>, commit, push, and refresh your browser to see the changes.  But wait: are you looking at the edited page, or the old version?  You watch the page build <a href="https://github.com/features/actions" target="blank">GitHub action</a> to confirm that it completed, but has the deployment trickled all the way down yet?</p>
+<p>It’s a problem every developer has faced (it me, I’m every developer).  You make an earth-shattering edit to your blog on <a href="https://pages.github.com/" target="blank">GitHub pages</a>, commit, push, and refresh your browser to see the changes.  But wait: are you looking at the edited page, or the old version?  You watch the page build <a href="https://github.com/features/actions" target="blank">GitHub action</a> to confirm that it completed, but has the deployment trickled all the way down yet?</p>
 
-<p>The only way to really know which version you’re looking at is to add the build time or git revision somewhere on your page.  Jekyll even offers the variable <code class="language-plaintext highlighter-rouge">site.github.build_revision</code> <a href="https://github.com/jekyll/github-metadata/blob/master/docs/configuration.md" target="blank">for the latter</a>.</p>
+<p>The only way to really know which version you’re looking at is to add the build time or git revision somewhere on your page.  <a href="https://jekyllrb.com/" target="blank">Jekyll</a> even offers the variable <code class="language-plaintext highlighter-rouge">site.github.build_revision</code> <a href="https://github.com/jekyll/github-metadata/blob/master/docs/configuration.md" target="blank">for the latter</a>.</p>
 
 <p>We’re going to look at a more flexible solution that can be extended to other automated page modifications, which will eventually look like this:</p>
 
 <p><em>Build: Fri Dec 31 01:03:45 UTC 2021, revision: <code class="language-plaintext highlighter-rouge">f7c5b70</code></em></p>
 
 <p>Assuming I haven’t broken anything, you can probably see it live at the bottom of this page.</p>
+
+<p>The variables injected into the page will form part of the serum that transforms Jekyll’s markdown into Hyde’s html.</p>
 
 <h2 id="setup-your-template-page-source-with-variables-to-be-replaced">Setup your template page source with variables to be replaced</h2>
 
@@ -131,6 +133,7 @@
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cp _layouts/default-template.html _layouts/default.html
 
+export TZ='US/Eastern'
 date=$(date)
 revi=$(git rev-parse --short HEAD)
 
@@ -142,6 +145,8 @@ sed -i "s/BUILD\_REVI/$revi/g" _layouts/default.html
 
 <p>The underscore <code class="language-plaintext highlighter-rouge">_</code> needs to be escaped in the search pattern like <code class="language-plaintext highlighter-rouge">\_</code>.</p>
 
+<p>Setting the timezone <code class="language-plaintext highlighter-rouge">TZ</code> is optional, it will probably default to <a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time" target="blank">UTC</a> otherwise.</p>
+
 <p>Short of sigils, we can get little a extra protection by only replacing whole words that match the search pattern, by marking the beginning and ending word boundaries with <code class="language-plaintext highlighter-rouge">\&lt;</code> and <code class="language-plaintext highlighter-rouge">\&gt;</code> respectively:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sed -i "s/\&lt;BUILD\_DATE\&gt;/$date/g" _layouts/default.html
@@ -151,9 +156,9 @@ sed -i "s/BUILD\_REVI/$revi/g" _layouts/default.html
 
 <h2 id="build-and-deploy-the-page">Build and deploy the page</h2>
 
-<p>Because we’re modifying the page source after every commit, we can’t use the default Jekyll GitHub pages workflow.  We need to make a custom <code class="language-plaintext highlighter-rouge">jekyll.yml</code> workflow.</p>
+<p>Because we’re modifying the page source after every commit, we can’t use the default Jekyll GitHub pages workflow.  We need to make a custom <code class="language-plaintext highlighter-rouge">[jekyll.yml](https://github.com/JeffIrwin/JeffIrwin.github.io/blob/4b9b3923903862b58c009129dee710111e2a21e7/.github/workflows/jekyll.yml){:target="blank"}</code> workflow.</p>
 
-<p>TBD</p>
+<p>TODO</p>
 
 <p>I’m using JamesIves/github-pages-deploy-action.  To guard against a left-pad (LINK) fiasco, I forked it and use <code class="language-plaintext highlighter-rouge">pgh</code> (LINK) git helper to keep it up to date.</p>
 
@@ -179,7 +184,7 @@ sed -i "s/BUILD\_REVI/$revi/g" _layouts/default.html
           <a href="https://www.linkedin.com/in/jeff-irwin-54967332" target="_blank">LinkedIn</a>
         </p>
 
-        <p>Build: Fri Dec 31 10:54:31 EST 2021, revision: <code>9f92feb</code></p>
+        <p>Build: Fri Dec 31 13:07:55 EST 2021, revision: <code>4c1a1b9</code></p>
 
       </footer>
     </main>
