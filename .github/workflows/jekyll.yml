@@ -24,14 +24,16 @@ jobs:
         # This could be outsourced to a separate bash script if it becomes
         # lengthy
 
-        cp _layouts/default-template.html _layouts/default.html
+        source=_layouts/default-template.html
+        destin=_layouts/default.html
+        cp $source $destin
 
         export TZ='US/Eastern'
         date=$(date)
         revi=$(git rev-parse --short HEAD)
 
-        sed -i "s/\<BUILD\_DATE\>/$date/g" _layouts/default.html
-        sed -i "s/\<BUILD\_REVI\>/$revi/g" _layouts/default.html
+        sed -i "s/\<BUILD\_DATE\>/$date/g" $destin
+        sed -i "s/\<BUILD\_REVI\>/$revi/g" $destin
 
 
 
