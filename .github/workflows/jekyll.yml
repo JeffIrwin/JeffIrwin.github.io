@@ -30,16 +30,16 @@ jobs:
         revi=$(git rev-parse --short HEAD)
 
         # Would whole-word replacement be better?
-        sed -i "s/BUILD\_DATE/$date/g" _layouts/default.html
-        sed -i "s/BUILD\_REVI/$revi/g" _layouts/default.html
+        sed -i "s/\<BUILD\_DATE\>/$date/g" _layouts/default.html
+        sed -i "s/\<BUILD\_REVI\>/$revi/g" _layouts/default.html
 
 
 
-    - uses: actions/jekyll-build-pages@v1-beta
+    #- uses: actions/jekyll-build-pages@v1-beta
 
-    - name: Deploy to github pages
-      uses: JeffIrwin/github-pages-deploy-action@4.1.8
-      with:
-        branch: main
-        folder: .
+    #- name: Deploy to github pages
+    #  uses: JeffIrwin/github-pages-deploy-action@4.1.8
+    #  with:
+    #    branch: main
+    #    folder: .
 
