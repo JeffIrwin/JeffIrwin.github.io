@@ -11,19 +11,19 @@
     <meta charset="UTF-8">
 
 <!-- Begin Jekyll SEO tag v2.7.1 -->
-<title>&lt;!– | JeffIrwin.github.io</title>
+<title>JeffIrwin.github.io | Jeff Irwin’s GitHub page</title>
 <meta name="generator" content="Jekyll v3.9.0" />
-<meta property="og:title" content="&lt;!–" />
+<meta property="og:title" content="JeffIrwin.github.io" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="Jeff Irwin’s GitHub page" />
 <meta property="og:description" content="Jeff Irwin’s GitHub page" />
-<link rel="canonical" href="https://www.jeffirwin.xyz/about.html" />
-<meta property="og:url" content="https://www.jeffirwin.xyz/about.html" />
+<link rel="canonical" href="https://www.jeffirwin.xyz/posts/2021-12-31-a.html" />
+<meta property="og:url" content="https://www.jeffirwin.xyz/posts/2021-12-31-a.html" />
 <meta property="og:site_name" content="JeffIrwin.github.io" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="&lt;!–" />
+<meta property="twitter:title" content="JeffIrwin.github.io" />
 <script type="application/ld+json">
-{"headline":"&lt;!–","description":"Jeff Irwin’s GitHub page","url":"https://www.jeffirwin.xyz/about.html","@type":"WebPage","@context":"https://schema.org"}</script>
+{"headline":"JeffIrwin.github.io","description":"Jeff Irwin’s GitHub page","url":"https://www.jeffirwin.xyz/posts/2021-12-31-a.html","@type":"WebPage","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -71,15 +71,7 @@
     </header>
 
     <main id="content" class="main-content" role="main">
-      <!--
----
-firstname: Jeff
-lastname: Irwin
----
--->
-
-<link rel="shortcut icon" type="image/png" href="favicon.png" />
-
+      
 <table>
   <tbody>
     <tr>
@@ -91,9 +83,33 @@ lastname: Irwin
   </tbody>
 </table>
 
-<h1 id="about">About</h1>
+<h1 id="injecting-date-and-time-into-a-github-page-with-jekyll">Injecting date and time into a GitHub page with Jekyll</h1>
 
-<!--All about  -->
+<!-- ## Subtitle -->
+
+<h3 id="2021-dec-31">2021 Dec 31</h3>
+
+<h1 id="todo-sblank_blankgc">TODO: <code class="language-plaintext highlighter-rouge">s/blank/_blank/gc</code></h1>
+
+<p>It’s a problem we’ve all faced.  You make an earth shattering edit to your blog on <a href="https://pages.github.com/" target="blank">GitHub pages</a>, commit, push, and refresh your browser to see the changes.  But wait: are you looking at the edited page, or the old version?  You watch the page build <a href="https://github.com/features/actions" target="blank">GitHub action</a> to confirm that it completed, but has the deployment trickled all the way down yet?</p>
+
+<p>The only way to really know which version you’re looking at is to add the build time or git revision somewhere on your page.  Jekyll even offers the <code class="language-plaintext highlighter-rouge">site.github.build_revision</code> <a href="https://github.com/jekyll/github-metadata/blob/master/docs/configuration.md" target="blank">for the latter</a>.  We’re going to look at a more flexible solution that can be extended to other automated page modifications.</p>
+
+<h2 id="setup-your-template-page-source-with-variables-to-be-replaced">Setup your template page source with variables to be replaced</h2>
+
+<p>In my example, I’m working on the <code class="language-plaintext highlighter-rouge">_layouts/default.html</code> page.  You can run the injection on index.md or any other html or markdown translation unit.</p>
+
+<p>We don’t want the injection to modify our source code and we don’t care about version control on the output of the injection process.  So, move your source to a template that will be the source of truth:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mv _layouts/default.html _layouts/default-template.html
+</code></pre></div></div>
+
+<p>Next, <a href="https://github.com/JeffIrwin/JeffIrwin.github.io/blob/4b9b3923903862b58c009129dee710111e2a21e7/_layouts/default-template.html#L94" target="blank">add the content</a> where you’re going to inject variables:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;p&gt;Build: BUILD_DATE, revision: &lt;code&gt;BUILD_REVI&lt;/code&gt;&lt;/p&gt;
+</code></pre></div></div>
+
+<p>The variable identifiers are <code class="language-plaintext highlighter-rouge">BUILD_DATE</code> and <code class="language-plaintext highlighter-rouge">BUILD_REVI</code>.</p>
 
 
 
