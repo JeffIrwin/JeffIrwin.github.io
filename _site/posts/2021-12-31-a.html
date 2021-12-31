@@ -89,20 +89,24 @@
 
 <h3 id="2021-dec-31">2021 Dec 31</h3>
 
-<h1 id="todo-sblank_blankgc">TODO: <code class="language-plaintext highlighter-rouge">s/blank/_blank/gc</code></h1>
+<p>It’s a problem we’ve all faced.  You make an earth-shattering edit to your blog on <a href="https://pages.github.com/" target="blank">GitHub pages</a>, commit, push, and refresh your browser to see the changes.  But wait: are you looking at the edited page, or the old version?  You watch the page build <a href="https://github.com/features/actions" target="blank">GitHub action</a> to confirm that it completed, but has the deployment trickled all the way down yet?</p>
 
-<p>It’s a problem we’ve all faced.  You make an earth shattering edit to your blog on <a href="https://pages.github.com/" target="blank">GitHub pages</a>, commit, push, and refresh your browser to see the changes.  But wait: are you looking at the edited page, or the old version?  You watch the page build <a href="https://github.com/features/actions" target="blank">GitHub action</a> to confirm that it completed, but has the deployment trickled all the way down yet?</p>
+<p>The only way to really know which version you’re looking at is to add the build time or git revision somewhere on your page.  Jekyll even offers the <code class="language-plaintext highlighter-rouge">site.github.build_revision</code> <a href="https://github.com/jekyll/github-metadata/blob/master/docs/configuration.md" target="blank">for the latter</a>.</p>
 
-<p>The only way to really know which version you’re looking at is to add the build time or git revision somewhere on your page.  Jekyll even offers the <code class="language-plaintext highlighter-rouge">site.github.build_revision</code> <a href="https://github.com/jekyll/github-metadata/blob/master/docs/configuration.md" target="blank">for the latter</a>.  We’re going to look at a more flexible solution that can be extended to other automated page modifications.</p>
+<p>We’re going to look at a more flexible solution that can be extended to other automated page modifications, which will eventually look like this:</p>
+
+<p><em>Build: Fri Dec 31 01:03:45 UTC 2021, revision: <code class="language-plaintext highlighter-rouge">f7c5b70</code></em></p>
 
 <h2 id="setup-your-template-page-source-with-variables-to-be-replaced">Setup your template page source with variables to be replaced</h2>
 
-<p>In my example, I’m working on the <code class="language-plaintext highlighter-rouge">_layouts/default.html</code> page.  You can run the injection on index.md or any other html or markdown translation unit.</p>
+<p>In my example, I’m working on the <code class="language-plaintext highlighter-rouge">_layouts/default.html</code> page.  You can run the injection on <code class="language-plaintext highlighter-rouge">index.md</code> or any other html or markdown translation unit.</p>
 
 <p>We don’t want the injection to modify our source code and we don’t care about version control on the output of the injection process.  So, move your source to a template that will be the source of truth:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mv _layouts/default.html _layouts/default-template.html
 </code></pre></div></div>
+
+<p>Make sure the template filename starts with <code class="language-plaintext highlighter-rouge">_</code> or <code class="language-plaintext highlighter-rouge">.</code> to be ignored by Jekyll.  In the future, do all of your editing on the template file rather than the one that gets automatically modified.</p>
 
 <p>Next, <a href="https://github.com/JeffIrwin/JeffIrwin.github.io/blob/4b9b3923903862b58c009129dee710111e2a21e7/_layouts/default-template.html#L94" target="blank">add the content</a> where you’re going to inject variables:</p>
 
@@ -110,6 +114,33 @@
 </code></pre></div></div>
 
 <p>The variable identifiers are <code class="language-plaintext highlighter-rouge">BUILD_DATE</code> and <code class="language-plaintext highlighter-rouge">BUILD_REVI</code>.</p>
+
+<p>Be careful that these identifiers don’t appear elsewhere in your source where you want them to be literal and unmodified.  Perhaps add some <a href="https://en.wikipedia.org/wiki/Sigil_(computer_programming)" target="blank">sigil</a> like <code class="language-plaintext highlighter-rouge">$VARIABLE</code> as an extra guard against the dumb parsing that we’re about to do.</p>
+
+<h2 id="use-sed-to-search-and-replace-the-template-variables-and-generate-your-page-source">Use <code class="language-plaintext highlighter-rouge">sed</code> to search and replace the template variables and generate your page source</h2>
+
+<p>In this example, there are some handy bash and git commands to get the data that we want to inject.</p>
+
+<p>First, copy the template file to the injected output file.  Then inject the data:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    cp _layouts/default-template.html _layouts/default.html
+
+    date=$(date)
+    revi=$(git rev-parse --short HEAD)
+
+    sed -i "s/BUILD\_DATE/$date/g" _layouts/default.html
+    sed -i "s/BUILD\_REVI/$revi/g" _layouts/default.html
+</code></pre></div></div>
+
+<p>Recall that the <code class="language-plaintext highlighter-rouge">var=$(command)</code> syntax saves the output of a bash command in a variable.</p>
+
+<h2 id="build-and-deploy-the-page">Build and deploy the page</h2>
+
+<p>Because we’re modifying the page source, we can’t use the default Jekyll GitHub pages workflow.  We need to make a custom <code class="language-plaintext highlighter-rouge">jekyll.yml</code> workflow.</p>
+
+<p>TBD</p>
+
+<p>I’m using JamesIves/github-pages-deploy-action.  To guard against a left-pad (LINK) fiasco, I forked it and use <code class="language-plaintext highlighter-rouge">pgh</code> (LINK) git helper to keep it up to date.</p>
 
 
 
@@ -131,7 +162,7 @@
           <a href="https://www.linkedin.com/in/jeff-irwin-54967332" target="_blank">LinkedIn</a>
         </p>
 
-        <p>Build: Fri Dec 31 01:03:45 UTC 2021, revision: <code>f7c5b70</code></p>
+        <p>Build: Fri Dec 31 01:24:06 UTC 2021, revision: <code>b33a9e4</code></p>
 
       </footer>
     </main>
