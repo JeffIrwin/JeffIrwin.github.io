@@ -26,9 +26,7 @@ jobs:
 
         cp _layouts/default-template.html _layouts/default.html
 
-        ls /usr/share/zoneinfo
-        timedatectl list-timezones
-
+        TZ='US/Eastern'
         date=$(date)
         revi=$(git rev-parse --short HEAD)
 
