@@ -127,16 +127,16 @@
 
 <p>First, copy the template source file to the output destination file to be injected.  Then inject the data with <code class="language-plaintext highlighter-rouge">sed</code>:</p>
 
-<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="nb">source</span><span class="o">=</span>_layouts/default-template.html
-<span class="nv">destin</span><span class="o">=</span>_layouts/default.html
-<span class="nb">cp</span> <span class="nv">$source</span> <span class="nv">$destin</span>
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="nv">srce</span><span class="o">=</span>_layouts/default-template.html
+<span class="nv">dest</span><span class="o">=</span>_layouts/default.html
+<span class="nb">cp</span> <span class="nv">$srce</span> <span class="nv">$dest</span>
 
 <span class="nb">export </span><span class="nv">TZ</span><span class="o">=</span><span class="s1">'US/Eastern'</span>
 <span class="nb">date</span><span class="o">=</span><span class="si">$(</span><span class="nb">date</span><span class="si">)</span>
 <span class="nv">revi</span><span class="o">=</span><span class="si">$(</span>git rev-parse <span class="nt">--short</span> HEAD<span class="si">)</span>
 
-<span class="nb">sed</span> <span class="nt">-i</span> <span class="s2">"s/BUILD</span><span class="se">\_</span><span class="s2">DATE/</span><span class="nv">$date</span><span class="s2">/g"</span> <span class="nv">$destin</span>
-<span class="nb">sed</span> <span class="nt">-i</span> <span class="s2">"s/BUILD</span><span class="se">\_</span><span class="s2">REVI/</span><span class="nv">$revi</span><span class="s2">/g"</span> <span class="nv">$destin</span></code></pre></figure>
+<span class="nb">sed</span> <span class="nt">-i</span> <span class="s2">"s/BUILD</span><span class="se">\_</span><span class="s2">DATE/</span><span class="nv">$date</span><span class="s2">/g"</span> <span class="nv">$dest</span>
+<span class="nb">sed</span> <span class="nt">-i</span> <span class="s2">"s/BUILD</span><span class="se">\_</span><span class="s2">REVI/</span><span class="nv">$revi</span><span class="s2">/g"</span> <span class="nv">$dest</span></code></pre></figure>
 
 <p>Recall that the <code class="language-plaintext highlighter-rouge">var=$(command)</code> syntax saves the output of a bash command in a variable.  The syntax for replacing <code class="language-plaintext highlighter-rouge">search</code> with <code class="language-plaintext highlighter-rouge">replace</code> globally in a <code class="language-plaintext highlighter-rouge">file</code> is <code class="language-plaintext highlighter-rouge">sed -i "s/search/replace/g" file</code>.</p>
 
@@ -146,7 +146,7 @@
 
 <p>Short of sigils, we can get little a extra protection by only replacing whole words that match the search pattern, by marking the beginning and ending word boundaries with <code class="language-plaintext highlighter-rouge">\&lt;</code> and <code class="language-plaintext highlighter-rouge">\&gt;</code> respectively:</p>
 
-<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="nb">sed</span> <span class="nt">-i</span> <span class="s2">"s/</span><span class="se">\&lt;</span><span class="s2">BUILD</span><span class="se">\_</span><span class="s2">DATE</span><span class="se">\&gt;</span><span class="s2">/</span><span class="nv">$date</span><span class="s2">/g"</span> <span class="nv">$destin</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="nb">sed</span> <span class="nt">-i</span> <span class="s2">"s/</span><span class="se">\&lt;</span><span class="s2">BUILD</span><span class="se">\_</span><span class="s2">DATE</span><span class="se">\&gt;</span><span class="s2">/</span><span class="nv">$date</span><span class="s2">/g"</span> <span class="nv">$dest</span></code></pre></figure>
 
 <p>Alternatively, if you don’t want to use <code class="language-plaintext highlighter-rouge">sed</code>, you could generate an entire footer file with <code class="language-plaintext highlighter-rouge">echo</code>, <code class="language-plaintext highlighter-rouge">cat</code>, etc.  For the <a href="https://github.com/pages-themes/cayman" target="blank">Jekyll cayman theme</a>, the footer is part of <code class="language-plaintext highlighter-rouge">default.html</code>, so it seems easier to use <code class="language-plaintext highlighter-rouge">sed</code> instead of generating all of <code class="language-plaintext highlighter-rouge">default.html</code> from scratch.</p>
 
@@ -194,7 +194,7 @@
           <a href="https://www.linkedin.com/in/jeff-irwin-54967332" target="_blank">LinkedIn</a>
         </p>
 
-        <p>Build: Sun Jan  2 10:10:45 EST 2022, revision: <code>64b1dd9</code></p>
+        <p>Build: Sun Jan  2 10:27:56 EST 2022, revision: <code>3b2b524</code></p>
 
       </footer>
     </main>
