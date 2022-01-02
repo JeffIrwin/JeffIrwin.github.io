@@ -109,13 +109,13 @@
 
 <p>We don’t want the injection to modify our source code and we don’t care about version control on the output of the injection process.  So, move your source file to a template that will be the source of truth:</p>
 
-<figure class="highlight"><pre><code class="language-shell" data-lang="shell">    <span class="nb">mv </span>_layouts/default.html _layouts/default-template.html</code></pre></figure>
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="nb">mv </span>_layouts/default.html _layouts/default-template.html</code></pre></figure>
 
 <p>Make sure the template filename starts with <code class="language-plaintext highlighter-rouge">_</code> or <code class="language-plaintext highlighter-rouge">.</code> so that it is ignored by Jekyll.  We’re good since <code class="language-plaintext highlighter-rouge">default.html</code> is already in the <code class="language-plaintext highlighter-rouge">_layouts</code> folder.  In the future, do all of your editing on the template file rather than the one that gets automatically modified.</p>
 
 <p>Next, <a href="https://github.com/JeffIrwin/JeffIrwin.github.io/blob/89f0290/_layouts/default-template.html#L94" target="blank">add the content</a> where you’re going to inject variables into <code class="language-plaintext highlighter-rouge">default-template.html</code>:</p>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html">    <span class="nt">&lt;p&gt;</span>Build: BUILD_DATE, revision: <span class="nt">&lt;code&gt;</span>BUILD_REVI<span class="nt">&lt;/code&gt;&lt;/p&gt;</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;p&gt;</span>Build: BUILD_DATE, revision: <span class="nt">&lt;code&gt;</span>BUILD_REVI<span class="nt">&lt;/code&gt;&lt;/p&gt;</span></code></pre></figure>
 
 <p>The variable identifiers I have chosen are <code class="language-plaintext highlighter-rouge">BUILD_DATE</code> and <code class="language-plaintext highlighter-rouge">BUILD_REVI</code>.</p>
 
@@ -127,17 +127,16 @@
 
 <p>First, copy the template source file to the output destination file to be injected.  Then inject the data with <code class="language-plaintext highlighter-rouge">sed</code>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>source=_layouts/default-template.html
-destin=_layouts/default.html
-cp $source $destin
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="nb">source</span><span class="o">=</span>_layouts/default-template.html
+<span class="nv">destin</span><span class="o">=</span>_layouts/default.html
+<span class="nb">cp</span> <span class="nv">$source</span> <span class="nv">$destin</span>
 
-export TZ='US/Eastern'
-date=$(date)
-revi=$(git rev-parse --short HEAD)
+<span class="nb">export </span><span class="nv">TZ</span><span class="o">=</span><span class="s1">'US/Eastern'</span>
+<span class="nb">date</span><span class="o">=</span><span class="si">$(</span><span class="nb">date</span><span class="si">)</span>
+<span class="nv">revi</span><span class="o">=</span><span class="si">$(</span>git rev-parse <span class="nt">--short</span> HEAD<span class="si">)</span>
 
-sed -i "s/BUILD\_DATE/$date/g" $destin
-sed -i "s/BUILD\_REVI/$revi/g" $destin
-</code></pre></div></div>
+<span class="nb">sed</span> <span class="nt">-i</span> <span class="s2">"s/BUILD</span><span class="se">\_</span><span class="s2">DATE/</span><span class="nv">$date</span><span class="s2">/g"</span> <span class="nv">$destin</span>
+<span class="nb">sed</span> <span class="nt">-i</span> <span class="s2">"s/BUILD</span><span class="se">\_</span><span class="s2">REVI/</span><span class="nv">$revi</span><span class="s2">/g"</span> <span class="nv">$destin</span></code></pre></figure>
 
 <p>Recall that the <code class="language-plaintext highlighter-rouge">var=$(command)</code> syntax saves the output of a bash command in a variable.  The syntax for replacing <code class="language-plaintext highlighter-rouge">search</code> with <code class="language-plaintext highlighter-rouge">replace</code> globally in a <code class="language-plaintext highlighter-rouge">file</code> is <code class="language-plaintext highlighter-rouge">sed -i "s/search/replace/g" file</code>.</p>
 
@@ -147,8 +146,7 @@ sed -i "s/BUILD\_REVI/$revi/g" $destin
 
 <p>Short of sigils, we can get little a extra protection by only replacing whole words that match the search pattern, by marking the beginning and ending word boundaries with <code class="language-plaintext highlighter-rouge">\&lt;</code> and <code class="language-plaintext highlighter-rouge">\&gt;</code> respectively:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sed -i "s/\&lt;BUILD\_DATE\&gt;/$date/g" $destin
-</code></pre></div></div>
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="nb">sed</span> <span class="nt">-i</span> <span class="s2">"s/</span><span class="se">\&lt;</span><span class="s2">BUILD</span><span class="se">\_</span><span class="s2">DATE</span><span class="se">\&gt;</span><span class="s2">/</span><span class="nv">$date</span><span class="s2">/g"</span> <span class="nv">$destin</span></code></pre></figure>
 
 <p>Alternatively, if you don’t want to use <code class="language-plaintext highlighter-rouge">sed</code>, you could generate an entire footer file with <code class="language-plaintext highlighter-rouge">echo</code>, <code class="language-plaintext highlighter-rouge">cat</code>, etc.  For the <a href="https://github.com/pages-themes/cayman" target="blank">Jekyll cayman theme</a>, the footer is part of <code class="language-plaintext highlighter-rouge">default.html</code>, so it seems easier to use <code class="language-plaintext highlighter-rouge">sed</code> instead of generating all of <code class="language-plaintext highlighter-rouge">default.html</code> from scratch.</p>
 
@@ -158,14 +156,13 @@ sed -i "s/BUILD\_REVI/$revi/g" $destin
 
 <p>After checking out the git repo and running <code class="language-plaintext highlighter-rouge">sed</code> as above, place these steps in the workflow <code class="language-plaintext highlighter-rouge">yml</code> to build and deploy the page:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- uses: actions/jekyll-build-pages@v1-beta
+<figure class="highlight"><pre><code class="language-yml" data-lang="yml"><span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/jekyll-build-pages@v1-beta</span>
 
-- name: Deploy to github pages
-  uses: JeffIrwin/github-pages-deploy-action@4.1.8
-  with:
-    branch: main
-    folder: .
-</code></pre></div></div>
+<span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Deploy to github pages</span>
+  <span class="na">uses</span><span class="pi">:</span> <span class="s">JeffIrwin/github-pages-deploy-action@4.1.8</span>
+  <span class="na">with</span><span class="pi">:</span>
+    <span class="na">branch</span><span class="pi">:</span> <span class="s">main</span>
+    <span class="na">folder</span><span class="pi">:</span> <span class="s">.</span></code></pre></figure>
 
 <p>Make sure to update the branch name that you’re deploying from if it’s not <code class="language-plaintext highlighter-rouge">main</code>.  Are you still naming branches <code class="language-plaintext highlighter-rouge">master</code> in 2022?  😩</p>
 
@@ -197,7 +194,7 @@ sed -i "s/BUILD\_REVI/$revi/g" $destin
           <a href="https://www.linkedin.com/in/jeff-irwin-54967332" target="_blank">LinkedIn</a>
         </p>
 
-        <p>Build: Sun Jan  2 10:05:25 EST 2022, revision: <code>46a4c54</code></p>
+        <p>Build: Sun Jan  2 10:10:45 EST 2022, revision: <code>64b1dd9</code></p>
 
       </footer>
     </main>
