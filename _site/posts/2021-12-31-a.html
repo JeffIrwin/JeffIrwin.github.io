@@ -109,15 +109,13 @@
 
 <p>We don’t want the injection to modify our source code and we don’t care about version control on the output of the injection process.  So, move your source file to a template that will be the source of truth:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mv _layouts/default.html _layouts/default-template.html
-</code></pre></div></div>
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell">    <span class="nb">mv </span>_layouts/default.html _layouts/default-template.html</code></pre></figure>
 
 <p>Make sure the template filename starts with <code class="language-plaintext highlighter-rouge">_</code> or <code class="language-plaintext highlighter-rouge">.</code> so that it is ignored by Jekyll.  We’re good since <code class="language-plaintext highlighter-rouge">default.html</code> is already in the <code class="language-plaintext highlighter-rouge">_layouts</code> folder.  In the future, do all of your editing on the template file rather than the one that gets automatically modified.</p>
 
 <p>Next, <a href="https://github.com/JeffIrwin/JeffIrwin.github.io/blob/89f0290/_layouts/default-template.html#L94" target="blank">add the content</a> where you’re going to inject variables into <code class="language-plaintext highlighter-rouge">default-template.html</code>:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;p&gt;Build: BUILD_DATE, revision: &lt;code&gt;BUILD_REVI&lt;/code&gt;&lt;/p&gt;
-</code></pre></div></div>
+<figure class="highlight"><pre><code class="language-html" data-lang="html">    <span class="nt">&lt;p&gt;</span>Build: BUILD_DATE, revision: <span class="nt">&lt;code&gt;</span>BUILD_REVI<span class="nt">&lt;/code&gt;&lt;/p&gt;</span></code></pre></figure>
 
 <p>The variable identifiers I have chosen are <code class="language-plaintext highlighter-rouge">BUILD_DATE</code> and <code class="language-plaintext highlighter-rouge">BUILD_REVI</code>.</p>
 
@@ -199,7 +197,7 @@ sed -i "s/BUILD\_REVI/$revi/g" $destin
           <a href="https://www.linkedin.com/in/jeff-irwin-54967332" target="_blank">LinkedIn</a>
         </p>
 
-        <p>Build: Fri Dec 31 16:56:53 EST 2021, revision: <code>e451a69</code></p>
+        <p>Build: Sun Jan  2 10:05:25 EST 2022, revision: <code>46a4c54</code></p>
 
       </footer>
     </main>
