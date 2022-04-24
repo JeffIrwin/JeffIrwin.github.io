@@ -27,5 +27,6 @@ syntax -->
 
 - [Allemande](https://soundcloud.com/jirwin505/french-suite-no1-in-d-minor-bwv-812-i-allemande?si=aa910a6c1b4442ada535791af9f0f7ff){:target="_blank"}
 - Courante [part 1](https://www.tiktok.com/@jeff.irwin/video/6958856517751803142){:target="_blank"} and [part 2](https://www.tiktok.com/@jeff.irwin/video/6966349034906766597){:target="_blank"}
+- [Sarabande](https://www.youtube.com/watch?v=zKBBfl6Gwjg){:target="_blank"}
 - More TBA ...
 
