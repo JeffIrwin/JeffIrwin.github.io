@@ -9,7 +9,7 @@
 
 Highlights of some of my toys include:
 
-<!-- - TODO temple-viewer -->
+- [A 3D model viewer for TempleOS](https://github.com/JeffIrwin/temple-viewer){:target="_blank"}
 - [A visualizer for Bohemian matrices](https://github.com/JeffIrwin/bomat){:target="_blank"}
 - [A Rubik's cube game that you can play in your browser](rubik-js/){:target="_blank"}
 - [A heat mapping tool for fitness data](https://github.com/JeffIrwin/maph){:target="_blank"}
