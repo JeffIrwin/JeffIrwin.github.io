@@ -36,7 +36,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#157878">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="stylesheet" href="/assets/css/style.css?v=6f27a5d313f674442160ce6de9d2b5a2ab551518">
+    <link rel="stylesheet" href="/assets/css/style.css?v=a3c63504ea9e90d10c0e1cd4bfff12ed3f44f69a">
     <link rel="shortcut icon" type="image/png" href="/favicon.png">
   </head>
   <body>
@@ -87,6 +87,13 @@
     </tr>
   </tbody>
 </table>
+
+<!--
+TODO: go live
+- link from top-level "posts" page
+- cross post to socials
+- ffmpeg is slowly becoming one of my favorite tools.  i wrote up my journey through what seemed like a common problem that yielded no stackoverflow results
+-->
 
 <h1 id="the-ffmpeg-manifesto">The ffmpeg manifesto</h1>
 
@@ -142,9 +149,41 @@ instead of <code class="language-plaintext highlighter-rouge">16:9</code>.  Here
 
 <p>We’ll break this down step by step below.</p>
 
-<h2 id="getting-help-with-ffmpeg">Getting help with ffmpeg</h2>
+<h2 id="the-deceptive-allure-of-ffmpeg">The deceptive allure of ffmpeg</h2>
 
-<!-- TODO: move part of next section above this? -->
+<p><code class="language-plaintext highlighter-rouge">ffmpeg</code> is intimidating.  You get lured in with straightforward conversion
+commands with just a couple arguments, e.g. <code class="language-plaintext highlighter-rouge">avi</code> to <code class="language-plaintext highlighter-rouge">mp4</code>:</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell">ffmpeg <span class="nt">-i</span> <span class="s2">"input.avi"</span> <span class="s2">"output.mp4"</span></code></pre></figure>
+
+<p>And then there are moderately more advanced commands to apply video filters,
+e.g. scaling an input resolution down or up to HD resolution <code class="language-plaintext highlighter-rouge">1920:1080</code>:</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell">ffmpeg <span class="nt">-i</span> <span class="s2">"input.mp4"</span> <span class="nt">-filter</span>:video <span class="s2">"scale=1920:1080"</span> <span class="s2">"output.mp4"</span></code></pre></figure>
+
+<p>And finally there are gargantuan one-liners like ours, similar to what you might
+find on <a href="https://stackoverflow.com/q/53795205/4347028">stack</a>
+<a href="https://stackoverflow.com/q/53795205/4347028">overflow</a>
+<a href="https://stackoverflow.com/a/61360675">posts</a> from <code class="language-plaintext highlighter-rouge">ffmpeg</code> wizards.</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell">ffmpeg <span class="se">\</span>
+	<span class="nt">-i</span> <span class="s2">"input.mp4"</span> <span class="se">\</span>
+	<span class="nt">-vf</span> <span class="s2">"split [fg][bg];
+	[bg]        crop=ceil(ih*9/16/2)*2:ih, boxblur=30 [bg];
+	[fg]       scale=ceil(ih*9/16/2)*2:ceil(ih*9*9/16/16/2)*2 [fg];
+	[bg][fg] overlay=y=main_h/2-overlay_h/2"</span> <span class="se">\</span>
+	<span class="s2">"output.mp4"</span></code></pre></figure>
+
+<p>How does anyone come up with these?  What seemed like a problem of crafting a
+few command line arguments has evolved into a task of writing a weird
+interpretted programming language, complete with variables like <code class="language-plaintext highlighter-rouge">[fg]</code> and
+<code class="language-plaintext highlighter-rouge">[bg]</code>, mathematical operations and the <code class="language-plaintext highlighter-rouge">ceil()</code> function, and bizarrely
+abbreviated constant variables like <code class="language-plaintext highlighter-rouge">ih</code> and <code class="language-plaintext highlighter-rouge">main_h</code>.</p>
+
+<p>But before we dive into the complexity, let’s help you help yourself with
+<code class="language-plaintext highlighter-rouge">ffmpeg</code>.</p>
+
+<h2 id="getting-help-with-ffmpeg">Getting help with ffmpeg</h2>
 
 <p>To get top-level help, use <code class="language-plaintext highlighter-rouge">ffmpeg --help</code> or <code class="language-plaintext highlighter-rouge">ffmpeg -h</code>:</p>
 
@@ -189,6 +228,10 @@ on where they are positioned in the argument list.</p>
 <p>It feels inconsistent, but notice there’s no <code class="language-plaintext highlighter-rouge">-h</code> in the above help command for
 filters. Again, I’ve omitted everything that’s irrelevant to this blog.</p>
 
+<p>Note that most of these filters map a single video input to a single video
+output <code class="language-plaintext highlighter-rouge">V-&gt;V</code>.  The exception is <code class="language-plaintext highlighter-rouge">overlay</code>, which maps two inputs to one output
+<code class="language-plaintext highlighter-rouge">VV-&gt;V</code>.</p>
+
 <p>Finally, to get help with a specific filter, e.g. <code class="language-plaintext highlighter-rouge">crop</code>, use <code class="language-plaintext highlighter-rouge">ffmpeg -h filter=crop</code>:</p>
 
 <figure class="highlight"><pre><code class="language-shell" data-lang="shell">ffmpeg <span class="nt">-h</span> <span class="nv">filter</span><span class="o">=</span>crop
@@ -219,40 +262,6 @@ here’s an example crop command:</p>
 
 <h2 id="breaking-down-the-one-liner">Breaking down the one-liner</h2>
 
-<p><code class="language-plaintext highlighter-rouge">ffmpeg</code> is intimidating.  You get lured in with straightforward conversion
-commands, e.g. <code class="language-plaintext highlighter-rouge">avi</code> to <code class="language-plaintext highlighter-rouge">mp4</code>, like this with just a couple
-command-line arguments:</p>
-
-<figure class="highlight"><pre><code class="language-shell" data-lang="shell">ffmpeg <span class="nt">-i</span> <span class="s2">"input.avi"</span> <span class="s2">"output.mp4"</span></code></pre></figure>
-
-<!-- the thing about lossyness is wrong -->
-<!-- Not to mention `ffmpeg` uses killer codecs that can often compress video files
-produced by other tools down to 10 times smaller files without any lossyness or
-downgraded resolution. -->
-
-<p>And then there are moderately more advanced commands to apply video filters,
-e.g. scaling an input resolution down or up to HD resolution <code class="language-plaintext highlighter-rouge">1920:1080</code>:</p>
-
-<figure class="highlight"><pre><code class="language-shell" data-lang="shell">ffmpeg <span class="nt">-i</span> <span class="s2">"input.mp4"</span> <span class="nt">-filter</span>:video <span class="s2">"scale=1920:1080"</span> <span class="s2">"output.mp4"</span></code></pre></figure>
-
-<!-- TODO: stack links -->
-<p>And finally there are gargantuan one-liners like ours, which you might
-find on stackoverflow posts from <code class="language-plaintext highlighter-rouge">ffmpeg</code> wizards.</p>
-
-<figure class="highlight"><pre><code class="language-shell" data-lang="shell">ffmpeg <span class="se">\</span>
-	<span class="nt">-i</span> <span class="s2">"input.mp4"</span> <span class="se">\</span>
-	<span class="nt">-vf</span> <span class="s2">"split [fg][bg];
-	[bg]        crop=ceil(ih*9/16/2)*2:ih, boxblur=30 [bg];
-	[fg]       scale=ceil(ih*9/16/2)*2:ceil(ih*9*9/16/16/2)*2 [fg];
-	[bg][fg] overlay=y=main_h/2-overlay_h/2"</span> <span class="se">\</span>
-	<span class="s2">"output.mp4"</span></code></pre></figure>
-
-<p>How does anyone come up with these?  What seemed like a problem of crafting a
-few command line arguments has evolved into a task of writing a weird
-interpretted programming language, complete with variables like <code class="language-plaintext highlighter-rouge">[fg]</code> and
-<code class="language-plaintext highlighter-rouge">[bg]</code>, mathematical operations and the <code class="language-plaintext highlighter-rouge">ceil()</code> function, and bizarrely
-abbreviated constant variables like <code class="language-plaintext highlighter-rouge">ih</code> and <code class="language-plaintext highlighter-rouge">main_h</code>.</p>
-
 <p>I’ll be honest, it took me a couple hours of trial and error to settle on this
 one-liner.  I started step by step with a workflow that used 4 separate
 commands:</p>
@@ -264,12 +273,14 @@ commands:</p>
   <li>Overlay the foreground onto the background</li>
 </ol>
 
+<p>Let’s first translate those steps in the most straightforward way to <code class="language-plaintext highlighter-rouge">ffmpeg</code>
+commands, trading elegance for simplicity.  We’ll get it working before we get
+it working elegantly, efficiently, and generally.</p>
+
 <h3 id="fixed-19201080-resolution">Fixed 1920:1080 resolution</h3>
 
 <p>Here are those steps translated into <code class="language-plaintext highlighter-rouge">ffmpeg</code> commands, assuming the input has
 dimensions <code class="language-plaintext highlighter-rouge">1920:1080</code>:</p>
-
-<!-- first, fixed resolution 1920:1080 -->
 
 <!-- TODO: re-test -->
 
@@ -313,10 +324,6 @@ constants, as they don’t really change on the fly and they’re distinct from
 <em>labels</em> which we’ll get to later, but <code class="language-plaintext highlighter-rouge">ffmpeg</code> calls them variables anyway
 instead of constants.</p>
 
-<!-- then, substitute vars for general resolution -->
-
-<!-- ffmpeg -i "${input}.mp4" -vf "crop=ceil(ih*9/16/2)*2:ih, boxblur=30" "${input}-blur.mp4" -->
-
 <figure class="highlight"><pre><code class="language-shell" data-lang="shell">ffmpeg <span class="nt">-i</span> <span class="s2">"input.mp4"</span> <span class="nt">-vf</span> <span class="s2">"crop=ceil(ih*9/16/2)*2:ih"</span> <span class="s2">"crop.mp4"</span>
 
 ffmpeg <span class="nt">-i</span> <span class="s2">"crop.mp4"</span> <span class="nt">-vf</span> <span class="s2">"boxblur=30"</span> <span class="s2">"blur.mp4"</span>
@@ -334,12 +341,13 @@ thus two heights: <code class="language-plaintext highlighter-rouge">main_h</cod
 inputs mixed up like I do, just remember that the <em>overlay</em> input gets layed <em>over</em>
 the main input.</p>
 
-<p>I should explain the funny <code class="language-plaintext highlighter-rouge">ceil()</code> function in the <code class="language-plaintext highlighter-rouge">crop</code> and <code class="language-plaintext highlighter-rouge">scale</code> filters,
-e.g. <code class="language-plaintext highlighter-rouge">crop=ceil(ih*9/16/2)*2:ih</code>.  Ideally we would want a cropped width of just
-<code class="language-plaintext highlighter-rouge">ih*9/16</code>, but some formats and codecs will error out if you try to use an odd
-numbered dimension.  To guarantee an even number, we can divide by 2, round up,
-and multiply by 2 again, hence <code class="language-plaintext highlighter-rouge">ceil(ih*9/16/2)*2</code>.  The <code class="language-plaintext highlighter-rouge">scale</code> filter is
-similar.</p>
+<p>I should explain the <a href="https://stackoverflow.com/a/20848224">funny <code class="language-plaintext highlighter-rouge">ceil()</code>
+function</a> in the <code class="language-plaintext highlighter-rouge">crop</code> and <code class="language-plaintext highlighter-rouge">scale</code>
+filters, e.g. <code class="language-plaintext highlighter-rouge">crop=ceil(ih*9/16/2)*2:ih</code>.  Ideally we would want a cropped
+width of just <code class="language-plaintext highlighter-rouge">ih*9/16</code>, but some formats and codecs will error out if you try
+to use an odd numbered dimension.  To guarantee an even number, we can divide by
+2, round up, and multiply by 2 again, hence <code class="language-plaintext highlighter-rouge">ceil(ih*9/16/2)*2</code>.  The <code class="language-plaintext highlighter-rouge">scale</code>
+filter is similar.</p>
 
 <p>Further generalization to other aspect ratio inputs and outputs like <code class="language-plaintext highlighter-rouge">4:3</code> is
 left as an exercise for the reader.</p>
@@ -418,7 +426,7 @@ background.</p>
 
         <div style="display:none;"> <a rel="me" href="https://hachyderm.io/@jeffirwin">Mastodon</a> </div>
 
-        <p>Build: Sat Oct 28 12:31:01 EDT 2023, revision: <code>6f27a5d</code></p>
+        <p>Build: Sat Oct 28 17:39:19 EDT 2023, revision: <code>a3c6350</code></p>
 
       </footer>
     </main>
