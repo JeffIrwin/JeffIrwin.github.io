@@ -36,7 +36,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#157878">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="stylesheet" href="/assets/css/style.css?v=507b3b5795a0c38e369f693611da1556b1af7fad">
+    <link rel="stylesheet" href="/assets/css/style.css?v=6f27a5d313f674442160ce6de9d2b5a2ab551518">
     <link rel="shortcut icon" type="image/png" href="/favicon.png">
   </head>
   <body>
@@ -114,9 +114,21 @@ video.</p>
 
 <p>One common hack is to overlay the original widescreen video centered overtop of
 a blurred and cropped background in the correct vertical aspect ratio, <code class="language-plaintext highlighter-rouge">9:16</code>
-instead of <code class="language-plaintext highlighter-rouge">16:9</code>.</p>
+instead of <code class="language-plaintext highlighter-rouge">16:9</code>.  Here’s what that looks like with some content from <a href="https://en.wikipedia.org/wiki/Fallout_4">Fallout
+4</a>:</p>
 
-<!-- TODO: screenshots and links to example final products -->
+<table>
+  <tbody>
+    <tr>
+      <td><img src="/posts/resources/ffmpeg-input.png" alt="" /></td>
+      <td><img src="/posts/resources/ffmpeg-output.png" alt="" /></td>
+    </tr>
+    <tr>
+      <td>Figure 1a: <code class="language-plaintext highlighter-rouge">16:9</code> input</td>
+      <td>Figure 1b: blurred overlay <code class="language-plaintext highlighter-rouge">9:16</code> output</td>
+    </tr>
+  </tbody>
+</table>
 
 <p>You can do this with a single gargantuan one-liner <a href="ffmpeg.org"><code class="language-plaintext highlighter-rouge">ffmpeg</code></a> command:</p>
 
@@ -406,7 +418,7 @@ background.</p>
 
         <div style="display:none;"> <a rel="me" href="https://hachyderm.io/@jeffirwin">Mastodon</a> </div>
 
-        <p>Build: Sat Oct 28 12:19:54 EDT 2023, revision: <code>507b3b5</code></p>
+        <p>Build: Sat Oct 28 12:31:01 EDT 2023, revision: <code>6f27a5d</code></p>
 
       </footer>
     </main>
