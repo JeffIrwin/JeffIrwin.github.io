@@ -36,7 +36,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#157878">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="stylesheet" href="/assets/css/style.css?v=a3c63504ea9e90d10c0e1cd4bfff12ed3f44f69a">
+    <link rel="stylesheet" href="/assets/css/style.css?v=51a50192d7a2346e37de97f035084dd924d97471">
     <link rel="shortcut icon" type="image/png" href="/favicon.png">
   </head>
   <body>
@@ -137,7 +137,7 @@ instead of <code class="language-plaintext highlighter-rouge">16:9</code>.  Here
   </tbody>
 </table>
 
-<p>You can do this with a single gargantuan one-liner <a href="ffmpeg.org"><code class="language-plaintext highlighter-rouge">ffmpeg</code></a> command:</p>
+<p>You can do this with a single gargantuan one-liner <a href="https://www.ffmpeg.org/"><code class="language-plaintext highlighter-rouge">ffmpeg</code></a> command:</p>
 
 <figure class="highlight"><pre><code class="language-shell" data-lang="shell">ffmpeg <span class="se">\</span>
 	<span class="nt">-i</span> <span class="s2">"input.mp4"</span> <span class="se">\</span>
@@ -282,12 +282,10 @@ it working elegantly, efficiently, and generally.</p>
 <p>Here are those steps translated into <code class="language-plaintext highlighter-rouge">ffmpeg</code> commands, assuming the input has
 dimensions <code class="language-plaintext highlighter-rouge">1920:1080</code>:</p>
 
-<!-- TODO: re-test -->
-
 <figure class="highlight"><pre><code class="language-shell" data-lang="shell">ffmpeg <span class="nt">-i</span> <span class="s2">"input.mp4"</span> <span class="nt">-vf</span> <span class="s2">"crop=608:1080"</span> <span class="s2">"crop.mp4"</span>
 ffmpeg <span class="nt">-i</span>  <span class="s2">"crop.mp4"</span> <span class="nt">-vf</span> <span class="s2">"boxblur=30"</span> <span class="s2">"blur.mp4"</span>
 ffmpeg <span class="nt">-i</span> <span class="s2">"input.mp4"</span> <span class="nt">-vf</span> <span class="s2">"scale=608:342"</span> <span class="s2">"scale.mp4"</span>
-ffmpeg <span class="nt">-i</span> <span class="s2">"blur.mp4"</span> <span class="nt">-i</span> <span class="s2">"scale.mp4"</span> <span class="nt">-vf</span> <span class="s2">"overlay=y=369"</span> <span class="s2">"output.mp4"</span></code></pre></figure>
+ffmpeg <span class="nt">-i</span> <span class="s2">"blur.mp4"</span> <span class="nt">-i</span> <span class="s2">"scale.mp4"</span> <span class="nt">-filter_complex</span> <span class="s2">"overlay=y=369"</span> <span class="s2">"output.mp4"</span></code></pre></figure>
 
 <p>The short option <code class="language-plaintext highlighter-rouge">-vf</code> is an alias of the long options <code class="language-plaintext highlighter-rouge">-filter</code>, <code class="language-plaintext highlighter-rouge">-filter:v</code>,
 or <code class="language-plaintext highlighter-rouge">-filter:video</code>.  Why specify <code class="language-plaintext highlighter-rouge">video</code>?  Because <code class="language-plaintext highlighter-rouge">ffmpeg</code> can filter audio
@@ -333,7 +331,7 @@ ffmpeg <span class="nt">-i</span> <span class="s2">"input.mp4"</span> <span clas
 	<span class="s2">"scale.mp4"</span>
 
 ffmpeg <span class="nt">-i</span> <span class="s2">"blur.mp4"</span> <span class="nt">-i</span> <span class="s2">"scale.mp4"</span> <span class="se">\</span>
-	<span class="nt">-vf</span> <span class="s2">"overlay=y=main_h/2-overlay_h/2"</span> <span class="s2">"output.mp4"</span></code></pre></figure>
+	<span class="nt">-filter_complex</span> <span class="s2">"overlay=y=main_h/2-overlay_h/2"</span> <span class="s2">"output.mp4"</span></code></pre></figure>
 
 <p>Many filters accept <code class="language-plaintext highlighter-rouge">ih</code> for the input height and <code class="language-plaintext highlighter-rouge">iw</code> for the input width.  The
 <code class="language-plaintext highlighter-rouge">overlay</code> filter is slightly more complicated because there are two inputs and
@@ -356,8 +354,11 @@ left as an exercise for the reader.</p>
 
 <p>The workflow above leaves a few temporary files <code class="language-plaintext highlighter-rouge">crop.mp4</code>, <code class="language-plaintext highlighter-rouge">blur.mp4</code>, and
 <code class="language-plaintext highlighter-rouge">scale.mp4</code> which can be cleaned up.  The gargantuan one-liner is better because
-it does not waste any time reading and writing temporary files.
-<!-- TODO: give benchmark --></p>
+it does not waste any time reading, writing, and transcoding temporary files.
+In a benchmark that I ran, the whole process takes 1m57s as four separate
+commands but just 0m44s as a one-liner.  If you want the details of that
+benchmark, the input video was a 1 minute long, 60 fps, <code class="language-plaintext highlighter-rouge">1920:1080</code>, 20 MB <code class="language-plaintext highlighter-rouge">mp4</code>
+file.</p>
 
 <p>Again, take things one step at a time when chaining together these gargantuan
 one-liners.  To start, the first two steps of cropping an blurring can be
@@ -426,7 +427,7 @@ background.</p>
 
         <div style="display:none;"> <a rel="me" href="https://hachyderm.io/@jeffirwin">Mastodon</a> </div>
 
-        <p>Build: Sat Oct 28 17:39:19 EDT 2023, revision: <code>a3c6350</code></p>
+        <p>Build: Sat Oct 28 18:12:23 EDT 2023, revision: <code>51a5019</code></p>
 
       </footer>
     </main>
