@@ -35,6 +35,8 @@ jobs:
         sed -i "s/\<BUILD\_DATE\>/$date/g" $destin
         sed -i "s/\<BUILD\_REVI\>/$revi/g" $destin
 
+        bundle install
+
 
 
     - uses: actions/jekyll-build-pages@v1-beta
