@@ -11,3 +11,5 @@ Longer-form articles on subjects of tech etc.:
 - [Jekyll injection: adding date and time to a GitHub page (2021 Dec 31)]({{site.url}}/posts/2021-12-31-a)
 - [Abstract interfaces: swapping functions on the fly (2021 Dec 11)]({{site.url}}/posts/2021-12-11-a)
 
+<!-- TODO: link to tarjan's bridge post -->
+
