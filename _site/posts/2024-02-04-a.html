@@ -36,7 +36,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#157878">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="stylesheet" href="/assets/css/style.css?v=d2506894464a1c5bb939c2ea3955ccc176379986">
+    <link rel="stylesheet" href="/assets/css/style.css?v=eca7943b0fd1b8e909e3ebda6614c7fe23980ece">
     <link rel="shortcut icon" type="image/png" href="/favicon.png">
     <style>
         /* Style the tab */
@@ -140,91 +140,93 @@
 </div>
 
 <!-- Tab content -->
+<!-- TODO: replace tabs with 4 spaces.  Default tab width is 8 an there's too
+much scrolling -->
 <div id="syntran_0" class="tabcontent">
 
-<figure class="highlight"><pre><code class="language-rust" data-lang="rust">	<span class="k">let</span> <span class="n">sp</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="c">// stack pointer</span>
+<figure class="highlight"><pre><code class="language-rust" data-lang="rust">    <span class="k">let</span> <span class="n">sp</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="c">// stack pointer</span>
 
-	<span class="c">// Push root</span>
-	<span class="n">stack</span><span class="p">[(</span><span class="n">sp</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="c">// Push root</span>
+    <span class="n">stack</span><span class="p">[(</span><span class="n">sp</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 
-	<span class="k">let</span> <span class="n">visited</span> <span class="o">=</span> <span class="p">[</span><span class="k">false</span><span class="p">;</span> <span class="n">nn</span><span class="p">];</span>
-	<span class="k">let</span> <span class="n">defer</span>   <span class="o">=</span> <span class="p">[</span><span class="k">false</span><span class="p">;</span> <span class="n">nn</span><span class="p">];</span>
-	<span class="k">let</span> <span class="n">parent</span>  <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">nn</span><span class="p">];</span>
-	<span class="k">let</span> <span class="n">low</span>	    <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">nn</span><span class="p">];</span>
-	<span class="k">let</span> <span class="n">tin</span>     <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">nn</span><span class="p">];</span>
+    <span class="k">let</span> <span class="n">visited</span> <span class="o">=</span> <span class="p">[</span><span class="k">false</span><span class="p">;</span> <span class="n">nn</span><span class="p">];</span>
+    <span class="k">let</span> <span class="n">defer</span>   <span class="o">=</span> <span class="p">[</span><span class="k">false</span><span class="p">;</span> <span class="n">nn</span><span class="p">];</span>
+    <span class="k">let</span> <span class="n">parent</span>  <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">nn</span><span class="p">];</span>
+    <span class="k">let</span> <span class="n">low</span>     <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">nn</span><span class="p">];</span>
+    <span class="k">let</span> <span class="n">tin</span>     <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">nn</span><span class="p">];</span>
 
-	<span class="k">let</span> <span class="n">timer</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">let</span> <span class="n">timer</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 
-	<span class="c">// FIXME: implementations that I have seen online for Tarjan's algorithm</span>
-	<span class="c">// wrap the following loop in another `for` loop which iterates and pushes</span>
-	<span class="c">// every possible vertex.  I suppose this is just in case the graph</span>
-	<span class="c">// *already* has multiple disconnected components.  I don't think I need it</span>
-	<span class="c">// for AOC</span>
-	<span class="k">while</span> <span class="n">sp</span> <span class="o">&gt;=</span> <span class="mi">0</span>
-	<span class="p">{</span>
-		<span class="c">// pop</span>
-		<span class="k">let</span> <span class="n">v</span> <span class="o">=</span> <span class="n">stack</span><span class="p">[(</span><span class="n">sp</span> <span class="o">-=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">];</span>
-		<span class="c">//println("v = ", v, " = ", names[v]);</span>
+    <span class="c">// FIXME: implementations that I have seen online for Tarjan's algorithm</span>
+    <span class="c">// wrap the following loop in another `for` loop which iterates and pushes</span>
+    <span class="c">// every possible vertex.  I suppose this is just in case the graph</span>
+    <span class="c">// *already* has multiple disconnected components.  I don't think I need it</span>
+    <span class="c">// for AOC</span>
+    <span class="k">while</span> <span class="n">sp</span> <span class="o">&gt;=</span> <span class="mi">0</span>
+    <span class="p">{</span>
+        <span class="c">// pop</span>
+        <span class="k">let</span> <span class="n">v</span> <span class="o">=</span> <span class="n">stack</span><span class="p">[(</span><span class="n">sp</span> <span class="o">-=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">];</span>
+        <span class="c">//println("v = ", v, " = ", names[v]);</span>
 
-		<span class="k">if</span> <span class="n">not</span> <span class="n">visited</span><span class="p">[</span><span class="n">v</span><span class="p">]</span>
-		<span class="p">{</span>
-			<span class="n">low</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">timer</span><span class="p">;</span>
-			<span class="n">tin</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">timer</span><span class="p">;</span>
-			<span class="n">timer</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
-		<span class="p">}</span>
-		<span class="n">visited</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="k">true</span><span class="p">;</span>
+        <span class="k">if</span> <span class="n">not</span> <span class="n">visited</span><span class="p">[</span><span class="n">v</span><span class="p">]</span>
+        <span class="p">{</span>
+            <span class="n">low</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">timer</span><span class="p">;</span>
+            <span class="n">tin</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">timer</span><span class="p">;</span>
+            <span class="n">timer</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">visited</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="k">true</span><span class="p">;</span>
 
-		<span class="k">for</span> <span class="n">ito</span> <span class="n">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">:</span> <span class="n">nadj</span><span class="p">[</span><span class="n">v</span><span class="p">]]</span>
-		<span class="p">{</span>
-			<span class="k">let</span> <span class="n">to</span> <span class="o">=</span> <span class="n">g</span><span class="p">[</span><span class="n">ito</span><span class="p">,</span> <span class="n">v</span><span class="p">];</span>
-			<span class="k">if</span> <span class="n">to</span> <span class="o">==</span> <span class="n">parent</span><span class="p">[</span><span class="n">v</span><span class="p">]</span>
-			<span class="p">{</span>
-				<span class="c">// Do nothing</span>
-			<span class="p">}</span>
-			<span class="k">else</span> <span class="k">if</span> <span class="n">visited</span><span class="p">[</span><span class="n">to</span><span class="p">]</span>
-			<span class="p">{</span>
-				<span class="n">low</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="nf">min</span><span class="p">(</span><span class="n">low</span><span class="p">[</span><span class="n">v</span><span class="p">],</span> <span class="n">tin</span><span class="p">[</span><span class="n">to</span><span class="p">]);</span>
-			<span class="p">}</span>
-			<span class="k">else</span>
-			<span class="p">{</span>
-				<span class="n">parent</span><span class="p">[</span><span class="n">to</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span><span class="p">;</span>
+        <span class="k">for</span> <span class="n">ito</span> <span class="n">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">:</span> <span class="n">nadj</span><span class="p">[</span><span class="n">v</span><span class="p">]]</span>
+        <span class="p">{</span>
+            <span class="k">let</span> <span class="n">to</span> <span class="o">=</span> <span class="n">g</span><span class="p">[</span><span class="n">ito</span><span class="p">,</span> <span class="n">v</span><span class="p">];</span>
+            <span class="k">if</span> <span class="n">to</span> <span class="o">==</span> <span class="n">parent</span><span class="p">[</span><span class="n">v</span><span class="p">]</span>
+            <span class="p">{</span>
+                <span class="c">// Do nothing</span>
+            <span class="p">}</span>
+            <span class="k">else</span> <span class="k">if</span> <span class="n">visited</span><span class="p">[</span><span class="n">to</span><span class="p">]</span>
+            <span class="p">{</span>
+                <span class="n">low</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="nf">min</span><span class="p">(</span><span class="n">low</span><span class="p">[</span><span class="n">v</span><span class="p">],</span> <span class="n">tin</span><span class="p">[</span><span class="n">to</span><span class="p">]);</span>
+            <span class="p">}</span>
+            <span class="k">else</span>
+            <span class="p">{</span>
+                <span class="n">parent</span><span class="p">[</span><span class="n">to</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span><span class="p">;</span>
 
-				<span class="n">stack</span><span class="p">[(</span><span class="n">sp</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="n">v</span><span class="p">;</span>  <span class="c">// re-push parent for deferred processing</span>
-				<span class="n">defer</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="k">true</span><span class="p">;</span>
+                <span class="n">stack</span><span class="p">[(</span><span class="n">sp</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="n">v</span><span class="p">;</span>  <span class="c">// re-push parent for deferred processing</span>
+                <span class="n">defer</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="k">true</span><span class="p">;</span>
 
-				<span class="n">stack</span><span class="p">[(</span><span class="n">sp</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="n">to</span><span class="p">;</span> <span class="c">// push child. order matters wrt parent</span>
-				<span class="c">// TODO: stack cap check</span>
-			<span class="p">}</span>
-		<span class="p">}</span>
+                <span class="n">stack</span><span class="p">[(</span><span class="n">sp</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="n">to</span><span class="p">;</span> <span class="c">// push child. order matters wrt parent</span>
+                <span class="c">// TODO: stack cap check</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
 
-		<span class="k">if</span> <span class="n">defer</span><span class="p">[</span><span class="n">v</span><span class="p">]</span>
-		<span class="p">{</span>
-			<span class="k">for</span> <span class="n">ito</span> <span class="n">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">:</span> <span class="n">nadj</span><span class="p">[</span><span class="n">v</span><span class="p">]]</span>
-			<span class="p">{</span>
-				<span class="k">let</span> <span class="n">to</span> <span class="o">=</span> <span class="n">g</span><span class="p">[</span><span class="n">ito</span><span class="p">,</span> <span class="n">v</span><span class="p">];</span>
-				<span class="k">if</span> <span class="n">to</span> <span class="o">!=</span> <span class="n">parent</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="n">and</span> <span class="n">visited</span><span class="p">[</span><span class="n">to</span><span class="p">]</span>
-				<span class="p">{</span>
-					<span class="n">low</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="nf">min</span><span class="p">(</span><span class="n">low</span><span class="p">[</span><span class="n">v</span><span class="p">],</span> <span class="n">low</span><span class="p">[</span><span class="n">to</span><span class="p">]);</span>
-					<span class="k">if</span> <span class="p">(</span><span class="n">low</span><span class="p">[</span><span class="n">to</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">tin</span><span class="p">[</span><span class="n">v</span><span class="p">])</span>
-					<span class="p">{</span>
-						<span class="c">//// TODO: this may log the same bridge multiple times.</span>
-						<span class="c">//// Pushing to an equivalenced set is left as an exercise</span>
-						<span class="c">//// for the reader</span>
-						<span class="c">//println();</span>
-						<span class="c">//println("****************");</span>
+        <span class="k">if</span> <span class="n">defer</span><span class="p">[</span><span class="n">v</span><span class="p">]</span>
+        <span class="p">{</span>
+            <span class="k">for</span> <span class="n">ito</span> <span class="n">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">:</span> <span class="n">nadj</span><span class="p">[</span><span class="n">v</span><span class="p">]]</span>
+            <span class="p">{</span>
+                <span class="k">let</span> <span class="n">to</span> <span class="o">=</span> <span class="n">g</span><span class="p">[</span><span class="n">ito</span><span class="p">,</span> <span class="n">v</span><span class="p">];</span>
+                <span class="k">if</span> <span class="n">to</span> <span class="o">!=</span> <span class="n">parent</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="n">and</span> <span class="n">visited</span><span class="p">[</span><span class="n">to</span><span class="p">]</span>
+                <span class="p">{</span>
+                    <span class="n">low</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="nf">min</span><span class="p">(</span><span class="n">low</span><span class="p">[</span><span class="n">v</span><span class="p">],</span> <span class="n">low</span><span class="p">[</span><span class="n">to</span><span class="p">]);</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">low</span><span class="p">[</span><span class="n">to</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">tin</span><span class="p">[</span><span class="n">v</span><span class="p">])</span>
+                    <span class="p">{</span>
+                        <span class="c">//// TODO: this may log the same bridge multiple times.</span>
+                        <span class="c">//// Pushing to an equivalenced set is left as an exercise</span>
+                        <span class="c">//// for the reader</span>
+                        <span class="c">//println();</span>
+                        <span class="c">//println("****************");</span>
 
-						<span class="c">//println("Found bridge = ", [v, to], " = ", [names[v], names[to]]);</span>
-						<span class="c">//println();</span>
-						<span class="c">//exit(0); // TODO</span>
-					<span class="p">}</span>
-				<span class="p">}</span>
-			<span class="p">}</span>
-		<span class="p">}</span>
-	<span class="p">}</span>
-	<span class="c">//println("visited = ", visited);</span>
-	<span class="c">//println("parent = ", parent);</span>
-	<span class="c">//println("tin    = ", tin);</span>
-	<span class="c">//println("low  = ", low);</span></code></pre></figure>
+                        <span class="c">//println("Found bridge = ", [v, to], " = ", [names[v], names[to]]);</span>
+                        <span class="c">//println();</span>
+                        <span class="c">//exit(0); // TODO</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="c">//println("visited = ", visited);</span>
+    <span class="c">//println("parent = ", parent);</span>
+    <span class="c">//println("tin    = ", tin);</span>
+    <span class="c">//println("low  = ", low);</span></code></pre></figure>
 
 </div>
 
@@ -236,28 +238,28 @@
 </div>
 
 <script>
-	function openTab(evt, tabName) {
-		// Declare all variables
-		var i, tabcontent, tablinks;
+    function openTab(evt, tabName) {
+        // Declare all variables
+        var i, tabcontent, tablinks;
 
-		// Get all elements with class="tabcontent" and hide them
-		tabcontent = document.getElementsByClassName("tabcontent");
-		for (i = 0; i < tabcontent.length; i++) {
-			tabcontent[i].style.display = "none";
-		}
+        // Get all elements with class="tabcontent" and hide them
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
 
-		// Get all elements with class="tablinks" and remove the class "active"
-		tablinks = document.getElementsByClassName("tablinks");
-		for (i = 0; i < tablinks.length; i++) {
-			tablinks[i].className = tablinks[i].className.replace(" active", "");
-		}
+        // Get all elements with class="tablinks" and remove the class "active"
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
 
-		// Show the current tab, and add an "active" class to the button that opened the tab
-		document.getElementById(tabName).style.display = "block";
-		evt.currentTarget.className += " active";
-	}
+        // Show the current tab, and add an "active" class to the button that opened the tab
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
 
-	document.getElementById("defaultOpen").click();
+    document.getElementById("defaultOpen").click();
 
 </script>
 
@@ -287,7 +289,7 @@
 
         <div style="display:none;"> <a rel="me" href="https://hachyderm.io/@jeffirwin">Mastodon</a> </div>
 
-        <p>Build: Fri Feb  2 20:41:18 EST 2024, revision: <code>d250689</code></p>
+        <p>Build: Fri Feb  2 20:46:43 EST 2024, revision: <code>eca7943</code></p>
 
       </footer>
     </main>
