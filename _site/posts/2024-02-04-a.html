@@ -36,7 +36,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#157878">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="stylesheet" href="/assets/css/style.css?v=19860ca71be529dd65c9012372c2eb38aa9a34ba">
+    <link rel="stylesheet" href="/assets/css/style.css?v=135a04cf8295fba58ec6f8ac8749344ac232e753">
     <link rel="shortcut icon" type="image/png" href="/favicon.png">
   </head>
   <body>
@@ -96,6 +96,54 @@
 
 <figure class="highlight"><pre><code class="language-rust" data-lang="rust"><span class="c">// Syntran code</span></code></pre></figure>
 
+<h2 id="tabs">Tabs</h2>
+
+<!-- Tab links -->
+<div class="tab">
+  <button class="tablinks" onclick="openCity(event, 'London')">London</button>
+  <button class="tablinks" onclick="openCity(event, 'Paris')">Paris</button>
+  <button class="tablinks" onclick="openCity(event, 'Tokyo')">Tokyo</button>
+</div>
+
+<!-- Tab content -->
+<div id="London" class="tabcontent">
+  <h3>London</h3>
+  <p>London is the capital city of England.</p>
+</div>
+
+<div id="Paris" class="tabcontent">
+  <h3>Paris</h3>
+  <p>Paris is the capital of France.</p>
+</div>
+
+<div id="Tokyo" class="tabcontent">
+  <h3>Tokyo</h3>
+  <p>Tokyo is the capital of Japan.</p>
+</div>
+
+<script>
+function openCity(evt, cityName) {
+  // Declare all variables
+  var i, tabcontent, tablinks;
+
+  // Get all elements with class="tabcontent" and hide them
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+
+  // Get all elements with class="tablinks" and remove the class "active"
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+
+  // Show the current tab, and add an "active" class to the button that opened the tab
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+</script>
+
 
 
       <footer class="site-footer">
@@ -122,7 +170,7 @@
 
         <div style="display:none;"> <a rel="me" href="https://hachyderm.io/@jeffirwin">Mastodon</a> </div>
 
-        <p>Build: Fri Feb  2 19:54:47 EST 2024, revision: <code>19860ca</code></p>
+        <p>Build: Fri Feb  2 20:08:21 EST 2024, revision: <code>135a04c</code></p>
 
       </footer>
     </main>
