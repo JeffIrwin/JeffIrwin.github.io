@@ -36,7 +36,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#157878">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="stylesheet" href="/assets/css/style.css?v=3d277575ea29a3e9caeb78e3b95bde6fefa4c5b5">
+    <link rel="stylesheet" href="/assets/css/style.css?v=494e1fbd4d83df292942ef6953cff7970f8f2dda">
     <link rel="shortcut icon" type="image/png" href="/favicon.png">
     <style>
         /* Style the tab */
@@ -131,19 +131,29 @@
 
 <h3 id="2024-feb-04">2024 Feb 04</h3>
 
+<p>Tarjan’s bridge algorithm finds <em>bridges</em> in a graph.  A bridge is an edge
+whose removal would increase the number of connected components of a graph, i.e.
+removing a bridge from a graph of 1 connected component would break it into 2
+connected components.  I’ll explain this more with figures later, but first
+let’s dive right into the algorithm.</p>
+
 <p>Here is a non-recursive function that searches for a bridge in graph <code class="language-plaintext highlighter-rouge">g</code>, in the
 component connected to node 0. The function returns the pair of nodes that make
 up the first bridge found, or <code class="language-plaintext highlighter-rouge">[-1, -1]</code> if no bridges are found.</p>
 
+<p>The input graph <code class="language-plaintext highlighter-rouge">g</code> is represented as a rank-2 array of size <code class="language-plaintext highlighter-rouge">NADJ_CAP</code> by <code class="language-plaintext highlighter-rouge">nn</code>,
+where <code class="language-plaintext highlighter-rouge">NADJ_CAP</code> is the max number of adjacent nodes per node and <code class="language-plaintext highlighter-rouge">nn</code> is the
+total number of nodes in the graph.  The slice <code class="language-plaintext highlighter-rouge">g[:,v]</code> lists the neighbors of
+node <code class="language-plaintext highlighter-rouge">v</code>.  The graph <code class="language-plaintext highlighter-rouge">g</code> is accompanied by another array <code class="language-plaintext highlighter-rouge">num_adj</code>.  The number
+of neighbors of node <code class="language-plaintext highlighter-rouge">v</code> is <code class="language-plaintext highlighter-rouge">num_adj[v]</code>.</p>
+
 <!-- Tab link buttons -->
 <div class="tab">
-  <button class="tablinks" onclick="openTab(event, 'syntran_0')" id="defaultOpen">syntran</button>
+  <button class="tablinks" onclick="openTab(event, 'syntran_0')" id="default_open_0">syntran</button>
   <button class="tablinks" onclick="openTab(event, 'c_0')">C</button>
 </div>
 
 <!-- Tab content -->
-<!-- TODO: replace tabs with 4 spaces.  Default tab width is 8 an there's too
-much scrolling -->
 <div id="syntran_0" class="tabcontent">
 
 <figure class="highlight"><pre><code class="language-rust" data-lang="rust"><span class="k">fn</span> <span class="nf">get_bridge</span><span class="p">(</span><span class="n">g</span><span class="p">:</span> <span class="p">[</span><span class="nb">i32</span><span class="p">;</span> <span class="p">:,</span> <span class="p">:],</span> <span class="n">num_adj</span><span class="p">:</span> <span class="p">[</span><span class="nb">i32</span><span class="p">;</span> <span class="p">:]):</span> <span class="p">[</span><span class="nb">i32</span><span class="p">;</span> <span class="p">:]</span>
@@ -222,6 +232,8 @@ much scrolling -->
 <span class="p">}</span></code></pre></figure>
 
 </div>
+
+<!-- ******** -->
 
 <div id="c_0" class="tabcontent">
 
@@ -308,6 +320,8 @@ much scrolling -->
 
 </div>
 
+<!----------------------------------------------------------------------------->
+
 <script>
     function openTab(evt, tabName) {
         // Declare all variables
@@ -330,8 +344,9 @@ much scrolling -->
         evt.currentTarget.className += " active";
     }
 
-    // Show only default tab on page load
-    document.getElementById("defaultOpen").click();
+    // Show only default tab(s) on page load
+    document.getElementById("default_open_0").click();
+    document.getElementById("default_open_1").click();
 
     // Change code block "figure" margins from ungodly 40px
     elems = document.getElementsByClassName("highlight");
@@ -340,6 +355,62 @@ much scrolling -->
         elems[i].style.tabSize = "4";
     }
 </script>
+
+<!----------------------------------------------------------------------------->
+
+<h2 id="why-iterative-instead-of-recursive">Why iterative instead of recursive?</h2>
+
+<h2 id="what-is-a-bridge">What is a bridge?</h2>
+
+<h2 id="reading-the-graph">Reading the graph</h2>
+
+<h2 id="calling-the-get_bridge-function">Calling the get_bridge() function</h2>
+
+<!-- Tab link buttons -->
+<div class="tab">
+  <button class="tablinks" onclick="openTab(event, 'syntran_1')" id="default_open_1">syntran</button>
+  <button class="tablinks" onclick="openTab(event, 'c_1')">C</button>
+</div>
+
+<!-- Tab content -->
+<div id="syntran_1" class="tabcontent">
+
+<figure class="highlight"><pre><code class="language-rust" data-lang="rust"><span class="k">fn</span> <span class="nf">main</span><span class="p">():</span> <span class="nb">i32</span>
+<span class="p">{</span>
+	<span class="nf">read_aoc_graph</span><span class="p">(</span><span class="n">filename_glbl</span><span class="p">);</span>
+
+	<span class="k">let</span> <span class="n">bridge</span> <span class="o">=</span> <span class="nf">get_bridge</span><span class="p">(</span><span class="n">g_glbl</span><span class="p">,</span> <span class="n">num_adj_glbl</span><span class="p">);</span>
+	<span class="k">if</span> <span class="n">bridge</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span>
+		<span class="nf">println</span><span class="p">(</span><span class="s">"No bridges were found"</span><span class="p">);</span>
+	<span class="k">else</span>
+		<span class="nf">println</span><span class="p">(</span><span class="s">"Found bridge between nodes "</span><span class="p">,</span> <span class="n">bridge</span><span class="p">,</span> <span class="s">" = "</span><span class="p">,</span>
+				<span class="p">[</span><span class="n">names_glbl</span><span class="p">[</span><span class="n">bridge</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">names_glbl</span><span class="p">[</span><span class="n">bridge</span><span class="p">[</span><span class="mi">1</span><span class="p">]]]);</span>
+
+	<span class="k">let</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span></code></pre></figure>
+
+</div>
+
+<!-- ******** -->
+
+<div id="c_1" class="tabcontent">
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="n">read_aoc_graph</span><span class="p">(</span><span class="n">filename_glbl</span><span class="p">);</span>
+
+	<span class="kt">int</span><span class="o">*</span> <span class="n">bridge</span> <span class="o">=</span> <span class="n">get_bridge</span><span class="p">(</span><span class="n">g_glbl</span><span class="p">,</span> <span class="n">num_adj_glbl</span><span class="p">,</span> <span class="n">num_nodes</span><span class="p">);</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">bridge</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+		<span class="n">println</span><span class="p">(</span><span class="s">"No bridges were found"</span><span class="p">);</span>
+	<span class="k">else</span>
+		<span class="n">printf</span><span class="p">(</span><span class="s">"Found bridge between nodes [%d, %d] = [%s, %s]</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span>
+				<span class="n">bridge</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">bridge</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+				<span class="n">names_glbl</span><span class="p">[</span><span class="n">bridge</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">names_glbl</span><span class="p">[</span><span class="n">bridge</span><span class="p">[</span><span class="mi">1</span><span class="p">]]);</span>
+
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span></code></pre></figure>
+
+</div>
 
 
 
@@ -367,7 +438,7 @@ much scrolling -->
 
         <div style="display:none;"> <a rel="me" href="https://hachyderm.io/@jeffirwin">Mastodon</a> </div>
 
-        <p>Build: Sun Feb  4 13:23:49 EST 2024, revision: <code>3d27757</code></p>
+        <p>Build: Sun Feb  4 14:22:58 EST 2024, revision: <code>494e1fb</code></p>
 
       </footer>
     </main>
