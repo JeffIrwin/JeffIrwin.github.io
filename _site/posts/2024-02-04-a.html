@@ -36,7 +36,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#157878">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="stylesheet" href="/assets/css/style.css?v=4805d5d602889ba9a77f6311580b2a5fb09b5356">
+    <link rel="stylesheet" href="/assets/css/style.css?v=0570538798c534b952f8b331c983f629dccd6bb6">
     <link rel="shortcut icon" type="image/png" href="/favicon.png">
     <style>
         /* Style the tab */
@@ -322,6 +322,62 @@ of neighbors of node <code class="language-plaintext highlighter-rouge">v</code>
 
 <!----------------------------------------------------------------------------->
 
+<h2 id="why-iterative-instead-of-recursive">Why iterative instead of recursive?</h2>
+
+<h2 id="what-is-a-bridge">What is a bridge?</h2>
+
+<h2 id="reading-the-graph">Reading the graph</h2>
+
+<h2 id="calling-the-get_bridge-function">Calling the get_bridge() function</h2>
+
+<!-- Tab link buttons -->
+<div class="tab">
+  <button class="tablinks_1" onclick="open_tab_1(event, 'syntran_1')" id="default_open_1">syntran</button>
+  <button class="tablinks_1" onclick="open_tab_1(event, 'c_1')">C</button>
+</div>
+
+<!-- Tab content -->
+<div id="syntran_1" class="tabcontent_1">
+
+<figure class="highlight"><pre><code class="language-rust" data-lang="rust"><span class="k">fn</span> <span class="nf">main</span><span class="p">():</span> <span class="nb">i32</span>
+<span class="p">{</span>
+	<span class="nf">read_aoc_graph</span><span class="p">(</span><span class="n">filename_glbl</span><span class="p">);</span>
+
+	<span class="k">let</span> <span class="n">bridge</span> <span class="o">=</span> <span class="nf">get_bridge</span><span class="p">(</span><span class="n">g_glbl</span><span class="p">,</span> <span class="n">num_adj_glbl</span><span class="p">);</span>
+	<span class="k">if</span> <span class="n">bridge</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span>
+		<span class="nf">println</span><span class="p">(</span><span class="s">"No bridges were found"</span><span class="p">);</span>
+	<span class="k">else</span>
+		<span class="nf">println</span><span class="p">(</span><span class="s">"Found bridge between nodes "</span><span class="p">,</span> <span class="n">bridge</span><span class="p">,</span> <span class="s">" = "</span><span class="p">,</span>
+				<span class="p">[</span><span class="n">names_glbl</span><span class="p">[</span><span class="n">bridge</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">names_glbl</span><span class="p">[</span><span class="n">bridge</span><span class="p">[</span><span class="mi">1</span><span class="p">]]]);</span>
+
+	<span class="k">let</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span></code></pre></figure>
+
+</div>
+
+<!-- ******** -->
+
+<div id="c_1" class="tabcontent_1">
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="n">read_aoc_graph</span><span class="p">(</span><span class="n">filename_glbl</span><span class="p">);</span>
+
+	<span class="kt">int</span><span class="o">*</span> <span class="n">bridge</span> <span class="o">=</span> <span class="n">get_bridge</span><span class="p">(</span><span class="n">g_glbl</span><span class="p">,</span> <span class="n">num_adj_glbl</span><span class="p">,</span> <span class="n">num_nodes</span><span class="p">);</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">bridge</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+		<span class="n">println</span><span class="p">(</span><span class="s">"No bridges were found"</span><span class="p">);</span>
+	<span class="k">else</span>
+		<span class="n">printf</span><span class="p">(</span><span class="s">"Found bridge between nodes [%d, %d] = [%s, %s]</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span>
+				<span class="n">bridge</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">bridge</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+				<span class="n">names_glbl</span><span class="p">[</span><span class="n">bridge</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">names_glbl</span><span class="p">[</span><span class="n">bridge</span><span class="p">[</span><span class="mi">1</span><span class="p">]]);</span>
+
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span></code></pre></figure>
+
+</div>
+
+<!----------------------------------------------------------------------------->
+
 <script>
 
     function open_tab_0(evt, tabName) {
@@ -378,62 +434,6 @@ of neighbors of node <code class="language-plaintext highlighter-rouge">v</code>
     }
 </script>
 
-<!----------------------------------------------------------------------------->
-
-<h2 id="why-iterative-instead-of-recursive">Why iterative instead of recursive?</h2>
-
-<h2 id="what-is-a-bridge">What is a bridge?</h2>
-
-<h2 id="reading-the-graph">Reading the graph</h2>
-
-<h2 id="calling-the-get_bridge-function">Calling the get_bridge() function</h2>
-
-<!-- Tab link buttons -->
-<div class="tab">
-  <button class="tablinks_1" onclick="open_tab_1(event, 'syntran_1')" id="default_open_1">syntran</button>
-  <button class="tablinks_1" onclick="open_tab_1(event, 'c_1')">C</button>
-</div>
-
-<!-- Tab content -->
-<div id="syntran_1" class="tabcontent_1">
-
-<figure class="highlight"><pre><code class="language-rust" data-lang="rust"><span class="k">fn</span> <span class="nf">main</span><span class="p">():</span> <span class="nb">i32</span>
-<span class="p">{</span>
-	<span class="nf">read_aoc_graph</span><span class="p">(</span><span class="n">filename_glbl</span><span class="p">);</span>
-
-	<span class="k">let</span> <span class="n">bridge</span> <span class="o">=</span> <span class="nf">get_bridge</span><span class="p">(</span><span class="n">g_glbl</span><span class="p">,</span> <span class="n">num_adj_glbl</span><span class="p">);</span>
-	<span class="k">if</span> <span class="n">bridge</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span>
-		<span class="nf">println</span><span class="p">(</span><span class="s">"No bridges were found"</span><span class="p">);</span>
-	<span class="k">else</span>
-		<span class="nf">println</span><span class="p">(</span><span class="s">"Found bridge between nodes "</span><span class="p">,</span> <span class="n">bridge</span><span class="p">,</span> <span class="s">" = "</span><span class="p">,</span>
-				<span class="p">[</span><span class="n">names_glbl</span><span class="p">[</span><span class="n">bridge</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">names_glbl</span><span class="p">[</span><span class="n">bridge</span><span class="p">[</span><span class="mi">1</span><span class="p">]]]);</span>
-
-	<span class="k">let</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span></code></pre></figure>
-
-</div>
-
-<!-- ******** -->
-
-<div id="c_1" class="tabcontent_1">
-
-<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
-<span class="p">{</span>
-	<span class="n">read_aoc_graph</span><span class="p">(</span><span class="n">filename_glbl</span><span class="p">);</span>
-
-	<span class="kt">int</span><span class="o">*</span> <span class="n">bridge</span> <span class="o">=</span> <span class="n">get_bridge</span><span class="p">(</span><span class="n">g_glbl</span><span class="p">,</span> <span class="n">num_adj_glbl</span><span class="p">,</span> <span class="n">num_nodes</span><span class="p">);</span>
-	<span class="k">if</span> <span class="p">(</span><span class="n">bridge</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
-		<span class="n">println</span><span class="p">(</span><span class="s">"No bridges were found"</span><span class="p">);</span>
-	<span class="k">else</span>
-		<span class="n">printf</span><span class="p">(</span><span class="s">"Found bridge between nodes [%d, %d] = [%s, %s]</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span>
-				<span class="n">bridge</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">bridge</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
-				<span class="n">names_glbl</span><span class="p">[</span><span class="n">bridge</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">names_glbl</span><span class="p">[</span><span class="n">bridge</span><span class="p">[</span><span class="mi">1</span><span class="p">]]);</span>
-
-	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span></code></pre></figure>
-
-</div>
-
 
 
       <footer class="site-footer">
@@ -460,7 +460,7 @@ of neighbors of node <code class="language-plaintext highlighter-rouge">v</code>
 
         <div style="display:none;"> <a rel="me" href="https://hachyderm.io/@jeffirwin">Mastodon</a> </div>
 
-        <p>Build: Sun Feb  4 14:43:03 EST 2024, revision: <code>4805d5d</code></p>
+        <p>Build: Sun Feb  4 14:48:34 EST 2024, revision: <code>0570538</code></p>
 
       </footer>
     </main>
