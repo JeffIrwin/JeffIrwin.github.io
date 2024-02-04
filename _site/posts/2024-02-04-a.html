@@ -36,7 +36,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#157878">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="stylesheet" href="/assets/css/style.css?v=44e4b8466c5799c67e59c0748e38871f50d482bd">
+    <link rel="stylesheet" href="/assets/css/style.css?v=66446c8d69de38b38bcf689477ecb75912306b5d">
     <link rel="shortcut icon" type="image/png" href="/favicon.png">
     <style>
         /* Style the tab */
@@ -131,9 +131,11 @@
 
 <h3 id="2024-feb-04">2024 Feb 04</h3>
 
-<h2 id="tabs">Tabs</h2>
+<p>Here is a non-recursive function that searches for a bridge in graph <code class="language-plaintext highlighter-rouge">g</code>, in the
+component connected to node 0. The function returns the pair of nodes that make
+up the first bridge found, or <code class="language-plaintext highlighter-rouge">[-1, -1]</code> if no bridges are found.</p>
 
-<!-- Tab links -->
+<!-- Tab link buttons -->
 <div class="tab">
   <button class="tablinks" onclick="openTab(event, 'syntran_0')" id="defaultOpen">syntran</button>
   <button class="tablinks" onclick="openTab(event, 'c_0')">C</button>
@@ -144,101 +146,177 @@
 much scrolling -->
 <div id="syntran_0" class="tabcontent">
 
-<figure class="highlight"><pre><code class="language-rust" data-lang="rust">    <span class="k">let</span> <span class="n">sp</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="c">// stack pointer</span>
+<figure class="highlight"><pre><code class="language-rust" data-lang="rust"><span class="k">fn</span> <span class="nf">get_bridge</span><span class="p">(</span><span class="n">g</span><span class="p">:</span> <span class="p">[</span><span class="nb">i32</span><span class="p">;</span> <span class="p">:,</span> <span class="p">:],</span> <span class="n">num_adj</span><span class="p">:</span> <span class="p">[</span><span class="nb">i32</span><span class="p">;</span> <span class="p">:]):</span> <span class="p">[</span><span class="nb">i32</span><span class="p">;</span> <span class="p">:]</span>
+<span class="p">{</span>
+    <span class="k">let</span> <span class="n">nn</span> <span class="o">=</span> <span class="nf">size</span><span class="p">(</span><span class="n">num_adj</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 
-    <span class="c">// Push root</span>
+    <span class="c">// Stack for iterative (non-recursive) depth-first search</span>
+    <span class="k">let</span> <span class="n">STACK_CAP</span> <span class="o">=</span> <span class="mi">16</span> <span class="o">*</span> <span class="n">nn</span><span class="p">;</span>
+    <span class="k">let</span> <span class="n">stack</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">;</span> <span class="n">STACK_CAP</span><span class="p">];</span>
+    <span class="k">let</span> <span class="n">sp</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="c">// stack "pointer"</span>
+
+    <span class="c">// Push node 0 as root</span>
     <span class="n">stack</span><span class="p">[(</span><span class="n">sp</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 
     <span class="k">let</span> <span class="n">visited</span> <span class="o">=</span> <span class="p">[</span><span class="k">false</span><span class="p">;</span> <span class="n">nn</span><span class="p">];</span>
     <span class="k">let</span> <span class="n">defer</span>   <span class="o">=</span> <span class="p">[</span><span class="k">false</span><span class="p">;</span> <span class="n">nn</span><span class="p">];</span>
-    <span class="k">let</span> <span class="n">parent</span>  <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">nn</span><span class="p">];</span>
-    <span class="k">let</span> <span class="n">low</span>     <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">nn</span><span class="p">];</span>
-    <span class="k">let</span> <span class="n">tin</span>     <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">nn</span><span class="p">];</span>
+    <span class="k">let</span> <span class="n">parent</span>  <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span>   <span class="p">;</span> <span class="n">nn</span><span class="p">];</span>
+    <span class="k">let</span> <span class="n">low</span>        <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span>   <span class="p">;</span> <span class="n">nn</span><span class="p">];</span>
+    <span class="k">let</span> <span class="n">dists</span>   <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span>   <span class="p">;</span> <span class="n">nn</span><span class="p">];</span>
 
-    <span class="k">let</span> <span class="n">timer</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">let</span> <span class="n">loop_count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 
-    <span class="c">// FIXME: implementations that I have seen online for Tarjan's algorithm</span>
-    <span class="c">// wrap the following loop in another `for` loop which iterates and pushes</span>
-    <span class="c">// every possible vertex.  I suppose this is just in case the graph</span>
-    <span class="c">// *already* has multiple disconnected components.  I don't think I need it</span>
-    <span class="c">// for AOC</span>
-    <span class="k">while</span> <span class="n">sp</span> <span class="o">&gt;=</span> <span class="mi">0</span>
+    <span class="k">let</span> <span class="n">dist</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">let</span> <span class="n">found</span> <span class="o">=</span> <span class="k">false</span><span class="p">;</span>
+    <span class="k">let</span> <span class="n">bridge</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">];</span>
+    <span class="k">while</span> <span class="n">sp</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="n">and</span> <span class="n">not</span> <span class="n">found</span>
     <span class="p">{</span>
-        <span class="c">// pop</span>
-        <span class="k">let</span> <span class="n">v</span> <span class="o">=</span> <span class="n">stack</span><span class="p">[(</span><span class="n">sp</span> <span class="o">-=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">];</span>
-        <span class="c">//println("v = ", v, " = ", names[v]);</span>
+        <span class="n">loop_count</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">loop_count</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">)</span> <span class="nf">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
 
+        <span class="k">let</span> <span class="n">v</span> <span class="o">=</span> <span class="n">stack</span><span class="p">[(</span><span class="n">sp</span> <span class="o">-=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">];</span> <span class="c">// pop</span>
         <span class="k">if</span> <span class="n">not</span> <span class="n">visited</span><span class="p">[</span><span class="n">v</span><span class="p">]</span>
         <span class="p">{</span>
-            <span class="n">low</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">timer</span><span class="p">;</span>
-            <span class="n">tin</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">timer</span><span class="p">;</span>
-            <span class="n">timer</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="n">low</span><span class="p">[</span><span class="n">v</span><span class="p">]</span>   <span class="o">=</span> <span class="n">dist</span><span class="p">;</span>
+            <span class="n">dists</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">dist</span><span class="p">;</span>
+            <span class="n">dist</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
         <span class="p">}</span>
         <span class="n">visited</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="k">true</span><span class="p">;</span>
 
-        <span class="k">for</span> <span class="n">ito</span> <span class="n">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">:</span> <span class="n">nadj</span><span class="p">[</span><span class="n">v</span><span class="p">]]</span>
+        <span class="k">for</span> <span class="n">iw</span> <span class="n">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">:</span> <span class="n">num_adj</span><span class="p">[</span><span class="n">v</span><span class="p">]]</span>
         <span class="p">{</span>
-            <span class="k">let</span> <span class="n">to</span> <span class="o">=</span> <span class="n">g</span><span class="p">[</span><span class="n">ito</span><span class="p">,</span> <span class="n">v</span><span class="p">];</span>
-            <span class="k">if</span> <span class="n">to</span> <span class="o">==</span> <span class="n">parent</span><span class="p">[</span><span class="n">v</span><span class="p">]</span>
+            <span class="k">let</span> <span class="n">w</span> <span class="o">=</span> <span class="n">g</span><span class="p">[</span><span class="n">iw</span><span class="p">,</span> <span class="n">v</span><span class="p">];</span>
+            <span class="k">if</span> <span class="n">w</span> <span class="o">==</span> <span class="n">parent</span><span class="p">[</span><span class="n">v</span><span class="p">]</span>
             <span class="p">{</span>
                 <span class="c">// Do nothing</span>
             <span class="p">}</span>
-            <span class="k">else</span> <span class="k">if</span> <span class="n">visited</span><span class="p">[</span><span class="n">to</span><span class="p">]</span>
+            <span class="k">else</span> <span class="k">if</span> <span class="n">visited</span><span class="p">[</span><span class="n">w</span><span class="p">]</span>
             <span class="p">{</span>
-                <span class="n">low</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="nf">min</span><span class="p">(</span><span class="n">low</span><span class="p">[</span><span class="n">v</span><span class="p">],</span> <span class="n">tin</span><span class="p">[</span><span class="n">to</span><span class="p">]);</span>
+                <span class="n">low</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="nf">min</span><span class="p">(</span><span class="n">low</span><span class="p">[</span><span class="n">v</span><span class="p">],</span> <span class="n">dists</span><span class="p">[</span><span class="n">w</span><span class="p">]);</span>
             <span class="p">}</span>
             <span class="k">else</span>
             <span class="p">{</span>
-                <span class="n">parent</span><span class="p">[</span><span class="n">to</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span><span class="p">;</span>
-
+                <span class="n">parent</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span><span class="p">;</span>
                 <span class="n">stack</span><span class="p">[(</span><span class="n">sp</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="n">v</span><span class="p">;</span>  <span class="c">// re-push parent for deferred processing</span>
+                <span class="nf">check_stack_cap</span><span class="p">(</span><span class="n">sp</span><span class="p">,</span> <span class="n">STACK_CAP</span><span class="p">);</span>
                 <span class="n">defer</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="k">true</span><span class="p">;</span>
 
-                <span class="n">stack</span><span class="p">[(</span><span class="n">sp</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="n">to</span><span class="p">;</span> <span class="c">// push child. order matters wrt parent</span>
-                <span class="c">// TODO: stack cap check</span>
+                <span class="n">stack</span><span class="p">[(</span><span class="n">sp</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="n">w</span><span class="p">;</span> <span class="c">// push child. order matters wrt parent</span>
+                <span class="nf">check_stack_cap</span><span class="p">(</span><span class="n">sp</span><span class="p">,</span> <span class="n">STACK_CAP</span><span class="p">);</span>
             <span class="p">}</span>
         <span class="p">}</span>
 
         <span class="k">if</span> <span class="n">defer</span><span class="p">[</span><span class="n">v</span><span class="p">]</span>
         <span class="p">{</span>
-            <span class="k">for</span> <span class="n">ito</span> <span class="n">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">:</span> <span class="n">nadj</span><span class="p">[</span><span class="n">v</span><span class="p">]]</span>
+            <span class="k">for</span> <span class="n">iw</span> <span class="n">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">:</span> <span class="n">num_adj</span><span class="p">[</span><span class="n">v</span><span class="p">]]</span>
             <span class="p">{</span>
-                <span class="k">let</span> <span class="n">to</span> <span class="o">=</span> <span class="n">g</span><span class="p">[</span><span class="n">ito</span><span class="p">,</span> <span class="n">v</span><span class="p">];</span>
-                <span class="k">if</span> <span class="n">to</span> <span class="o">!=</span> <span class="n">parent</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="n">and</span> <span class="n">visited</span><span class="p">[</span><span class="n">to</span><span class="p">]</span>
+                <span class="k">let</span> <span class="n">w</span> <span class="o">=</span> <span class="n">g</span><span class="p">[</span><span class="n">iw</span><span class="p">,</span> <span class="n">v</span><span class="p">];</span>
+                <span class="k">if</span> <span class="n">w</span> <span class="o">!=</span> <span class="n">parent</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="n">and</span> <span class="n">visited</span><span class="p">[</span><span class="n">w</span><span class="p">]</span>
                 <span class="p">{</span>
-                    <span class="n">low</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="nf">min</span><span class="p">(</span><span class="n">low</span><span class="p">[</span><span class="n">v</span><span class="p">],</span> <span class="n">low</span><span class="p">[</span><span class="n">to</span><span class="p">]);</span>
-                    <span class="k">if</span> <span class="p">(</span><span class="n">low</span><span class="p">[</span><span class="n">to</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">tin</span><span class="p">[</span><span class="n">v</span><span class="p">])</span>
+                    <span class="n">low</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="nf">min</span><span class="p">(</span><span class="n">low</span><span class="p">[</span><span class="n">v</span><span class="p">],</span> <span class="n">low</span><span class="p">[</span><span class="n">w</span><span class="p">]);</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">low</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">dists</span><span class="p">[</span><span class="n">v</span><span class="p">])</span>
                     <span class="p">{</span>
-                        <span class="c">//// TODO: this may log the same bridge multiple times.</span>
-                        <span class="c">//// Pushing to an equivalenced set is left as an exercise</span>
-                        <span class="c">//// for the reader</span>
-                        <span class="c">//println();</span>
-                        <span class="c">//println("****************");</span>
-
-                        <span class="c">//println("Found bridge = ", [v, to], " = ", [names[v], names[to]]);</span>
-                        <span class="c">//println();</span>
-                        <span class="c">//exit(0); // TODO</span>
+                        <span class="c">//println("Found bridge = ", [v, w], " = ", [names_glbl[v], names_glbl[w]]);</span>
+                        <span class="n">bridge</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span><span class="p">,</span> <span class="n">w</span><span class="p">];</span>
+                        <span class="n">found</span> <span class="o">=</span> <span class="k">true</span><span class="p">;</span>
                     <span class="p">}</span>
                 <span class="p">}</span>
             <span class="p">}</span>
         <span class="p">}</span>
     <span class="p">}</span>
-    <span class="c">//println("visited = ", visited);</span>
-    <span class="c">//println("parent = ", parent);</span>
-    <span class="c">//println("tin    = ", tin);</span>
-    <span class="c">//println("low  = ", low);</span></code></pre></figure>
+    <span class="k">let</span> <span class="n">ans</span> <span class="o">=</span> <span class="n">bridge</span><span class="p">;</span>
+<span class="p">}</span></code></pre></figure>
 
 </div>
 
 <div id="c_0" class="tabcontent">
 
-<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="c1">// TODO: implement Tarjan's bridge algorithm in C</span>
-<span class="n">printf</span><span class="p">(</span><span class="s">"hello world"</span><span class="p">);</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="kt">int</span><span class="o">*</span> <span class="nf">get_bridge</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span> <span class="n">g</span><span class="p">,</span> <span class="kt">int</span><span class="o">*</span> <span class="n">num_adj</span><span class="p">,</span> <span class="kt">int</span> <span class="n">nn</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// Stack for iterative (non-recursive) depth-first search</span>
+    <span class="kt">int</span> <span class="n">STACK_CAP</span> <span class="o">=</span> <span class="mi">16</span> <span class="o">*</span> <span class="n">nn</span><span class="p">;</span>
+    <span class="kt">int</span><span class="o">*</span> <span class="n">stack</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="n">STACK_CAP</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+    <span class="n">memset</span><span class="p">(</span><span class="n">stack</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">stack</span><span class="p">));</span>
+    <span class="kt">int</span> <span class="n">sp</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="c1">// stack "pointer"</span>
+
+    <span class="c1">// Push node 0 as root</span>
+    <span class="c1">//stack[(sp += 1)] = 0;</span>
+    <span class="n">stack</span><span class="p">[</span><span class="o">++</span><span class="n">sp</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="n">bool</span><span class="o">*</span> <span class="n">visited</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="n">nn</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">bool</span><span class="p">));</span>
+    <span class="n">bool</span><span class="o">*</span> <span class="n">defer</span>   <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="n">nn</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">bool</span><span class="p">));</span>
+    <span class="kt">int</span><span class="o">*</span>  <span class="n">parent</span>  <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="n">nn</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+    <span class="kt">int</span><span class="o">*</span>  <span class="n">low</span>     <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="n">nn</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+    <span class="kt">int</span><span class="o">*</span>  <span class="n">dists</span>   <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="n">nn</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+
+    <span class="n">memset</span><span class="p">(</span><span class="n">visited</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="n">nn</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">bool</span><span class="p">));</span>
+    <span class="n">memset</span><span class="p">(</span><span class="n">defer</span>  <span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="n">nn</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">bool</span><span class="p">));</span>
+    <span class="n">memset</span><span class="p">(</span><span class="n">parent</span> <span class="p">,</span> <span class="o">-</span><span class="mi">1</span>   <span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">parent</span> <span class="p">));</span>
+    <span class="n">memset</span><span class="p">(</span><span class="n">low</span>    <span class="p">,</span> <span class="o">-</span><span class="mi">1</span>   <span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">low</span>    <span class="p">));</span>
+    <span class="n">memset</span><span class="p">(</span><span class="n">dists</span>  <span class="p">,</span> <span class="o">-</span><span class="mi">1</span>   <span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">dists</span>  <span class="p">));</span>
+
+    <span class="kt">int</span> <span class="n">dist</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">bool</span> <span class="n">found</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="kt">int</span><span class="o">*</span> <span class="n">bridge</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span> <span class="n">bridge</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">bridge</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">sp</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">found</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">v</span> <span class="o">=</span> <span class="n">stack</span><span class="p">[</span><span class="n">sp</span><span class="o">--</span><span class="p">];</span> <span class="c1">// pop</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">visited</span><span class="p">[</span><span class="n">v</span><span class="p">])</span>
+        <span class="p">{</span>
+            <span class="n">low</span><span class="p">[</span><span class="n">v</span><span class="p">]</span>   <span class="o">=</span> <span class="n">dist</span><span class="p">;</span>
+            <span class="n">dists</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">dist</span><span class="p">;</span>
+            <span class="n">dist</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">visited</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">iw</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">iw</span> <span class="o">&lt;</span> <span class="n">num_adj</span><span class="p">[</span><span class="n">v</span><span class="p">];</span> <span class="n">iw</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="kt">int</span> <span class="n">w</span> <span class="o">=</span> <span class="n">g</span><span class="p">[</span><span class="n">v</span> <span class="o">*</span> <span class="n">NADJ_CAP</span> <span class="o">+</span> <span class="n">iw</span><span class="p">];</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">w</span> <span class="o">==</span> <span class="n">parent</span><span class="p">[</span><span class="n">v</span><span class="p">])</span>
+            <span class="p">{</span>
+                <span class="c1">// Do nothing</span>
+            <span class="p">}</span>
+            <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">visited</span><span class="p">[</span><span class="n">w</span><span class="p">])</span>
+            <span class="p">{</span>
+                <span class="n">low</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">low</span><span class="p">[</span><span class="n">v</span><span class="p">],</span> <span class="n">dists</span><span class="p">[</span><span class="n">w</span><span class="p">]);</span>
+            <span class="p">}</span>
+            <span class="k">else</span>
+            <span class="p">{</span>
+                <span class="n">parent</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span><span class="p">;</span>
+                <span class="n">stack</span><span class="p">[</span><span class="o">++</span><span class="n">sp</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span><span class="p">;</span>  <span class="c1">// re-push parent for deferred processing</span>
+                <span class="c1">//check_stack_cap(sp, STACK_CAP); // TODO</span>
+                <span class="n">defer</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+
+                <span class="n">stack</span><span class="p">[</span><span class="o">++</span><span class="n">sp</span><span class="p">]</span> <span class="o">=</span> <span class="n">w</span><span class="p">;</span> <span class="c1">// push child. order matters wrt parent</span>
+                <span class="c1">//check_stack_cap(sp, STACK_CAP); // TODO</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">defer</span><span class="p">[</span><span class="n">v</span><span class="p">])</span>
+        <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">iw</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">iw</span> <span class="o">&lt;</span> <span class="n">num_adj</span><span class="p">[</span><span class="n">v</span><span class="p">];</span> <span class="n">iw</span><span class="o">++</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="kt">int</span> <span class="n">w</span> <span class="o">=</span> <span class="n">g</span><span class="p">[</span><span class="n">v</span> <span class="o">*</span> <span class="n">NADJ_CAP</span> <span class="o">+</span> <span class="n">iw</span><span class="p">];</span>
+
+                <span class="k">if</span> <span class="p">((</span><span class="n">w</span> <span class="o">!=</span> <span class="n">parent</span><span class="p">[</span><span class="n">v</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="n">visited</span><span class="p">[</span><span class="n">w</span><span class="p">])</span>
+                <span class="p">{</span>
+                    <span class="n">low</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">low</span><span class="p">[</span><span class="n">v</span><span class="p">],</span> <span class="n">low</span><span class="p">[</span><span class="n">w</span><span class="p">]);</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">low</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">dists</span><span class="p">[</span><span class="n">v</span><span class="p">])</span>
+                    <span class="p">{</span>
+                        <span class="n">bridge</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span><span class="p">;</span> <span class="n">bridge</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">w</span><span class="p">;</span>
+                        <span class="n">found</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">bridge</span><span class="p">;</span>
+<span class="p">}</span></code></pre></figure>
 
 </div>
 
 <script>
-
     function openTab(evt, tabName) {
         // Declare all variables
         var i, tabcontent, tablinks;
@@ -268,11 +346,6 @@ much scrolling -->
     for (i = 0; i < elems.length; i++) {
         elems[i].style.margin = "0px";
     }
-    //elems = document.getElementsByClassName("tabcontent");
-    //for (i = 0; i < elems.length; i++) {
-    //    elems[i].style.padding = "0px";
-    //}
-
 </script>
 
 
@@ -301,7 +374,7 @@ much scrolling -->
 
         <div style="display:none;"> <a rel="me" href="https://hachyderm.io/@jeffirwin">Mastodon</a> </div>
 
-        <p>Build: Sat Feb  3 10:38:35 EST 2024, revision: <code>44e4b84</code></p>
+        <p>Build: Sat Feb  3 22:38:04 EST 2024, revision: <code>66446c8</code></p>
 
       </footer>
     </main>
