@@ -36,7 +36,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#157878">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="stylesheet" href="/assets/css/style.css?v=7126e1337b73b6199a3cc89da838ad1c71d5529b">
+    <link rel="stylesheet" href="/assets/css/style.css?v=b443090aacaf93b08ab919a2cf53efef9464d681">
     <link rel="shortcut icon" type="image/png" href="/favicon.png">
     <style>
         /* Style the tab */
@@ -324,7 +324,34 @@ of neighbors of node <code class="language-plaintext highlighter-rouge">v</code>
 
 <h2 id="why-iterative-instead-of-recursive">Why iterative instead of recursive?</h2>
 
+<p>I first learned about Tarjan’s bridge algorithm while working on an <a href="https://adventofcode.com/2023/day/25">Advent of
+Code problem</a> in my programming language
+<a href="https://github.com/JeffIrwin/syntran">syntran</a>.  It turned out that searching
+for bridges wasn’t a great way to solve this problem, but that’s beside the
+point.</p>
+
+<p>One of the many features that the syntran language currently lacks is
+<a href="https://www.google.com/search?channel=fs&amp;client=ubuntu-sn&amp;q=recursion">recursion</a>.
+Fortunately, recursive algorithms, such as binary search, breadth-first search,
+depth-first search, or even <a href="https://github.com/JeffIrwin/syntran/blob/538b979bf3d42777a5d541e8416fd65e2f0df64f/src/tests/long/aoc/2023/22/main.syntran#L17">quick
+sort</a>,
+can always be translated to an equivalent iterative algorithm using stacks or
+queues.</p>
+
+<p>There are plenty of online resources which present recursive versions of
+Tarjan’s bridge algorithm, but I couldn’t find any iterative versions.  It
+wasn’t straightforward to come up with one, since there is some tricky state in
+the algorithm regarding the way that <em>deferred</em> nodes are processed.</p>
+
 <h2 id="what-is-a-bridge">What is a bridge?</h2>
+
+<p>A graph is an abstract mathematical entity with diverse applications for road
+networks and communication networks.  In the case of road networks, a bridge in
+a graph is like a literal bridge.</p>
+
+<p>To be precise, a bridge is an edge whose removal increases the number of
+connected components of a graph.  This is best explained with a visual example,
+like Figure 1.</p>
 
 <table>
   <tbody>
@@ -336,6 +363,13 @@ of neighbors of node <code class="language-plaintext highlighter-rouge">v</code>
     </tr>
   </tbody>
 </table>
+
+<p>In this example, removing the edge between the nodes <code class="language-plaintext highlighter-rouge">yag</code> and <code class="language-plaintext highlighter-rouge">ket</code> would split
+the graph into 2 (dis)connected components: one in the lower-left on the <code class="language-plaintext highlighter-rouge">yag</code>
+side, and a separate component on in the upper-right on the <code class="language-plaintext highlighter-rouge">ket</code> side.</p>
+
+<p>A graph can have more than one bridge, and graphs which have multiple connected
+components can also have bridges which would split off an additional component.</p>
 
 <h2 id="reading-the-graph">Reading the graph</h2>
 
@@ -450,7 +484,7 @@ of neighbors of node <code class="language-plaintext highlighter-rouge">v</code>
 
         <div style="display:none;"> <a rel="me" href="https://hachyderm.io/@jeffirwin">Mastodon</a> </div>
 
-        <p>Build: Sun Feb  4 19:58:18 EST 2024, revision: <code>7126e13</code></p>
+        <p>Build: Sun Feb  4 20:28:25 EST 2024, revision: <code>b443090</code></p>
 
       </footer>
     </main>
