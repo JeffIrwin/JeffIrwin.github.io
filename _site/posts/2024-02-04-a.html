@@ -36,7 +36,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#157878">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="stylesheet" href="/assets/css/style.css?v=1ac3d16a32c96936dc2e26a39a52a71a1dd4b5dc">
+    <link rel="stylesheet" href="/assets/css/style.css?v=3e18fb32befdb99be9cc3e0fe879732ec7addc95">
     <link rel="shortcut icon" type="image/png" href="/favicon.png">
     <style>
         /* Style the tab */
@@ -338,10 +338,11 @@ sort</a>,
 can always be translated to an equivalent iterative algorithm using stacks or
 queues.</p>
 
-<p>There are plenty of online resources which present recursive versions of
-Tarjan’s bridge algorithm, but I couldn’t find any iterative versions.  It
-wasn’t straightforward to come up with one, since there is some tricky state in
-the algorithm regarding the way that <em>deferred</em> nodes are processed.</p>
+<p>There are plenty of online resources which present <a href="https://cp-algorithms.com/graph/bridge-searching.html">recursive
+versions</a> of Tarjan’s
+bridge algorithm, but I couldn’t find any iterative versions.  It wasn’t
+straightforward to come up with one, since there is some tricky state in the
+algorithm regarding the way that <em>deferred</em> nodes are processed.</p>
 
 <h2 id="what-is-a-bridge">What is a bridge?</h2>
 
@@ -369,12 +370,13 @@ the graph into 2 (dis)connected components: one in the lower-left on the <code c
 side, and a separate component on in the upper-right on the <code class="language-plaintext highlighter-rouge">ket</code> side.</p>
 
 <p>A graph can have more than one bridge, and graphs which have multiple connected
-components can also have bridges which would split off an additional component.</p>
+components to begin with can also have bridges which would cut off an
+additional component.</p>
 
 <h2 id="reading-the-graph">Reading the graph</h2>
 
-<p>Before calling the <code class="language-plaintext highlighter-rouge">get_bridge()</code> function, there is a parsing problem.  For the
-Advent of Code problem, the graph is given in a format like this:</p>
+<p>Before calling the <code class="language-plaintext highlighter-rouge">get_bridge()</code> function, there is a parsing problem.  In the
+Advent of Code, the graph is given in a format like this:</p>
 
 <figure class="highlight"><pre><code class="language-plaintext" data-lang="plaintext">teg: pro tej saw
 awn: lev kex ist
@@ -440,8 +442,7 @@ times.  First, we have to find the set of unique node names and construct the
 		<span class="n">println</span><span class="p">(</span><span class="s">"No bridges were found"</span><span class="p">);</span>
 	<span class="k">else</span>
 		<span class="n">printf</span><span class="p">(</span><span class="s">"Found bridge between nodes [%d, %d] = [%s, %s]</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span>
-				<span class="n">bridge</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">bridge</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
-				<span class="n">names_glbl</span><span class="p">[</span><span class="n">bridge</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">names_glbl</span><span class="p">[</span><span class="n">bridge</span><span class="p">[</span><span class="mi">1</span><span class="p">]]);</span>
+				<span class="n">bridge</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">bridge</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">names_glbl</span><span class="p">[</span><span class="n">bridge</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">names_glbl</span><span class="p">[</span><span class="n">bridge</span><span class="p">[</span><span class="mi">1</span><span class="p">]]);</span>
 
 	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
@@ -511,7 +512,7 @@ times.  First, we have to find the set of unique node names and construct the
 
         <div style="display:none;"> <a rel="me" href="https://hachyderm.io/@jeffirwin">Mastodon</a> </div>
 
-        <p>Build: Sun Feb  4 20:40:31 EST 2024, revision: <code>1ac3d16</code></p>
+        <p>Build: Sun Feb  4 20:56:47 EST 2024, revision: <code>3e18fb3</code></p>
 
       </footer>
     </main>
