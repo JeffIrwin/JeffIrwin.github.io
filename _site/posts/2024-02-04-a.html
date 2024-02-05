@@ -36,7 +36,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#157878">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="stylesheet" href="/assets/css/style.css?v=772de4246d1396bb8d669f8ba021c5b7f65ff4c1">
+    <link rel="stylesheet" href="/assets/css/style.css?v=72fbedf95486c278291e2df0359b3f8a4fe1a069">
     <link rel="shortcut icon" type="image/png" href="/favicon.png">
     <style>
         /* Style the tab */
@@ -114,9 +114,22 @@
 
     <main id="content" class="main-content" role="main">
       
-<div style="background-color: #f1f1f1;">
-  <p>| <a href="https://www.jeffirwin.xyz">Home</a> | <a href="https://www.jeffirwin.xyz/music">Music</a> | <a href="https://www.jeffirwin.xyz/posts">Posts</a> | <a href="https://www.jeffirwin.xyz/about">About</a> |</p>
-</div>
+<!-- TODO: this div styling works but doesn't look great.  Maybe try the whole
+`.tab` class style from default-template.html? -->
+<!-- <div markdown="1" style="background-color: #f1f1f1;"> -->
+
+<table>
+  <tbody>
+    <tr>
+      <td><a href="https://www.jeffirwin.xyz">Home</a></td>
+      <td><a href="https://www.jeffirwin.xyz/music">Music</a></td>
+      <td><a href="https://www.jeffirwin.xyz/posts">Posts</a></td>
+      <td><a href="https://www.jeffirwin.xyz/about">About</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- </div> -->
 
 <h1 id="tarjans-bridge-algorithm">Tarjan’s bridge algorithm</h1>
 
@@ -507,7 +520,7 @@ times.  First, we have to find the set of unique node names and construct the
 
         <div style="display:none;"> <a rel="me" href="https://hachyderm.io/@jeffirwin">Mastodon</a> </div>
 
-        <p>Build: Sun Feb  4 21:09:33 EST 2024, revision: <code>772de42</code></p>
+        <p>Build: Sun Feb  4 21:21:34 EST 2024, revision: <code>72fbedf</code></p>
 
       </footer>
     </main>
