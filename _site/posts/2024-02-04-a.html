@@ -36,7 +36,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#157878">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="stylesheet" href="/assets/css/style.css?v=b443090aacaf93b08ab919a2cf53efef9464d681">
+    <link rel="stylesheet" href="/assets/css/style.css?v=1ac3d16a32c96936dc2e26a39a52a71a1dd4b5dc">
     <link rel="shortcut icon" type="image/png" href="/favicon.png">
     <style>
         /* Style the tab */
@@ -373,6 +373,33 @@ components can also have bridges which would split off an additional component.<
 
 <h2 id="reading-the-graph">Reading the graph</h2>
 
+<p>Before calling the <code class="language-plaintext highlighter-rouge">get_bridge()</code> function, there is a parsing problem.  For the
+Advent of Code problem, the graph is given in a format like this:</p>
+
+<figure class="highlight"><pre><code class="language-plaintext" data-lang="plaintext">teg: pro tej saw
+awn: lev kex ist
+pam: eth ket mim
+yag: teg pro ket
+eth: ket
+kex: ist ket
+fid: yag saw tej pro
+lev: eth mim ist
+pro: saw
+tej: pro saw
+ket: mim
+ist: mim
+rom: eth pam ist awn</code></pre></figure>
+
+<p>On each line, the node to the left of the colon (e.g. <code class="language-plaintext highlighter-rouge">teg</code>) is connected to
+every node to the right of the colon (e.g. <code class="language-plaintext highlighter-rouge">pro</code>, <code class="language-plaintext highlighter-rouge">tej</code>, and <code class="language-plaintext highlighter-rouge">saw</code>).  This is
+the same graph shown in Figure 1.</p>
+
+<p>Notice the node name <code class="language-plaintext highlighter-rouge">teg</code> appears twice in this file, and <code class="language-plaintext highlighter-rouge">pro</code> appears five
+times.  First, we have to find the set of unique node names and construct the
+<code class="language-plaintext highlighter-rouge">g</code> and <code class="language-plaintext highlighter-rouge">num_adj</code> arrays.</p>
+
+<!-- TODO: more description.  Present whole read_aoc_graph() fn and related fns? -->
+
 <h2 id="calling-the-get_bridge-function">Calling the get_bridge() function</h2>
 
 <!-- Tab link buttons -->
@@ -484,7 +511,7 @@ components can also have bridges which would split off an additional component.<
 
         <div style="display:none;"> <a rel="me" href="https://hachyderm.io/@jeffirwin">Mastodon</a> </div>
 
-        <p>Build: Sun Feb  4 20:28:25 EST 2024, revision: <code>b443090</code></p>
+        <p>Build: Sun Feb  4 20:40:31 EST 2024, revision: <code>1ac3d16</code></p>
 
       </footer>
     </main>
