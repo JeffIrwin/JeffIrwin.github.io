@@ -1,3 +1,6 @@
+---
+layout: default
+---
 
 <link rel="shortcut icon" type="image/png" href="favicon.png">
 
@@ -29,4 +32,6 @@ syntax -->
 - Courante [part 1](https://www.tiktok.com/@jeff.irwin/video/6958856517751803142){:target="_blank"} and [part 2](https://www.tiktok.com/@jeff.irwin/video/6966349034906766597){:target="_blank"}
 - [Sarabande](https://www.youtube.com/watch?v=zKBBfl6Gwjg){:target="_blank"}
 - More TBA ...
+---
+---
 

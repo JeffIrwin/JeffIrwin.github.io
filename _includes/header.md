@@ -1,3 +1,8 @@
+<!-- 
+---
+layout: default
+---
+-->
 
 <!-- TODO: this div styling works but doesn't look great.  Maybe try the whole
 `.tab` class style from default-template.html? -->
