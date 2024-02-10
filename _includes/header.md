@@ -14,9 +14,9 @@
 <nav>
 	<ul>
 		<li><a id="home" href="/">Home</a></li>
-		<li><a id="music" href="/music/">Music</a></li>
-		<li><a id="posts" href="/posts/">Posts</a></li>
-		<li><a id="about" href="/about/">About</a></li>
+		<li><a id="music" href="/music">Music</a></li>
+		<li><a id="posts" href="/posts">Posts</a></li>
+		<li><a id="about" href="/about">About</a></li>
 		<!-- <li><a class="active" href="/about/">About</a></li> -->
 	</ul>
 </nav>
