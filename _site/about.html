@@ -15,20 +15,15 @@
 
     <meta charset="UTF-8">
 
-<!-- Begin Jekyll SEO tag v2.7.1 -->
-<title>&lt;!– | JeffIrwin.github.io</title>
-<meta name="generator" content="Jekyll v3.9.0" />
-<meta property="og:title" content="&lt;!–" />
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v4.3.3" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Jeff Irwin’s GitHub page" />
-<meta property="og:description" content="Jeff Irwin’s GitHub page" />
-<link rel="canonical" href="https://www.jeffirwin.xyz/about.html" />
-<meta property="og:url" content="https://www.jeffirwin.xyz/about.html" />
-<meta property="og:site_name" content="JeffIrwin.github.io" />
+<link rel="canonical" href="http://localhost:4000/about.html" />
+<meta property="og:url" content="http://localhost:4000/about.html" />
+<meta property="og:type" content="website" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="&lt;!–" />
 <script type="application/ld+json">
-{"description":"Jeff Irwin’s GitHub page","url":"https://www.jeffirwin.xyz/about.html","@type":"WebPage","headline":"&lt;!–","@context":"https://schema.org"}</script>
+{"@context":"https://schema.org","@type":"WebPage","url":"http://localhost:4000/about.html"}</script>
 <!-- End Jekyll SEO tag -->
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -36,10 +31,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#157878">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-	<!-- <link rel="stylesheet" href="/assets/css/style.css?v=292afed44caa0a8b5c12343e7bfb6a61aa207296"> -->
+	<!-- <link rel="stylesheet" href="/assets/css/style.css?v="> -->
 	<link rel="stylesheet" href="/assets/css/style.css">
     <link rel="shortcut icon" type="image/png" href="/favicon.png">
     <style>
+
+		nav {
+			display: block;
+			background-color: #f1f1f1;
+		ul {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+			overflow: hidden;
+			/*background-color: #333;*/
+			background-color: #f1f1f1;
+		}
+
+		li {
+		  float: left;
+		}
+		
+		li a {
+		  display: block;
+		  /*color: white;*/
+		  text-align: center;
+		  padding: 14px 16px;
+		  text-decoration: none;
+		}
+		
+		/* Change the link color to #111 (black) on hover */
+		li a:hover {
+			/*background-color: #111;*/
+			background-color: #ddd;
+		}
+		}
+		.active {
+			/*background-color: #04AA6D;*/
+			background-color: #ccc;
+		}
+
+/*		ul {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+		}
+		li {
+			display: inline;
+		}
+		a {
+			display: block;
+			padding: 8px;
+			background-color: #dddddd;
+		}	
+*/
+
         /* Style the tab */
         .tab {
           overflow: hidden;
@@ -123,28 +169,33 @@ lastname: Irwin
 
 <link rel="shortcut icon" type="image/png" href="favicon.png" />
 
-<!-- 
----
-layout: default
----
--->
-
 <!-- TODO: this div styling works but doesn't look great.  Maybe try the whole
 `.tab` class style from default-template.html? -->
 <!-- <div markdown="1" style="background-color: #f1f1f1;"> -->
 
-<table>
-  <tbody>
-    <tr>
-      <td><a href="https://www.jeffirwin.xyz">Home</a></td>
-      <td><a href="https://www.jeffirwin.xyz/music">Music</a></td>
-      <td><a href="https://www.jeffirwin.xyz/posts">Posts</a></td>
-      <td><a href="https://www.jeffirwin.xyz/about">About</a></td>
-    </tr>
-  </tbody>
-</table>
+<!--
+|
+[Home](http://localhost:4000) |
+[Music](http://localhost:4000/music) |
+[Posts](http://localhost:4000/posts) | 
+[About](http://localhost:4000/about) |
+-->
+
+<nav>
+	<ul>
+		<li><a id="home" href="/">Home</a></li>
+		<li><a id="music" href="/music/">Music</a></li>
+		<li><a id="posts" href="/posts/">Posts</a></li>
+		<li><a id="about" href="/about/">About</a></li>
+		<!-- <li><a class="active" href="/about/">About</a></li> -->
+	</ul>
+</nav>
 
 <!-- </div> -->
+
+<script>
+	document.getElementById("about").className = " active";
+</script>
 
 <h1 id="about">About</h1>
 

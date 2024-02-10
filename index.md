@@ -7,6 +7,9 @@ layout: default
 <!--</div> ends .full-width that started in _includes/header.html -->
 
 {% include header.md %}
+<script>
+	document.getElementById("home").className = " active";
+</script>
 
 # Jeff Irwin's home page
 

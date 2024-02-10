@@ -5,6 +5,9 @@ layout: default
 <link rel="shortcut icon" type="image/png" href="favicon.png">
 
 {% include header.md %}
+<script>
+	document.getElementById("music").className = " active";
+</script>
 
 # Music
 

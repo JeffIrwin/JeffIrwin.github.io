@@ -15,20 +15,15 @@
 
     <meta charset="UTF-8">
 
-<!-- Begin Jekyll SEO tag v2.7.1 -->
-<title>JeffIrwin.github.io | Jeff Irwin’s GitHub page</title>
-<meta name="generator" content="Jekyll v3.9.0" />
-<meta property="og:title" content="JeffIrwin.github.io" />
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v4.3.3" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Jeff Irwin’s GitHub page" />
-<meta property="og:description" content="Jeff Irwin’s GitHub page" />
-<link rel="canonical" href="https://www.jeffirwin.xyz/posts/2024-02-04-a.html" />
-<meta property="og:url" content="https://www.jeffirwin.xyz/posts/2024-02-04-a.html" />
-<meta property="og:site_name" content="JeffIrwin.github.io" />
+<link rel="canonical" href="http://localhost:4000/posts/2024-02-04-a.html" />
+<meta property="og:url" content="http://localhost:4000/posts/2024-02-04-a.html" />
+<meta property="og:type" content="website" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="JeffIrwin.github.io" />
 <script type="application/ld+json">
-{"description":"Jeff Irwin’s GitHub page","url":"https://www.jeffirwin.xyz/posts/2024-02-04-a.html","@type":"WebPage","headline":"JeffIrwin.github.io","@context":"https://schema.org"}</script>
+{"@context":"https://schema.org","@type":"WebPage","url":"http://localhost:4000/posts/2024-02-04-a.html"}</script>
 <!-- End Jekyll SEO tag -->
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -36,10 +31,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#157878">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-	<!-- <link rel="stylesheet" href="/assets/css/style.css?v=292afed44caa0a8b5c12343e7bfb6a61aa207296"> -->
+	<!-- <link rel="stylesheet" href="/assets/css/style.css?v="> -->
 	<link rel="stylesheet" href="/assets/css/style.css">
     <link rel="shortcut icon" type="image/png" href="/favicon.png">
     <style>
+
+		nav {
+			display: block;
+			background-color: #f1f1f1;
+		ul {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+			overflow: hidden;
+			/*background-color: #333;*/
+			background-color: #f1f1f1;
+		}
+
+		li {
+		  float: left;
+		}
+		
+		li a {
+		  display: block;
+		  /*color: white;*/
+		  text-align: center;
+		  padding: 14px 16px;
+		  text-decoration: none;
+		}
+		
+		/* Change the link color to #111 (black) on hover */
+		li a:hover {
+			/*background-color: #111;*/
+			background-color: #ddd;
+		}
+		}
+		.active {
+			/*background-color: #04AA6D;*/
+			background-color: #ccc;
+		}
+
+/*		ul {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+		}
+		li {
+			display: inline;
+		}
+		a {
+			display: block;
+			padding: 8px;
+			background-color: #dddddd;
+		}	
+*/
+
         /* Style the tab */
         .tab {
           overflow: hidden;
@@ -114,26 +160,28 @@
     </header>
 
     <main id="content" class="main-content" role="main">
-      <!-- 
----
-layout: default
----
--->
-
+      
 <!-- TODO: this div styling works but doesn't look great.  Maybe try the whole
 `.tab` class style from default-template.html? -->
 <!-- <div markdown="1" style="background-color: #f1f1f1;"> -->
 
-<table>
-  <tbody>
-    <tr>
-      <td><a href="https://www.jeffirwin.xyz">Home</a></td>
-      <td><a href="https://www.jeffirwin.xyz/music">Music</a></td>
-      <td><a href="https://www.jeffirwin.xyz/posts">Posts</a></td>
-      <td><a href="https://www.jeffirwin.xyz/about">About</a></td>
-    </tr>
-  </tbody>
-</table>
+<!--
+|
+[Home](http://localhost:4000) |
+[Music](http://localhost:4000/music) |
+[Posts](http://localhost:4000/posts) | 
+[About](http://localhost:4000/about) |
+-->
+
+<nav>
+	<ul>
+		<li><a id="home" href="/">Home</a></li>
+		<li><a id="music" href="/music/">Music</a></li>
+		<li><a id="posts" href="/posts/">Posts</a></li>
+		<li><a id="about" href="/about/">About</a></li>
+		<!-- <li><a class="active" href="/about/">About</a></li> -->
+	</ul>
+</nav>
 
 <!-- </div> -->
 
@@ -170,13 +218,13 @@ of neighbors of node <code class="language-plaintext highlighter-rouge">v</code>
 
 <figure class="highlight"><pre><code class="language-rust" data-lang="rust"><span class="k">fn</span> <span class="nf">get_bridge</span><span class="p">(</span><span class="n">g</span><span class="p">:</span> <span class="p">[</span><span class="nb">i32</span><span class="p">;</span> <span class="p">:,</span> <span class="p">:],</span> <span class="n">num_adj</span><span class="p">:</span> <span class="p">[</span><span class="nb">i32</span><span class="p">;</span> <span class="p">:]):</span> <span class="p">[</span><span class="nb">i32</span><span class="p">;</span> <span class="p">:]</span>
 <span class="p">{</span>
-	<span class="c">// Stack for iterative (non-recursive) depth-first search</span>
+	<span class="c1">// Stack for iterative (non-recursive) depth-first search</span>
 	<span class="k">let</span> <span class="n">nn</span> <span class="o">=</span> <span class="nf">size</span><span class="p">(</span><span class="n">num_adj</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 	<span class="k">let</span> <span class="n">STACK_CAP</span> <span class="o">=</span> <span class="mi">16</span> <span class="o">*</span> <span class="n">nn</span><span class="p">;</span>
 	<span class="k">let</span> <span class="n">stack</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">;</span> <span class="n">STACK_CAP</span><span class="p">];</span>
-	<span class="k">let</span> <span class="n">sp</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="c">// stack "pointer"</span>
+	<span class="k">let</span> <span class="n">sp</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="c1">// stack "pointer"</span>
 
-	<span class="c">// Push node 0 as root</span>
+	<span class="c1">// Push node 0 as root</span>
 	<span class="n">stack</span><span class="p">[(</span><span class="n">sp</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 
 	<span class="k">let</span> <span class="n">visited</span> <span class="o">=</span> <span class="p">[</span><span class="k">false</span><span class="p">;</span> <span class="n">nn</span><span class="p">];</span>
@@ -190,7 +238,7 @@ of neighbors of node <code class="language-plaintext highlighter-rouge">v</code>
 	<span class="k">let</span> <span class="n">bridge</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">];</span>
 	<span class="k">while</span> <span class="n">sp</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="n">and</span> <span class="n">not</span> <span class="n">found</span>
 	<span class="p">{</span>
-		<span class="k">let</span> <span class="n">v</span> <span class="o">=</span> <span class="n">stack</span><span class="p">[(</span><span class="n">sp</span> <span class="o">-=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">];</span> <span class="c">// pop</span>
+		<span class="k">let</span> <span class="n">v</span> <span class="o">=</span> <span class="n">stack</span><span class="p">[(</span><span class="n">sp</span> <span class="o">-=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">];</span> <span class="c1">// pop</span>
 		<span class="k">if</span> <span class="n">not</span> <span class="n">visited</span><span class="p">[</span><span class="n">v</span><span class="p">]</span>
 		<span class="p">{</span>
 			<span class="n">low</span><span class="p">[</span><span class="n">v</span><span class="p">]</span>   <span class="o">=</span> <span class="n">dist</span><span class="p">;</span>
@@ -199,12 +247,12 @@ of neighbors of node <code class="language-plaintext highlighter-rouge">v</code>
 		<span class="p">}</span>
 		<span class="n">visited</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="k">true</span><span class="p">;</span>
 
-		<span class="k">for</span> <span class="n">iw</span> <span class="n">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">:</span> <span class="n">num_adj</span><span class="p">[</span><span class="n">v</span><span class="p">]]</span>
+		<span class="k">for</span> <span class="n">iw</span> <span class="k">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">:</span> <span class="n">num_adj</span><span class="p">[</span><span class="n">v</span><span class="p">]]</span>
 		<span class="p">{</span>
 			<span class="k">let</span> <span class="n">w</span> <span class="o">=</span> <span class="n">g</span><span class="p">[</span><span class="n">iw</span><span class="p">,</span> <span class="n">v</span><span class="p">];</span>
 			<span class="k">if</span> <span class="n">w</span> <span class="o">==</span> <span class="n">parent</span><span class="p">[</span><span class="n">v</span><span class="p">]</span>
 			<span class="p">{</span>
-				<span class="c">// Do nothing</span>
+				<span class="c1">// Do nothing</span>
 			<span class="p">}</span>
 			<span class="k">else</span> <span class="k">if</span> <span class="n">visited</span><span class="p">[</span><span class="n">w</span><span class="p">]</span>
 				<span class="n">low</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="nf">min</span><span class="p">(</span><span class="n">low</span><span class="p">[</span><span class="n">v</span><span class="p">],</span> <span class="n">dists</span><span class="p">[</span><span class="n">w</span><span class="p">]);</span>
@@ -212,12 +260,12 @@ of neighbors of node <code class="language-plaintext highlighter-rouge">v</code>
 			<span class="p">{</span>
 				<span class="n">parent</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span><span class="p">;</span>
 
-				<span class="c">// re-push parent for deferred processing</span>
+				<span class="c1">// re-push parent for deferred processing</span>
 				<span class="n">stack</span><span class="p">[(</span><span class="n">sp</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="n">v</span><span class="p">;</span>
 				<span class="nf">check_stack_cap</span><span class="p">(</span><span class="n">sp</span><span class="p">,</span> <span class="n">STACK_CAP</span><span class="p">);</span>
 				<span class="n">defer</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="k">true</span><span class="p">;</span>
 
-				<span class="c">// push child. order matters wrt parent</span>
+				<span class="c1">// push child. order matters wrt parent</span>
 				<span class="n">stack</span><span class="p">[(</span><span class="n">sp</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="n">w</span><span class="p">;</span>
 				<span class="nf">check_stack_cap</span><span class="p">(</span><span class="n">sp</span><span class="p">,</span> <span class="n">STACK_CAP</span><span class="p">);</span>
 			<span class="p">}</span>
@@ -225,7 +273,7 @@ of neighbors of node <code class="language-plaintext highlighter-rouge">v</code>
 
 		<span class="k">if</span> <span class="n">defer</span><span class="p">[</span><span class="n">v</span><span class="p">]</span>
 		<span class="p">{</span>
-			<span class="k">for</span> <span class="n">iw</span> <span class="n">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">:</span> <span class="n">num_adj</span><span class="p">[</span><span class="n">v</span><span class="p">]]</span>
+			<span class="k">for</span> <span class="n">iw</span> <span class="k">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">:</span> <span class="n">num_adj</span><span class="p">[</span><span class="n">v</span><span class="p">]]</span>
 			<span class="p">{</span>
 				<span class="k">let</span> <span class="n">w</span> <span class="o">=</span> <span class="n">g</span><span class="p">[</span><span class="n">iw</span><span class="p">,</span> <span class="n">v</span><span class="p">];</span>
 				<span class="k">if</span> <span class="n">w</span> <span class="o">!=</span> <span class="n">parent</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="n">and</span> <span class="n">visited</span><span class="p">[</span><span class="n">w</span><span class="p">]</span>
@@ -369,7 +417,7 @@ like Figure 1.</p>
 <table>
   <tbody>
     <tr>
-      <td><img src="/posts/resources/graph.png" alt="" /></td>
+      <td><img src="resources/graph.png" alt="" /></td>
     </tr>
     <tr>
       <td>Figure 1: A graph with a bridge, colored green, between nodes <code class="language-plaintext highlighter-rouge">yag</code> and <code class="language-plaintext highlighter-rouge">ket</code></td>
