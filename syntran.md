@@ -5,7 +5,6 @@
         <meta http-equiv="refresh" content="0; url=http://18.191.241.59:3000/">
         <script type="text/javascript">
             window.location.href = "http://18.191.241.59:3000/"
-
         </script>
         <title>Page Redirection</title>
     </head>
