@@ -1,59 +1,3 @@
-#
-#name: Jekyll site CI
-#
-#on:
-#  push:
-#    branches: [ main ]
-#  pull_request:
-#    branches: [ main ]
-#
-#permissions:
-#  contents: read
-#  pages: write
-#  id-token: write
-#
-#jobs:
-#  build:
-#
-#    runs-on: ubuntu-latest
-#
-#    steps:
-#
-#    - uses: actions/checkout@v4
-#
-#    - name: Custom site generation
-#      run: |
-#
-#        # This could be outsourced to a separate bash script if it becomes
-#        # lengthy
-#
-#        source=_layouts/default-template.html
-#        destin=_layouts/default.html
-#        cp $source $destin
-#
-#        export TZ='US/Eastern'
-#        date=$(date)
-#        revi=$(git rev-parse --short HEAD)
-#
-#        sed -i "s/\<BUILD\_DATE\>/$date/g" $destin
-#        sed -i "s/\<BUILD\_REVI\>/$revi/g" $destin
-#
-#    - uses: actions/jekyll-build-pages@v1
-#
-#    - name: Upload artifact
-#      uses: actions/upload-pages-artifact@v3
-#
-#    - name: Deploy to github pages
-#      uses: actions/deploy-pages@v4
-#      with:
-#        branch: main
-#        folder: .
-
-
-
-
-
-
 
 name: Build Jekyll site
 on:
@@ -92,6 +36,7 @@ jobs:
           sed -i "s/\<BUILD\_REVI\>/$revi/g" $destin
 
           cat $destin
+          # this works but jekyll just overwrites my shit i guess
 
       - name: Build
         uses: actions/jekyll-build-pages@v1
