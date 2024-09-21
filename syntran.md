@@ -40,6 +40,7 @@ Syntran explorer is a service where you can run syntran in a web browser
    and not using syntran at all for production (see the alpha notice above)
 9. This list is not comprehensive or exhaustive
 10. BSD-3 terms and conditions:
+
 ```
 BSD 3-Clause License
 
