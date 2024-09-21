@@ -36,7 +36,7 @@ jobs:
     - uses: actions/jekyll-build-pages@v1
 
     - name: Deploy to github pages
-      uses: JeffIrwin/github-pages-deploy-action@4.6.4
+      uses: JeffIrwin/github-pages-deploy-action@4
       with:
         branch: main
         folder: .
