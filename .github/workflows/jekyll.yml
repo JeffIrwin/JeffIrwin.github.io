@@ -89,6 +89,8 @@ jobs:
           sed -i "s/\<BUILD\_DATE\>/$date/g" $destin
           sed -i "s/\<BUILD\_REVI\>/$revi/g" $destin
 
+          cat $destin
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Build
