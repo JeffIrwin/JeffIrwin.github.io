@@ -40,6 +40,9 @@ jobs:
 
     - uses: actions/jekyll-build-pages@v1
 
+    - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+
     - name: Deploy to github pages
       uses: actions/deploy-pages@v4
       with:
