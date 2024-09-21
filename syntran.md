@@ -1,16 +1,26 @@
-<!DOCTYPE HTML>
-<html lang="en-US">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="refresh" content="0; url=http://18.191.241.59:3000/">
-        <script type="text/javascript">
-            window.location.href = "http://18.191.241.59:3000/"
-        </script>
-        <title>Page Redirection</title>
-    </head>
-    <body>
-        <!-- Note: don't tell people to `click` the link, just tell them that it is a link. -->
-        If you are not redirected automatically, follow this <a href="http://18.191.241.59:3000/">link to example</a>.
-    </body>
-</html>
+---
+layout: default
+---
+
+<link rel="shortcut icon" type="image/png" href="favicon.png">
+
+{% include header.md %}
+<script>
+	document.getElementById("syntran").className = " active";
+</script>
+
+<!-- 
+# Posts
+
+Longer-form articles on subjects of tech etc.:
+- [The ffmpeg manifesto: creating a blurred overlay (2023 Oct 29)]({{site.url}}/posts/2023-10-29-a)
+- [Git data transport commands (2023 Jun 22)]({{site.url}}/posts/2023-06-22-a)
+- [Jekyll injection: adding date and time to a GitHub page (2021 Dec 31)]({{site.url}}/posts/2021-12-31-a)
+- [Abstract interfaces: swapping functions on the fly (2021 Dec 11)]({{site.url}}/posts/2021-12-11-a)
+
+-->
+
+# Syntran
+
+## [Follow this link to access the syntran explorer]({{site.url}}/syntran-explorer)
 
