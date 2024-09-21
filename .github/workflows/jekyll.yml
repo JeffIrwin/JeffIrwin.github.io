@@ -16,8 +16,6 @@ jobs:
 
     - uses: actions/checkout@v4
 
-
-
     - name: Custom site generation
       run: |
 
@@ -35,12 +33,10 @@ jobs:
         sed -i "s/\<BUILD\_DATE\>/$date/g" $destin
         sed -i "s/\<BUILD\_REVI\>/$revi/g" $destin
 
-
-
-    - uses: actions/jekyll-build-pages@v1-beta
+    - uses: actions/jekyll-build-pages@v1
 
     - name: Deploy to github pages
-      uses: JeffIrwin/github-pages-deploy-action@4.1.8
+      uses: JeffIrwin/github-pages-deploy-action@4.6.4
       with:
         branch: main
         folder: .
