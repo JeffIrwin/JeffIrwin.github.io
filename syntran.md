@@ -20,7 +20,7 @@ written in Fortran.  It has a vaguely rust-like syntax.  For documentation, see
 the project readme:
 [https://github.com/JeffIrwin/syntran](https://github.com/JeffIrwin/syntran)
 
-Syntran explorer is a service where you can run syntran in a web browser
+[Syntran explorer]({{site.url}}/syntran-explorer) is a service where you can run syntran in a web browser
 
 ## Disclaimer
 
