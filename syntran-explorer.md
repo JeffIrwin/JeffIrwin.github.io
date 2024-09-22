@@ -14,12 +14,12 @@
         <meta http-equiv="refresh" content="0; url=http://syntran.jeffirwin.xyz">
 
         <script type="text/javascript">
-            window.location.href = "http://syntran.jeffirwin.xyz""
+            window.location.href = "http://syntran.jeffirwin.xyz"
         </script>
         <title>Page Redirection</title>
     </head>
     <body>
-        If you are not redirected automatically, follow this <a href="http://syntran.jeffirwin.xyz"">link to the explorer</a>.
+        If you are not redirected automatically, follow this <a href="http://syntran.jeffirwin.xyz">link to the explorer</a>.
     </body>
 </html>
 
