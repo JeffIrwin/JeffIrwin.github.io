@@ -29,9 +29,9 @@ the project readme:
 2. Not only is the syntran explorer web service alpha, but the syntran language
    itself is alhpa.  Do not expect stability
 3. Expect regular service interruptions for updates
-5. Availability is limitted.  Thanks to a free AWS trial, I have a server to run
+5. Availability is limited.  Thanks to a free AWS trial, I have a server to run
    the backend.  This service may not be available past July 2025
-6. This web service does not scale.  I expect limitted usage, but performance
+6. This web service does not scale.  I expect limited usage, but performance
    could degrade if there are a lot of users all on one server
 7. There is a 10 second timeout to prevent math bombs
 8. Syntran explorer is only intended as an introductory teaching tool, to lower
